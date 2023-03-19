@@ -1,10 +1,15 @@
+import { Header } from './Header';
+
 import '../styles/globals.css';
 
 const RootLayout = ({ children }) => {
   return (
     <html>
       <head />
-      <body>{children}</body>
+      <body className='pt-20'>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 };

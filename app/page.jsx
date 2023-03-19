@@ -33,7 +33,7 @@ const categories = [
 
 const Home = () => {
   return (
-    <div id='home' className='min-h-screen flex items-center justify-center'>
+    <div id='home' className='min-h-[calc(100vh-5rem)] flex items-center justify-center'>
       <section
         id='categories'
         className='px-4 w-full flex gap-4 flex-wrap justify-between md:px-16'
