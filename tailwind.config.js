@@ -6,10 +6,18 @@ module.exports = {
     './app/**/*.{js,jsx}',
   ],
   theme: {
-    screens: {
-      md: '1024px',
-      lg: '1440px',
-      xl: '1920px',
+    extend: {
+      screens: {
+        md: '1024px',
+        lg: '1440px',
+        xl: '1920px',
+      },
+      colors: {
+        'opaque-white': {
+          30: '#ffffff30',
+          90: '#ffffff90',
+        },
+      },
     },
   },
   plugins: [],
