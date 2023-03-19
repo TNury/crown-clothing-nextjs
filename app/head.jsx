@@ -2,7 +2,11 @@ const RootHead = () => {
   return (
     <>
       <title>Crown Clothing</title>
-      <meta content='width=device-width, initial-scale=1' name='viewport' />
+      <meta
+        favicon='/assets/logo.svg'
+        content='width=device-width, initial-scale=1'
+        name='viewport'
+      />
       <link rel='preconnect' href='https://fonts.googleapis.com' />
       <link
         rel='preconnect'
