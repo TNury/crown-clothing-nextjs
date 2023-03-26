@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const categories = [
   {
     id: 1,
@@ -42,7 +44,8 @@ const Home = () => {
         className='px-4 w-full flex gap-4 flex-wrap justify-between md:px-16'
       >
         {categories.map((entry) => (
-          <div
+          <Link
+            href={`${entry.route}`}
             key={entry.id}
             className='group min-w-[30%] h-60 flex-auto flex items-center justify-center border border-black overflow-hidden relative cursor-pointer [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1'
           >
@@ -54,7 +57,7 @@ const Home = () => {
               <h2 className='text-2xl uppercase font-bold'>{entry.title}</h2>
               <p>Shop Now</p>
             </div>
-          </div>
+          </Link>
         ))}
       </section>
     </div>

@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 
-import { getDocs, getFirestore, collection } from 'firebase/firestore';
+import {
+  getDocs,
+  getFirestore,
+  collection,
+  query,
+  where,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBUE5b6FPtNMXn3NLqv8AoUMCt7Ww_RcR4',
@@ -28,4 +34,31 @@ export const fetchShopPageEntries = async () => {
   });
 
   return shopPageEntries;
+};
+
+export const fetchCategorySlugProps = async (categorySlug) => {
+  let categorySlugProps = {};
+
+  const queryRef = query(
+    collection(db, 'inventory'),
+    where('title', '==', categorySlug)
+  );
+
+  const querySnapshot = await getDocs(queryRef);
+
+  querySnapshot.forEach((doc) => {
+    categorySlugProps = doc.data();
+  });
+
+  return categorySlugProps;
+};
+
+export const fetchCategorySlugParams = async () => {
+  const querySnapshot = await getDocs(collection(db, 'inventory'));
+
+  const categorySlugParams = querySnapshot.docs.map((doc) => ({
+    categorySlug: doc.data().title,
+  }));
+
+  return categorySlugParams;
 };
