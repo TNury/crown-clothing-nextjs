@@ -96,50 +96,8 @@ export const staticData = [
     ],
   },
   {
-    title: 'mens',
-    id: 2,
-    products: [
-      {
-        id: 30,
-        imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
-        name: 'Camo Down Vest',
-        price: 325,
-      },
-      {
-        imageUrl: 'https://i.ibb.co/qMQ75QZ/floral-shirt.png',
-        id: 31,
-        price: 20,
-        name: 'Floral T-shirt',
-      },
-      {
-        id: 32,
-        imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
-        name: 'Black & White Longsleeve',
-        price: 25,
-      },
-      {
-        price: 25,
-        id: 33,
-        imageUrl: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
-        name: 'Pink T-shirt',
-      },
-      {
-        id: 34,
-        imageUrl: 'https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png',
-        name: 'Jean Long Sleeve',
-        price: 40,
-      },
-      {
-        imageUrl: 'https://i.ibb.co/mh3VM1f/polka-dot-shirt.png',
-        price: 25,
-        name: 'Burgundy T-shirt',
-        id: 35,
-      },
-    ],
-  },
-  {
     title: 'sneakers',
-    id: 3,
+    id: 2,
     products: [
       {
         id: 10,
@@ -188,6 +146,48 @@ export const staticData = [
         imageUrl: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
         id: 17,
         price: 200,
+      },
+    ],
+  },
+  {
+    title: 'mens',
+    id: 3,
+    products: [
+      {
+        id: 30,
+        imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
+        name: 'Camo Down Vest',
+        price: 325,
+      },
+      {
+        imageUrl: 'https://i.ibb.co/qMQ75QZ/floral-shirt.png',
+        id: 31,
+        price: 20,
+        name: 'Floral T-shirt',
+      },
+      {
+        id: 32,
+        imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
+        name: 'Black & White Longsleeve',
+        price: 25,
+      },
+      {
+        price: 25,
+        id: 33,
+        imageUrl: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
+        name: 'Pink T-shirt',
+      },
+      {
+        id: 34,
+        imageUrl: 'https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png',
+        name: 'Jean Long Sleeve',
+        price: 40,
+      },
+      {
+        imageUrl: 'https://i.ibb.co/mh3VM1f/polka-dot-shirt.png',
+        price: 25,
+        name: 'Burgundy T-shirt',
+        id: 35,
       },
     ],
   },
