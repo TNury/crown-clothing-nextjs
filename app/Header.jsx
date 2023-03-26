@@ -5,7 +5,9 @@ import Image from 'next/image';
 export const Header = () => {
   return (
     <header className='pl-4 w-full h-20 flex items-center justify-between fixed top-0 z-20 bg-white md:pl-16 md:pr-14'>
-      <Image src='/assets/logo.svg' width={50} height={50} alt='brand_logo' />
+      <Link href='/'>
+        <Image src='/assets/logo.svg' width={50} height={50} alt='brand_logo' />
+      </Link>
       <div className='flex gap-2 items-center'>
         <Link href='/shop' className='p-2 text-base cursor-pointer'>
           SHOP
