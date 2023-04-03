@@ -1,5 +1,7 @@
 import { Header } from './Header';
 
+import { StoreProvider } from 'redux/StoreProvider';
+
 import '../styles/globals.css';
 
 const RootLayout = ({ children }) => {
@@ -7,8 +9,10 @@ const RootLayout = ({ children }) => {
     <html>
       <head />
       <body className='pt-20'>
-        <Header />
-        {children}
+        <StoreProvider>
+          <Header />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
