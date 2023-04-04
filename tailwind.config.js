@@ -17,6 +17,7 @@ module.exports = {
           30: '#ffffff30',
           90: '#ffffff90',
         },
+        darkgray: 'darkgray',
       },
     },
   },
