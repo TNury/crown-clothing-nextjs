@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { handleCartItemAddition } from './utils/cart.utils';
+import {
+  handleAddition,
+  handleRemoval,
+  handleQuantityDecrease,
+} from './utils/cart.utils';
 
 const initialState = {
   items: [],
@@ -12,13 +16,12 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: handleCartItemAddition,
-    removeItem: (state) => {
-      state.itemsQuantity -= 1;
-    },
+    addItem: handleAddition,
+    removeItem: handleRemoval,
+    decreaseQuantity: handleQuantityDecrease,
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, decreaseQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

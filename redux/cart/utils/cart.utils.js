@@ -1,12 +1,12 @@
-export function handleCartItemAddition(state, action) {
+export function handleAddition(cart, action) {
   const { id, name, price, imageUrl } = action.payload;
 
-  const existingItem = state.items.find((item) => item.id === id);
+  const existingItem = cart.items.find((item) => item.id === id);
 
   if (existingItem) {
     existingItem.quantity++;
   } else {
-    state.items.push({
+    cart.items.push({
       id,
       name,
       price,
@@ -15,6 +15,30 @@ export function handleCartItemAddition(state, action) {
     });
   }
 
-  state.itemsQuantity++;
-  state.total += price;
+  cart.itemsQuantity++;
+  cart.total += price;
+}
+
+export function handleRemoval(cart, action) {
+  const { id, price } = action.payload;
+
+  cart.items = cart.items.filter((item) => item.id !== id);
+
+  cart.itemsQuantity--;
+  cart.total -= price;
+}
+
+export function handleQuantityDecrease(cart, action) {
+  const { id, price } = action.payload;
+
+  const existingItem = cart.items.find((item) => item.id === id);
+
+  if (existingItem.quantity > 1) {
+    existingItem.quantity--;
+  } else {
+    cart.items = cart.items.filter((item) => item.id !== id);
+  }
+
+  cart.itemsQuantity--;
+  cart.total -= price;
 }
