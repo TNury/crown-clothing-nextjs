@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import Link from 'next/link';
 
@@ -42,7 +42,12 @@ export const Header = () => {
           </span>
         </button>
       </div>
-      {openCartPreview && <CartPreview cartItems={cartProps.items} />}
+      {openCartPreview && (
+        <CartPreview
+          cartItems={cartProps.items}
+          setOpenCartPreview={setOpenCartPreview}
+        />
+      )}
     </header>
   );
 };

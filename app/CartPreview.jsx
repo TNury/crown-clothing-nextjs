@@ -1,8 +1,35 @@
+'use client';
+
 import Link from 'next/link';
 
-const CartPreview = ({ cartItems }) => {
+import { useCallback, useEffect } from 'react';
+
+const CartPreview = ({ cartItems, setOpenCartPreview }) => {
+  const handleOnBlur = useCallback((event) => {
+    const cartPreviewRef = document.getElementById('cart_preview');
+    
+    if (!cartPreviewRef.contains(event.target)) {
+      setOpenCartPreview(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Timeout to prevent handleBlur from being triggered
+    // immediately after comp is rendered.
+    setTimeout(() => {
+      window.addEventListener('click', handleOnBlur);
+    }, 100);
+
+    return () => {
+      window.removeEventListener('click', handleOnBlur);
+    };
+  }, []);
+
   return (
-    <div className='w-60 h-96 p-4 flex flex-col gap-4 absolute right-14 top-20 border border-black bg-white'>
+    <div
+      id='cart_preview'
+      className='w-60 h-96 p-4 flex flex-col gap-4 absolute right-14 top-20 border border-black bg-white'
+    >
       <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
         {cartItems.map((item, index) => (
           <div key={index} className='flex w-full h-20'>
