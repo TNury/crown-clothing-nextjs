@@ -26,7 +26,9 @@ export const Header = () => {
         <Link href='/shop' className='p-2 text-base cursor-pointer'>
           SHOP
         </Link>
-        <a className='p-2 text-base cursor-pointer'>SIGN IN</a>
+        <Link href='/auth' className='p-2 text-base cursor-pointer'>
+          SIGN IN
+        </Link>
         <button
           onClick={toggleCartPreview}
           className='p-2 cursor-pointer flex items-center justify-center relative'

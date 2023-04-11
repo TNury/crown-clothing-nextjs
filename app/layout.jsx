@@ -1,6 +1,6 @@
 import { Header } from './Header';
 
-import { StoreProvider } from 'redux/StoreProvider';
+import { StoreProvider } from 'components/providers/StoreProvider';
 
 import '../styles/globals.css';
 

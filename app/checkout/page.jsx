@@ -21,8 +21,8 @@ const Checkout = () => {
   };
 
   return (
-    <main className='w-full min-h-[calc(100vh-5rem)] flex flex-col items-center'>
-      <div className='w-1/2 mt-14 flex flex-col gap-4'>
+    <main className='w-full min-h-[calc(100vh-5rem)] px-4 py-16 flex flex-col items-center'>
+      <div className='w-1/2 flex flex-col gap-4'>
         <div className='py-2 flex border-b border-darkgray text-center'>
           <span className='w-[23%] text-xl'>Product</span>
           <span className='w-[23%] text-xl'>Description</span>
