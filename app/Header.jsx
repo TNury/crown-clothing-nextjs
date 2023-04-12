@@ -1,20 +1,32 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { signUserOut as clearUserData } from 'redux/user/user.reducer';
 
 import Link from 'next/link';
 
 import Image from 'next/image';
 import CartPreview from './CartPreview';
-import { useSelector } from 'react-redux';
+
+import { signOutUser } from 'services/firebase';
 
 export const Header = () => {
-  const cartProps = useSelector((state) => state.cart);
-
   const [openCartPreview, setOpenCartPreview] = useState(false);
+
+  const cartProps = useSelector((state) => state.cart);
+  const userToken = useSelector((state) => state.user.currentUser.token);
+
+  const dispatch = useDispatch();
 
   const toggleCartPreview = () => {
     setOpenCartPreview(!openCartPreview);
+  };
+
+  const handleSignOutClick = () => {
+    signOutUser();
+    dispatch(clearUserData());
   };
 
   return (
@@ -26,9 +38,18 @@ export const Header = () => {
         <Link href='/shop' className='p-2 text-base cursor-pointer'>
           SHOP
         </Link>
-        <Link href='/auth' className='p-2 text-base cursor-pointer'>
-          SIGN IN
-        </Link>
+        {userToken ? (
+          <button
+            onClick={handleSignOutClick}
+            className='p-2 text-base cursor-pointer'
+          >
+            SIGN OUT
+          </button>
+        ) : (
+          <Link href='/auth' className='p-2 text-base cursor-pointer'>
+            SIGN IN
+          </Link>
+        )}
         <button
           onClick={toggleCartPreview}
           className='p-2 cursor-pointer flex items-center justify-center relative'

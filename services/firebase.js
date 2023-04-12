@@ -8,6 +8,14 @@ import {
   where,
 } from 'firebase/firestore';
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyBUE5b6FPtNMXn3NLqv8AoUMCt7Ww_RcR4',
   authDomain: 'crown-clothing-542d5.firebaseapp.com',
@@ -20,6 +28,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
+
+export const auth = getAuth();
 
 export const fetchShopPageEntries = async () => {
   const shopPageEntries = [];
@@ -61,4 +71,26 @@ export const fetchCategorySlugParams = async () => {
   }));
 
   return categorySlugParams;
+};
+
+export const createUser = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const updateUser = async (userCredentials, dataToUpdate) => {
+  if (!userCredentials) return;
+
+  return await updateProfile(userCredentials, dataToUpdate);
+};
+
+export const signInUser = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = () => {
+  signOut(auth);
 };

@@ -1,5 +1,9 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
+import { useDispatch } from 'react-redux';
+
 import { useFormik } from 'formik';
 
 import { Input } from 'components/ui/input/Input';
@@ -7,9 +11,24 @@ import { Input } from 'components/ui/input/Input';
 import { SignInFormValidationSchema } from 'utils/auth/auth.utils';
 import { Button } from 'components/ui/button/Button';
 
+import { signInUser } from 'services/firebase';
+import { setCurrentUser } from 'redux/user/user.reducer';
+
 const SignInForm = () => {
-  const handleOnSubmit = () => {
-    console.log('has submited');
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const handleOnSubmit = async (props) => {
+    try {
+      const response = await signInUser(props.email, props.password);
+
+      dispatch(setCurrentUser(response.user));
+
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({

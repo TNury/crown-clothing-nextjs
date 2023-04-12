@@ -1,5 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from 'redux/user/user.reducer';
+
 import { useFormik } from 'formik';
 
 import { Input } from 'components/ui/input/Input';
@@ -7,9 +12,34 @@ import { Input } from 'components/ui/input/Input';
 import { SignUpFormValidationSchema } from 'utils/auth/auth.utils';
 import { Button } from 'components/ui/button/Button';
 
+import { createUser, signInUser, updateUser } from 'services/firebase';
+
 const SignUpForm = () => {
-  const handleOnSubmit = () => {
-    console.log('has submited');
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  // Idea: If user already exists,
+  // show a popup saying just that. But maybe dont clear the form data.
+  const handleOnSubmit = async (props) => {
+    try {
+      const registrationResponse = await createUser(
+        props.email,
+        props.password
+      );
+
+      await updateUser(registrationResponse.user, {
+        displayName: `${props.first_name} ${props.last_name}`,
+      });
+
+      const loginResponse = await signInUser(props.email, props.password);
+
+      dispatch(setCurrentUser(loginResponse.user));
+
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({
