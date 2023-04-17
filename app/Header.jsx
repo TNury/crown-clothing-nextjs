@@ -7,7 +7,6 @@ import { signUserOut as clearUserData } from 'redux/user/user.reducer';
 
 import Link from 'next/link';
 
-import Image from 'next/image';
 import CartPreview from './CartPreview';
 
 import { signOutUser } from 'services/firebase';
@@ -32,7 +31,7 @@ export const Header = () => {
   return (
     <header className='pl-4 w-full h-20 flex items-center justify-between fixed top-0 z-20 bg-white md:pl-16 md:pr-14'>
       <Link href='/'>
-        <Image src='/assets/logo.svg' width={50} height={50} alt='brand_logo' />
+        <img src='/assets/logo.svg' alt='brand_logo' className='w-14 h-14' />
       </Link>
       <div className='flex gap-2 items-center'>
         <Link href='/shop' className='p-2 text-base cursor-pointer'>
@@ -54,11 +53,10 @@ export const Header = () => {
           onClick={toggleCartPreview}
           className='p-2 cursor-pointer flex items-center justify-center relative'
         >
-          <Image
+          <img
             src='/assets/shopping-bag.svg'
-            width={24}
-            height={24}
             alt='bag_icon'
+            className='w-6 h-6'
           />
           <span className='text-[10px] font-bold absolute top-4'>
             {cartProps.itemsQuantity}
