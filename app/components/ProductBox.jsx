@@ -1,15 +1,14 @@
-'use client'
+'use client';
 
-import { useDispatch } from "react-redux";
-import { addItem } from "redux/cart/cart.reducer";
+import { useDispatch } from 'react-redux';
+import { addItem } from 'redux/cart/cart.reducer';
 
 export const ProductBox = ({ productData }) => {
-
   const dispatch = useDispatch();
 
   const triggerItemAddition = () => {
-    dispatch(addItem(productData))
-  }
+    dispatch(addItem(productData));
+  };
 
   return (
     <div key={productData.id} className='w-full h-full flex flex-col gap-4'>

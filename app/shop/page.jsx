@@ -1,6 +1,6 @@
 import { fetchShopPageEntries } from 'services/firebase';
 
-import { ProductBox } from './Product';
+import { ProductBox } from '@/components/ProductBox';
 
 const ShopPage = async () => {
   const shopPageEntries = await fetchShopPageEntries();

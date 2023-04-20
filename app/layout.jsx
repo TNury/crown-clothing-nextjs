@@ -1,6 +1,6 @@
-import { Header } from './Header';
+import { Header } from '@/components/layout/Header';
 
-import { StoreProvider } from 'components/providers/StoreProvider';
+import { StoreProvider } from '@/components/providers/StoreProvider';
 
 import '../styles/globals.css';
 

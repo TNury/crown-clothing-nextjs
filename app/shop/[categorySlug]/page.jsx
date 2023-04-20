@@ -3,7 +3,7 @@ import {
   fetchCategorySlugParams,
 } from 'services/firebase';
 
-import { ProductBox } from '../Product';
+import { ProductBox } from '@/components/ProductBox';
 
 const CategorySlug = async ({ params: { categorySlug } }) => {
   const categorySlugProps = await fetchCategorySlugProps(categorySlug);
