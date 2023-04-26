@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 import CartPreview from '../CartPreview';
 
-import { signOutUser } from 'services/firebase';
+import { signOutUser } from '@services/firebase';
 
 export const Header = () => {
   const [openCartPreview, setOpenCartPreview] = useState(false);

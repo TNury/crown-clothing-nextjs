@@ -1,4 +1,4 @@
-import { fetchShopPageEntries } from 'services/firebase';
+import { fetchShopPageEntries } from '@services/firebase';
 
 import { ProductBox } from '@/components/ProductBox';
 

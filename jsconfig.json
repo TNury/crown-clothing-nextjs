@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["app/components/*"],
-      "@/redux/*": ["redux/*"]
+      "@/redux/*": ["redux/*"],
+      "@/utils/*": ["utils/*"],
+      "@services/*": ["services/*"]
     }
   }
 }

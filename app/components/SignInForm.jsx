@@ -9,9 +9,9 @@ import { useFormik } from 'formik';
 import { Input } from '@/components/ui/input/Input';
 import { Button } from '@/components/ui/button/Button';
 
-import { SignInFormValidationSchema } from 'utils/auth/auth.utils';
+import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import { signInUser } from 'services/firebase';
+import { signInUser } from '@services/firebase';
 import { setCurrentUser } from 'redux/user/user.reducer';
 
 const SignInForm = () => {

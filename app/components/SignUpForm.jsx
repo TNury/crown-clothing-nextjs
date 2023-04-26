@@ -7,12 +7,12 @@ import { setCurrentUser } from 'redux/user/user.reducer';
 
 import { useFormik } from 'formik';
 
-import { Input } from 'components/ui/input/Input';
+import { Input } from '@/components/ui/input/Input';
+import { Button } from '@/components/ui/button/Button';
 
-import { SignUpFormValidationSchema } from 'utils/auth/auth.utils';
-import { Button } from 'components/ui/button/Button';
+import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import { createUser, signInUser, updateUser } from 'services/firebase';
+import { createUser, signInUser, updateUser } from '@services/firebase';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import {
   fetchCategorySlugProps,
   fetchCategorySlugParams,
-} from 'services/firebase';
+} from '@services/firebase';
 
 import { ProductBox } from '@/components/ProductBox';
 
