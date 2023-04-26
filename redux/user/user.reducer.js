@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { handleSetCurrentUser } from './utils/user.utils';
+import { handleSetCurrentUser, handleUserSignOut } from './utils/user.utils';
 
 const initialState = {
   currentUser: {},
@@ -11,9 +11,15 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser: handleSetCurrentUser,
-    signUserOut: (state) => {
-      state.currentUser = {};
-    },
+    signUserOut: handleUserSignOut,
+  },
+  extraReducers: (builder) => {
+    builder.addCase('HYDRATE', (state, action) => {
+      return {
+        ...state,
+        ...action.payload.userReducer,
+      };
+    });
   },
 });
 

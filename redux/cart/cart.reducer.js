@@ -20,6 +20,14 @@ export const cartSlice = createSlice({
     removeItem: handleRemoval,
     decreaseQuantity: handleQuantityDecrease,
   },
+  extraReducers: (builder) => {
+    builder.addCase('HYDRATE', (state, action) => {
+      return {
+        ...state,
+        ...action.payload.cartReducer,
+      };
+    });
+  },
 });
 
 export const { addItem, removeItem, decreaseQuantity } = cartSlice.actions;

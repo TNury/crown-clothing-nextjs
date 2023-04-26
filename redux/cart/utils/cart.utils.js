@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export function handleAddition(cart, action) {
   const { id, name, price, imageUrl } = action.payload;
 
@@ -17,6 +19,8 @@ export function handleAddition(cart, action) {
 
   cart.itemsQuantity++;
   cart.total += price;
+
+  Cookies.set('cartReducer', JSON.stringify(cart));
 }
 
 export function handleRemoval(cart, action) {
@@ -26,6 +30,8 @@ export function handleRemoval(cart, action) {
 
   cart.itemsQuantity--;
   cart.total -= price;
+
+  Cookies.set('cartReducer', cart);
 }
 
 export function handleQuantityDecrease(cart, action) {
@@ -41,4 +47,6 @@ export function handleQuantityDecrease(cart, action) {
 
   cart.itemsQuantity--;
   cart.total -= price;
+
+  Cookies.set('cartReducer', cart);
 }
