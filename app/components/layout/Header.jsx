@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { signUserOut as clearUserData } from 'redux/user/user.reducer';
+import { signUserOut as clearUserData } from '@/redux/user/user.reducer';
 
 import Link from 'next/link';
 

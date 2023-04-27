@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { addItem } from 'redux/cart/cart.reducer';
+import { addItem } from '@/redux/cart/cart.reducer';
 
 export const ProductBox = ({ productData }) => {
   const dispatch = useDispatch();

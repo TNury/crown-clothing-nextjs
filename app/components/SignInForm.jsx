@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button/Button';
 import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
 import { signInUser } from '@services/firebase';
-import { setCurrentUser } from 'redux/user/user.reducer';
+import { setCurrentUser } from '@/redux/user/user.reducer';
 
 const SignInForm = () => {
   const dispatch = useDispatch();

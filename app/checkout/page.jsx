@@ -1,7 +1,7 @@
 'use client';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, decreaseQuantity, removeItem } from 'redux/cart/cart.reducer';
+import { addItem, decreaseQuantity, removeItem } from '@/redux/cart/cart.reducer';
 
 const Checkout = () => {
   const cartProps = useSelector((state) => state.cart);

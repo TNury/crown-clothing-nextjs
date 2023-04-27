@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from 'redux/user/user.reducer';
+import { setCurrentUser } from '@/redux/user/user.reducer';
 
 import { useFormik } from 'formik';
 
