@@ -1,39 +1,12 @@
 import Link from 'next/link';
 
-const categories = [
-  {
-    id: 1,
-    title: 'hats',
-    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    route: 'shop/hats',
-  },
-  {
-    id: 2,
-    title: 'jackets',
-    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    route: 'shop/jackets',
-  },
-  {
-    id: 3,
-    title: 'sneakers',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    route: 'shop/sneakers',
-  },
-  {
-    id: 4,
-    title: 'womens',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    route: 'shop/womens',
-  },
-  {
-    id: 5,
-    title: 'mens',
-    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    route: 'shop/mens',
-  },
-];
+import fetchFromAPI from '@services/api';
 
-const Home = () => {
+const Home = async () => {
+  const { collections: homepageCollections } = await fetchFromAPI(
+    'services/queries/collections.graphql'
+  );
+
   return (
     <div
       id='home'
@@ -43,14 +16,15 @@ const Home = () => {
         id='categories'
         className='px-4 w-full flex gap-4 flex-wrap justify-between md:px-16'
       >
-        {categories.map((entry) => (
+        {homepageCollections.nodes.map((entry) => (
           <Link
-            href={`${entry.route}`}
+            href={`shop/${entry.handle}`}
             key={entry.id}
             className='group min-w-[30%] h-60 flex-auto flex items-center justify-center border border-black overflow-hidden relative cursor-pointer [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1'
           >
             <img
-              src={entry.imageUrl}
+              src={entry.image.src}
+              alt={entry.image.altText}
               className='w-full h-full object-cover -z-10 absolute group-hover:scale-110 transition-all duration-1000'
             />
             <div className='h-24 px-6 flex flex-col items-center gap-4 bg-white border border-black opacity-70 group-hover:opacity-90 transition-all duration-500'>

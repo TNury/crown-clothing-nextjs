@@ -1,0 +1,13 @@
+query homepageCollections {
+  collections(first: 5) {
+    nodes {
+      id
+      title
+      handle
+      image {
+        src
+        altText
+      }
+    }
+  }
+}
