@@ -12,6 +12,31 @@ query homepageCollections {
   }
 }
 
+query shopPageQuery {
+  collections(first: 5) {
+    nodes {
+      id
+      title
+      handle
+      products(first: 5) {
+        nodes {
+          id
+          handle
+          title
+          featuredImage {
+            src
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 query categorySlugParams {
   collections(first: 5) {
     nodes {
