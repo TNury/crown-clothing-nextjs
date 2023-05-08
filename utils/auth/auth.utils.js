@@ -11,13 +11,13 @@ export const SignInFormValidationSchema = yup.object({
 });
 
 export const SignUpFormValidationSchema = yup.object({
-  first_name: yup
+  firstName: yup
     .string('')
     .matches(especialCharRegex, {
       message: 'Invalid character',
     })
     .required('Your first name is required'),
-  last_name: yup
+  lastName: yup
     .string('')
     .matches(especialCharRegex, {
       message: 'Invalid character',
