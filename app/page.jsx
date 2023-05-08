@@ -15,13 +15,13 @@ const Home = async () => {
     >
       <section
         id='categories'
-        className='px-4 w-full flex gap-4 flex-wrap justify-between md:px-16'
+        className='w-full max-w-screen-xl px-4 flex gap-4 flex-wrap justify-between md:px-16'
       >
         {homepageCollections.nodes.map((entry) => (
           <Link
             href={`shop/${entry.handle}`}
             key={entry.id}
-            className='group min-w-[30%] h-60 flex-auto flex items-center justify-center border border-black overflow-hidden relative cursor-pointer [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1'
+            className='group min-w-[30%] h-60 flex-auto flex items-center justify-center border border-black overflow-hidden relative cursor-pointer [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1 xl:h-80'
           >
             <img
               src={entry.image.src}
