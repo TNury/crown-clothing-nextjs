@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-import fs from 'fs';
+import { gql } from 'graphql-tag';
+
+import { readFileSync } from 'fs';
+
+import { print } from 'graphql/language/printer';
 
 import returnApiResponseData from '@/utils/misc/returnApiResponseData';
 
@@ -12,12 +16,22 @@ const api = axios.create({
   },
 });
 
-async function fetchFromAPI(pathToQuery) {
-  const query = fs.readFileSync(pathToQuery, 'utf-8');
+async function fetchFromAPI(queryPath, queryName, queryVariables) {
+  const queries = readFileSync(queryPath, 'utf-8');
 
-  const response = await api.post('/', {
-    query,
-  });
+  const query = gql`
+    ${queries}
+  `.definitions.find((definition) => definition.name.value === queryName);
+
+  const objectToSend = {
+    query: print(query),
+  };
+
+  if (queryVariables) {
+    objectToSend.variables = queryVariables;
+  }
+
+  const response = await api.post('/', objectToSend);
 
   return returnApiResponseData(response);
 }

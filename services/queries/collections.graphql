@@ -11,3 +11,33 @@ query homepageCollections {
     }
   }
 }
+
+query categorySlugParams {
+  collections(first: 5) {
+    nodes {
+      handle
+    }
+  }
+}
+
+query categorySlugCollection($handle: String!) {
+  collectionByHandle(handle: $handle) {
+    id
+    title
+    products(first: 10) {
+      nodes {
+        id
+        handle
+        title
+        featuredImage {
+          src
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+          }
+        }
+      }
+    }
+  }
+}

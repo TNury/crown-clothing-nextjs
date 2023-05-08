@@ -4,7 +4,8 @@ import fetchFromAPI from '@services/api';
 
 const Home = async () => {
   const { collections: homepageCollections } = await fetchFromAPI(
-    'services/queries/collections.graphql'
+    'services/queries/collections.graphql',
+    'homepageCollections'
   );
 
   return (
