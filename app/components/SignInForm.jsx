@@ -11,7 +11,8 @@ import { Button } from '@/components/ui/button/Button';
 
 import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import { signInUser } from '@services/firebase';
+import fetchFromAPI from '@services/api';
+
 import { setCurrentUser } from '@/redux/user/user.reducer';
 
 const SignInForm = () => {
@@ -21,9 +22,27 @@ const SignInForm = () => {
 
   const handleOnSubmit = async (props) => {
     try {
-      const response = await signInUser(props.email, props.password);
+      const accessTokenResponse = await fetchFromAPI(
+        'services/queries/auth.graphql',
+        'createAccessToken',
+        {
+          ...props,
+        }
+      );
 
-      dispatch(setCurrentUser(response.user));
+      const accessToken =
+        accessTokenResponse.customerAccessTokenCreate.customerAccessToken
+          .accessToken;
+
+      const loginResponse = await fetchFromAPI(
+        'services/queries/auth.graphql',
+        'retrieveCustomer',
+        {
+          accessToken,
+        }
+      );
+
+      dispatch(setCurrentUser({ ...loginResponse.customer, accessToken }));
 
       router.push('/');
     } catch (error) {

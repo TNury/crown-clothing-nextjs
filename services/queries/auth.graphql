@@ -16,10 +16,10 @@ mutation createCustomer(
       message
     }
     customer {
+      id
       email
       firstName
       lastName
-      id
     }
   }
 }
@@ -29,5 +29,14 @@ mutation createAccessToken($email: String!, $password: String!) {
     customerAccessToken {
       accessToken
     }
+  }
+}
+
+query retrieveCustomer($accessToken: String!) {
+  customer(customerAccessToken: $accessToken) {
+    id
+    email
+    firstName
+    lastName
   }
 }

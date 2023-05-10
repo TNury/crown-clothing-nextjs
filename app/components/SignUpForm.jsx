@@ -59,11 +59,11 @@ const SignUpForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: 'yuri',
-      lastName: 'souza',
-      email: 'yurdesou@gmail.com',
-      password: 'wordpass234',
-      confirm_password: 'wordpass234',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirm_password: '',
     },
     validationSchema: SignUpFormValidationSchema,
     onSubmit: handleOnSubmit,
