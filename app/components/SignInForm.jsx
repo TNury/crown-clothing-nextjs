@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button/Button';
 
 import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import fetchFromAPI from '@services/api';
+import callAPI from '@services/api';
 
 import { setCurrentUser } from '@/redux/user/user.reducer';
 
@@ -22,7 +22,7 @@ const SignInForm = () => {
 
   const handleOnSubmit = async (props) => {
     try {
-      const accessTokenResponse = await fetchFromAPI(
+      const accessTokenResponse = await callAPI(
         'services/queries/auth.graphql',
         'createAccessToken',
         {
@@ -34,7 +34,7 @@ const SignInForm = () => {
         accessTokenResponse.customerAccessTokenCreate.customerAccessToken
           .accessToken;
 
-      const loginResponse = await fetchFromAPI(
+      const loginResponse = await callAPI(
         'services/queries/auth.graphql',
         'retrieveCustomer',
         {

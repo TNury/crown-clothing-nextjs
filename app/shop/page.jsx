@@ -1,9 +1,9 @@
 import { ProductBox } from '@/components/ProductBox';
 
-import fetchFromAPI from '@services/api';
+import callAPI from '@services/api';
 
 const ShopPage = async () => {
-  const { collections: shopPageQuery } = await fetchFromAPI(
+  const { collections: shopPageQuery } = await callAPI(
     'services/queries/collections.graphql',
     'shopPageQuery'
   );

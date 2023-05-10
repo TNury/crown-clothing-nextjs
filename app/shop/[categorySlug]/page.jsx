@@ -1,9 +1,9 @@
 import { ProductBox } from '@/components/ProductBox';
 
-import fetchFromAPI from '@services/api';
+import callAPI from '@services/api';
 
 const CategorySlug = async ({ params: { categorySlug } }) => {
-  const { collectionByHandle: categorySlugProps } = await fetchFromAPI(
+  const { collectionByHandle: categorySlugProps } = await callAPI(
     'services/queries/collections.graphql',
     'categorySlugCollection',
     {
@@ -30,7 +30,7 @@ const CategorySlug = async ({ params: { categorySlug } }) => {
 export default CategorySlug;
 
 export async function generateStaticParams() {
-  const response = await fetchFromAPI(
+  const response = await callAPI(
     'services/queries/collections.graphql',
     'categorySlugParams'
   );

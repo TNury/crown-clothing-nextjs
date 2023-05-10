@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import fetchFromAPI from '@services/api';
+import callAPI from '@services/api';
 
 const Home = async () => {
-  const { collections: homepageCollections } = await fetchFromAPI(
+  const { collections: homepageCollections } = await callAPI(
     'services/queries/collections.graphql',
     'homepageCollections'
   );

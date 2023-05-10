@@ -12,7 +12,7 @@ const api = axios.create({
   },
 });
 
-async function fetchFromAPI(queryPath, queryName, queryVariables) {
+async function callAPI(queryPath, queryName, queryVariables) {
   const queryModule = await import(`${queryPath}`);
 
   const queryDefinition = queryModule.definitions.find(
@@ -32,4 +32,4 @@ async function fetchFromAPI(queryPath, queryName, queryVariables) {
   return returnApiResponseData(response);
 }
 
-export default fetchFromAPI;
+export default callAPI;

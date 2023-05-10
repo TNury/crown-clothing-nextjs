@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button/Button';
 
 import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import fetchFromAPI from '@services/api';
+import callAPI from '@services/api';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -27,13 +27,13 @@ const SignUpForm = () => {
 
       delete payload.confirm_password;
 
-      const registrationResponse = await fetchFromAPI(
+      const registrationResponse = await callAPI(
         'services/queries/auth.graphql',
         'createCustomer',
         { ...payload }
       );
 
-      const accessTokenResponse = await fetchFromAPI(
+      const accessTokenResponse = await callAPI(
         'services/queries/auth.graphql',
         'createAccessToken',
         {
