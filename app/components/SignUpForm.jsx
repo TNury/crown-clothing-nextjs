@@ -7,8 +7,8 @@ import { setCurrentUser } from '@/redux/user/user.reducer';
 
 import { useFormik } from 'formik';
 
-import { Input } from '@/components/ui/input/Input';
-import { Button } from '@/components/ui/button/Button';
+import { Input } from '@/components/ui/generic/input/Input';
+import { Button } from '@/components/ui/generic/button/Button';
 
 import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
 

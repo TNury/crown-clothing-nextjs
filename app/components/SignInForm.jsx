@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 
 import { useFormik } from 'formik';
 
-import { Input } from '@/components/ui/input/Input';
-import { Button } from '@/components/ui/button/Button';
+import { Input } from '@/components/ui/generic/input/Input';
+import { Button } from '@/components/ui/generic/button/Button';
 
 import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
