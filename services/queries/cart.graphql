@@ -1,0 +1,118 @@
+# fragment cartFields on Cart {
+#   id
+#   checkoutUrl
+#   buyerIdentity {
+#     email
+#   }
+#   totalQuantity
+#   lines(first: 10) {
+#     nodes {
+#       id
+#       quantity
+#       cost {
+#         totalAmount {
+#           amount
+#         }
+#       }
+#       merchandise {
+#         ... on ProductVariant {
+#           id
+#           price {
+#             amount
+#           }
+#           product {
+#             title
+#           }
+#         }
+#       }
+#     }
+#   }
+#   cost {
+#     totalAmount {
+#       amount
+#       currencyCode
+#     }
+#     subtotalAmount {
+#       amount
+#       currencyCode
+#     }
+#     totalTaxAmount {
+#       amount
+#       currencyCode
+#     }
+#     totalDutyAmount {
+#       amount
+#       currencyCode
+#     }
+#   }
+# }
+
+mutation createCart($quantity: Int!, $merchandiseId: ID!) {
+  cartCreate(
+    input: { lines: [{ quantity: $quantity, merchandiseId: $merchandiseId }] }
+  ) {
+    cart {
+      id
+      checkoutUrl
+      buyerIdentity {
+        email
+      }
+      totalQuantity
+      lines(first: 10) {
+        nodes {
+          id
+          quantity
+          cost {
+            totalAmount {
+              amount
+            }
+          }
+          merchandise {
+            ... on ProductVariant {
+              id
+              price {
+                amount
+              }
+              product {
+                title
+              }
+            }
+          }
+        }
+      }
+      cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }
+    }
+  }
+}
+
+# mutation addItemToCart(
+#   $cartId: Number!
+#   $quantity: Number!
+#   $merchandiseId: String!
+# ) {
+#   cartLinesAdd(
+#     cartId: $cartId
+#     lines: [{ quantity: $quantity, merchandiseId: $merchandiseId }]
+#   ) {
+#     cart {
+#       ...cartFields
+#     }
+#   }
+# }
