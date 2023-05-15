@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { ProductBox } from '@/components/ProductBox';
+import { ProductBox } from '@/components/product-box/ProductBox';
 
 import callAPI from '@services/api';
 
