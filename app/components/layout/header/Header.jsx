@@ -7,7 +7,7 @@ import { signUserOut as clearUserData } from '@/redux/user/user.reducer';
 
 import Link from 'next/link';
 
-import CartPreview from '../CartPreview';
+import CartPreview from '../../CartPreview';
 
 import { signOutUser } from '@services/firebase';
 
