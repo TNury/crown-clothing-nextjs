@@ -53,10 +53,6 @@ mutation createCart($quantity: Int!, $merchandiseId: ID!) {
   ) {
     cart {
       id
-      checkoutUrl
-      buyerIdentity {
-        email
-      }
       totalQuantity
       lines(first: 10) {
         nodes {
