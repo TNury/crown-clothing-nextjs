@@ -32,10 +32,8 @@ query shopPageQuery {
             }
           }
           variants(first: 1) {
-            edges {
-              node {
-                id
-              }
+            nodes {
+              id
             }
           }
         }
