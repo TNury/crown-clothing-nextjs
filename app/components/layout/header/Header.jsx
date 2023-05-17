@@ -2,30 +2,19 @@
 
 import { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { signUserOut as clearUserData } from '@/redux/user/user.reducer';
-
 import Link from 'next/link';
 
-import CartPreview from '../../CartPreview';
-
-import { signOutUser } from '@services/firebase';
+import CartPreview from '@/components/CartPreview';
 
 export const Header = () => {
   const [openCartPreview, setOpenCartPreview] = useState(false);
-
-  const cartProps = useSelector((state) => state.cart);
-  const userToken = useSelector((state) => state.user.currentUser.token);
-
-  const dispatch = useDispatch();
 
   const toggleCartPreview = () => {
     setOpenCartPreview(!openCartPreview);
   };
 
   const handleSignOutClick = () => {
-    signOutUser();
-    dispatch(clearUserData());
+    // signOutUser();
   };
 
   return (
@@ -37,7 +26,7 @@ export const Header = () => {
         <Link href='/shop' className='p-2 text-base cursor-pointer'>
           SHOP
         </Link>
-        {userToken ? (
+        {false ? (
           <button
             onClick={handleSignOutClick}
             className='p-2 text-base cursor-pointer'
@@ -59,7 +48,7 @@ export const Header = () => {
             className='w-6 h-6'
           />
           <span className='text-[10px] font-bold absolute top-4'>
-            {cartProps.itemsQuantity}
+            {/* {cartProps.itemsQuantity} */}0
           </span>
         </button>
       </div>
