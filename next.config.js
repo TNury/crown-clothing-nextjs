@@ -7,9 +7,10 @@
 // };
 
 module.exports = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   experimental: {
     appDir: true,
+    serverActions: true,
   },
   webpack: (config) => {
     config.module.rules.push({
