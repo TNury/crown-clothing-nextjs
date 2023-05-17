@@ -29,15 +29,15 @@ const CategorySlug = async ({ params: { categorySlug } }) => {
 
 export default CategorySlug;
 
-export async function generateStaticParams() {
-  const response = await callAPI(
-    'services/queries/collections.graphql',
-    'categorySlugParams'
-  );
+// export async function generateStaticParams() {
+//   const response = await callAPI(
+//     'services/queries/collections.graphql',
+//     'categorySlugParams'
+//   );
 
-  const categorySlugParams = response.collections.nodes.map((entry) => ({
-    categorySlug: entry.handle,
-  }));
+//   const categorySlugParams = response.collections.nodes.map((entry) => ({
+//     categorySlug: entry.handle,
+//   }));
 
-  return categorySlugParams;
-}
+//   return categorySlugParams;
+// }
