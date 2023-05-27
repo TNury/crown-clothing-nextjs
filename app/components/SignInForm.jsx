@@ -1,83 +1,60 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-
-import { useDispatch } from 'react-redux';
-
-import { useFormik } from 'formik';
+import { redirect } from 'next/navigation';
 
 import { Input } from '@/components/ui/generic/input/Input';
 import { Button } from '@/components/ui/generic/button/Button';
 
-import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
+import { storeCookie } from '@/actions/cookies/cookies';
 
 import callAPI from '@services/api';
 
-import { setCurrentUser } from '@/redux/user/user.reducer';
-
 const SignInForm = () => {
-  const dispatch = useDispatch();
+  const handleOnSubmit = async (formData) => {
+    'use server';
 
-  const router = useRouter();
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const accessTokenResponse = await callAPI(
+      'services/queries/auth.graphql',
+      'createAccessToken',
+      {
+        email,
+        password,
+      }
+    );
+    const accessToken =
+      accessTokenResponse.customerAccessTokenCreate.customerAccessToken
+        .accessToken;
+    const loginResponse = await callAPI(
+      'services/queries/auth.graphql',
+      'retrieveCustomer',
+      {
+        accessToken,
+      }
+    );
 
-  const handleOnSubmit = async (props) => {
-    try {
-      const accessTokenResponse = await callAPI(
-        'services/queries/auth.graphql',
-        'createAccessToken',
-        {
-          ...props,
-        }
-      );
+    storeCookie('userSession', {
+      ...loginResponse.customer,
+      accessToken,
+    });
 
-      const accessToken =
-        accessTokenResponse.customerAccessTokenCreate.customerAccessToken
-          .accessToken;
-
-      const loginResponse = await callAPI(
-        'services/queries/auth.graphql',
-        'retrieveCustomer',
-        {
-          accessToken,
-        }
-      );
-
-      dispatch(setCurrentUser({ ...loginResponse.customer, accessToken }));
-
-      router.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+    redirect('/');
   };
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: SignInFormValidationSchema,
-    onSubmit: handleOnSubmit,
-  });
-
   return (
-    <form onSubmit={formik.handleSubmit} className='flex flex-col gap-10'>
+    <form action={handleOnSubmit} className='flex flex-col gap-10'>
       <Input
-        id='email'
+        name='email'
         type='email'
-        label='Email'
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        error={formik.touched.email && Boolean(formik.errors.email)}
-        helperText={formik.touched.email && formik.errors.email}
+        placeholder='Email'
+        required
+        pattern='^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$'
       />
       <Input
-        id='password'
+        name='password'
         type='password'
-        label='Password'
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        error={formik.touched.password && Boolean(formik.errors.password)}
-        helperText={formik.touched.password && formik.errors.password}
+        placeholder='Password'
+        minLength={6}
+        required
       />
       <Button type='submit'>Submit</Button>
     </form>
