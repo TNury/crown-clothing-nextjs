@@ -1,8 +1,0 @@
-.input_label {
-  transform: translateY(0);
-}
-
-.input_label[data-shrink='true'] {
-  /* top: -1.75rem; */
-  transform: translateY(-2rem);
-}
