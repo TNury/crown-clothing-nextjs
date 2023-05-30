@@ -17,6 +17,11 @@ const SignInForm = () => {
   const handleOnSubmit = async (formData) => {
     await loginUser(formData);
 
+    /*
+      loginUser stores a cookie after it successfully logs a user in.
+      For some reason if we don't set a timeout before redirecting the user,
+      it generates a TREE MISMATCH error.
+    */
     setTimeout(() => {
       router.push('/');
     }, 1);
