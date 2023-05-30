@@ -1,29 +1,23 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { storeCookie } from '../cookies/cookies';
 
 import callAPI from '@services/api';
 
 export async function registerUser(formData) {
-  const payload = Object.fromEntries(formData.entries());
-
   const registrationResponse = await callAPI(
     'services/queries/auth.graphql',
     'createCustomer',
-    { ...payload }
+    { ...formData }
   );
-
   const accessTokenResponse = await callAPI(
     'services/queries/auth.graphql',
     'createAccessToken',
     {
-      email: payload.email,
-      password: payload.password,
+      email: formData.email,
+      password: formData.password,
     }
   );
-
   const accessToken =
     accessTokenResponse.customerAccessTokenCreate.customerAccessToken
       .accessToken;
@@ -32,6 +26,29 @@ export async function registerUser(formData) {
     ...registrationResponse.customerCreate.customer,
     accessToken,
   });
+}
 
-  redirect('/');
+export async function loginUser(formData) {
+  const accessTokenResponse = await callAPI(
+    'services/queries/auth.graphql',
+    'createAccessToken',
+    {
+      ...formData,
+    }
+  );
+  const accessToken =
+    accessTokenResponse.customerAccessTokenCreate.customerAccessToken
+      .accessToken;
+  const loginResponse = await callAPI(
+    'services/queries/auth.graphql',
+    'retrieveCustomer',
+    {
+      accessToken,
+    }
+  );
+
+  storeCookie('userSession', {
+    ...loginResponse.customer,
+    accessToken,
+  });
 }
