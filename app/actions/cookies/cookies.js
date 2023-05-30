@@ -11,5 +11,9 @@ export async function storeCookie(name, value) {
 export async function retrieveCookie(name) {
   const storedCookie = cookies().get(name);
 
-  return JSON.parse(storedCookie.value);
+  if (storedCookie) {
+    return JSON.parse(storedCookie.value);
+  } else {
+    return null;
+  }
 }
