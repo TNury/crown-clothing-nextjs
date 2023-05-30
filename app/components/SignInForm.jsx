@@ -1,60 +1,55 @@
-import { redirect } from 'next/navigation';
+'use client';
+
+import { useRouter } from 'next/navigation';
+
+import { useFormik } from 'formik';
 
 import { Input } from '@/components/ui/generic/input/Input';
 import { Button } from '@/components/ui/generic/button/Button';
 
-import { storeCookie } from '@/actions/cookies/cookies';
+import { loginUser } from '@/actions/auth/auth';
 
-import callAPI from '@services/api';
+import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
 const SignInForm = () => {
+  const router = useRouter();
+
   const handleOnSubmit = async (formData) => {
-    'use server';
+    await loginUser(formData);
 
-    const email = formData.get('email');
-    const password = formData.get('password');
-    const accessTokenResponse = await callAPI(
-      'services/queries/auth.graphql',
-      'createAccessToken',
-      {
-        email,
-        password,
-      }
-    );
-    const accessToken =
-      accessTokenResponse.customerAccessTokenCreate.customerAccessToken
-        .accessToken;
-    const loginResponse = await callAPI(
-      'services/queries/auth.graphql',
-      'retrieveCustomer',
-      {
-        accessToken,
-      }
-    );
-
-    storeCookie('userSession', {
-      ...loginResponse.customer,
-      accessToken,
-    });
-
-    redirect('/');
+    setTimeout(() => {
+      router.push('/');
+    }, 1);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: SignInFormValidationSchema,
+    onSubmit: handleOnSubmit,
+  });
+
   return (
-    <form action={handleOnSubmit} className='flex flex-col gap-10'>
+    <form onSubmit={formik.handleSubmit} className='flex flex-col gap-10'>
       <Input
-        name='email'
+        id='email'
         type='email'
         placeholder='Email'
-        required
-        pattern='^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$'
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        error={formik.touched.email && Boolean(formik.errors.email)}
+        helperText={formik.touched.email && formik.errors.email}
       />
       <Input
-        name='password'
+        id='password'
         type='password'
         placeholder='Password'
-        minLength={6}
-        required
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password}
       />
       <Button type='submit'>Submit</Button>
     </form>
