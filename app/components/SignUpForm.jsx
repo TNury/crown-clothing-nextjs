@@ -2,59 +2,24 @@
 
 import { useRouter } from 'next/navigation';
 
-import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '@/redux/user/user.reducer';
-
 import { useFormik } from 'formik';
 
 import { Input } from '@/components/ui/generic/input/Input';
 import { Button } from '@/components/ui/generic/button/Button';
 
+import { registerUser } from '@/actions/auth/auth';
+
 import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
 
-import callAPI from '@services/api';
-
 const SignUpForm = () => {
-  const dispatch = useDispatch();
-
   const router = useRouter();
 
-  // Idea: If user already exists,
-  // show a popup saying just that. But maybe dont clear the form data.
-  const handleOnSubmit = async (props) => {
-    try {
-      const payload = { ...props };
+  const handleOnSubmit = async (formData) => {
+    await registerUser(formData);
 
-      delete payload.confirm_password;
-
-      const registrationResponse = await callAPI(
-        'services/queries/auth.graphql',
-        'createCustomer',
-        { ...payload }
-      );
-
-      const accessTokenResponse = await callAPI(
-        'services/queries/auth.graphql',
-        'createAccessToken',
-        {
-          email: payload.email,
-          password: payload.password,
-        }
-      );
-
-      dispatch(
-        setCurrentUser({
-          ...registrationResponse.customerCreate.customer,
-          accessToken:
-            accessTokenResponse.customerAccessTokenCreate.customerAccessToken
-              .accessToken,
-        })
-      );
-
+    setTimeout(() => {
       router.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+    }, 1);
   };
 
   const formik = useFormik({
@@ -74,7 +39,7 @@ const SignUpForm = () => {
       <Input
         id='firstName'
         type='text'
-        label='First Name'
+        placeholder='First Name'
         value={formik.values.firstName}
         onChange={formik.handleChange}
         error={formik.touched.firstName && Boolean(formik.errors.firstName)}
@@ -83,7 +48,7 @@ const SignUpForm = () => {
       <Input
         id='lastName'
         type='text'
-        label='Last Name'
+        placeholder='Last Name'
         value={formik.values.lastName}
         onChange={formik.handleChange}
         error={formik.touched.lastName && Boolean(formik.errors.lastName)}
@@ -92,7 +57,7 @@ const SignUpForm = () => {
       <Input
         id='email'
         type='email'
-        label='Email'
+        placeholder='Email'
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email && Boolean(formik.errors.email)}
@@ -101,7 +66,7 @@ const SignUpForm = () => {
       <Input
         id='password'
         type='password'
-        label='Password'
+        placeholder='Password'
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.touched.password && Boolean(formik.errors.password)}
@@ -110,7 +75,7 @@ const SignUpForm = () => {
       <Input
         id='confirm_password'
         type='password'
-        label='Confirm Password'
+        placeholder='Confirm Password'
         value={formik.values.confirm_password}
         onChange={formik.handleChange}
         error={
