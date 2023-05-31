@@ -34,7 +34,7 @@ export const Header = ({ userSession, cartSession }) => {
             className='h-6 w-6'
           />
           <span className='absolute top-4 text-[10px] font-bold'>
-            {cartSession.totalQuantity}
+            {cartSession.totalQuantity ? cartSession.totalQuantity : 0}
           </span>
         </button>
       </div>
