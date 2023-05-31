@@ -40,7 +40,7 @@ export const Header = ({ userSession, cartSession }) => {
       </div>
       {openCartPreview && (
         <CartPreview
-          cartItems={cartProps.items}
+          cartSession={cartSession}
           setOpenCartPreview={setOpenCartPreview}
         />
       )}
