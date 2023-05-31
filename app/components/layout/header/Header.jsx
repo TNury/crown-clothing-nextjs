@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import CartPreview from '@/components/CartPreview';
 
-export const Header = ({ userSession }) => {
+export const Header = ({ userSession, cartSession }) => {
   const [openCartPreview, setOpenCartPreview] = useState(false);
 
   const toggleCartPreview = () => {
@@ -48,7 +48,7 @@ export const Header = ({ userSession }) => {
             className='h-6 w-6'
           />
           <span className='absolute top-4 text-[10px] font-bold'>
-            {/* {cartProps.itemsQuantity} */}0
+            {cartSession.totalQuantity}
           </span>
         </button>
       </div>
