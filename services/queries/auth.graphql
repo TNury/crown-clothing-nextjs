@@ -32,6 +32,15 @@ mutation createAccessToken($email: String!, $password: String!) {
   }
 }
 
+mutation deleteCustomerAccessToken($accessToken: String!) {
+  customerAccessTokenDelete(customerAccessToken: $accessToken) {
+    deletedAccessToken
+    userErrors {
+      message
+    }
+  }
+}
+
 query retrieveCustomer($accessToken: String!) {
   customer(customerAccessToken: $accessToken) {
     id
