@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { useCallback, useEffect } from 'react';
 
-const CartPreview = ({ cartItems, setOpenCartPreview }) => {
+const CartPreview = ({ cartSession, setOpenCartPreview }) => {
   const handleOnBlur = useCallback((event) => {
     const cartPreviewRef = document.getElementById('cart_preview');
 
@@ -28,36 +28,34 @@ const CartPreview = ({ cartItems, setOpenCartPreview }) => {
   return (
     <div
       id='cart_preview'
-      className='w-60 h-96 p-4 flex flex-col gap-4 absolute right-14 top-20 border border-black bg-white'
+      className='absolute right-14 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'
     >
-      {cartItems.length > 0 ? (
+      {cartSession.totalQuantity > 0 ? (
         <>
           <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
-            {cartItems.map((item, index) => (
-              <div key={index} className='flex w-full h-20'>
+            {cartSession.lines.nodes.map((entry, index) => (
+              <div key={index} className='flex h-20 w-full'>
                 <img
-                  src={item.imageUrl}
-                  className='w-1/3 h-full object-cover'
+                  src={entry.merchandise.image.url}
+                  className='h-full w-1/3 object-cover'
                 />
                 <div className='p-4'>
-                  <p>{item.name}</p>
-                  <p>
-                    {item.quantity} x €{item.price}
-                  </p>
+                  <p>{entry.merchandise.product.title}</p>
+                  <p>{entry.quantity} x €11</p>
                 </div>
               </div>
             ))}
           </div>
           <Link
             href='/checkout'
-            className='w-full p-4 mt-auto flex items-center justify-center bg-black border border-black text-base font-bold uppercase transition-all duration-200 text-white hover:bg-white hover:text-black'
+            className='mt-auto flex w-full items-center justify-center border border-black bg-black p-4 text-base font-bold uppercase text-white transition-all duration-200 hover:bg-white hover:text-black'
           >
             Checkout
           </Link>
         </>
       ) : (
-        <div className='w-full h-full flex items-center justify-center'>
-          <p className='text-3xl font-bold uppercase text-center'>
+        <div className='flex h-full w-full items-center justify-center'>
+          <p className='text-center text-3xl font-bold uppercase'>
             Your cart <br /> is empty
           </p>
         </div>
