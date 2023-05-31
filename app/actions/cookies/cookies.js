@@ -21,3 +21,7 @@ export async function retrieveCookie(name) {
     return null;
   }
 }
+
+export async function deleteCookie(name) {
+  cookies().delete(name);
+}
