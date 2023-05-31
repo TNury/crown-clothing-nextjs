@@ -5,16 +5,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import CartPreview from '@/components/CartPreview';
+import { AuthButton } from './auth-button/AuthButton';
 
 export const Header = ({ userSession, cartSession }) => {
   const [openCartPreview, setOpenCartPreview] = useState(false);
 
   const toggleCartPreview = () => {
     setOpenCartPreview(!openCartPreview);
-  };
-
-  const handleSignOutClick = () => {
-    // signOutUser();
   };
 
   return (
@@ -26,18 +23,7 @@ export const Header = ({ userSession, cartSession }) => {
         <Link href='/shop' className='cursor-pointer p-2 text-base'>
           SHOP
         </Link>
-        {userSession.accessToken ? (
-          <button
-            onClick={handleSignOutClick}
-            className='cursor-pointer p-2 text-base'
-          >
-            SIGN OUT
-          </button>
-        ) : (
-          <Link href='/auth' className='cursor-pointer p-2 text-base'>
-            SIGN IN
-          </Link>
-        )}
+        <AuthButton userSession={userSession} />
         <button
           onClick={toggleCartPreview}
           className='relative flex cursor-pointer items-center justify-center p-2'
