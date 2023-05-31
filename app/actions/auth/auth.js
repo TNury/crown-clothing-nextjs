@@ -1,6 +1,6 @@
 'use server';
 
-import { storeCookie } from '../cookies/cookies';
+import { storeCookie, deleteCookie } from '../cookies/cookies';
 
 import callAPI from '@services/api';
 
@@ -51,4 +51,12 @@ export async function loginUser(formData) {
     ...loginResponse.customer,
     accessToken,
   });
+}
+
+export async function logoutUser(accessToken) {
+  await callAPI('services/queries/auth.graphql', 'deleteCustomerAccessToken', {
+    accessToken,
+  });
+
+  await deleteCookie('userSession');
 }
