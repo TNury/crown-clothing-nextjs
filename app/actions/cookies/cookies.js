@@ -12,7 +12,11 @@ export async function retrieveCookie(name) {
   const storedCookie = cookies().get(name);
 
   if (storedCookie) {
-    return JSON.parse(storedCookie.value);
+    if (storedCookie.value) {
+      return JSON.parse(storedCookie.value);
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
