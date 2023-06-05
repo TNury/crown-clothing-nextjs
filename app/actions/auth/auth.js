@@ -58,5 +58,5 @@ export async function logoutUser(accessToken) {
     accessToken,
   });
 
-  await deleteCookie('userSession');
+  deleteCookie('userSession');
 }
