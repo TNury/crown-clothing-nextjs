@@ -5,7 +5,13 @@ import { cookies } from 'next/headers';
 export async function storeCookie(name, value) {
   const stringifiedValue = JSON.stringify(value);
 
-  cookies().set(name, stringifiedValue);
+  cookies().set(name, stringifiedValue, {
+    path: '/',
+    maxAge: 3600, // 1 hour
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+  });
 }
 
 export async function retrieveCookie(name) {
@@ -23,5 +29,11 @@ export async function retrieveCookie(name) {
 }
 
 export async function deleteCookie(name) {
-  cookies().delete(name);
+  cookies().set(name, '', {
+    path: '/',
+    maxAge: 0, // 1 hour
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+  });
 }
