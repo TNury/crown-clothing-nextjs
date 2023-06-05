@@ -4,6 +4,10 @@ import { retrieveCookie } from './actions/cookies/cookies';
 
 import '../styles/globals.css';
 
+export const metadata = {
+  title: 'Crown Clothing | NextJS',
+};
+
 const RootLayout = async ({ children }) => {
   const userSession = (await retrieveCookie('userSession')) || {};
   const cartSession = (await retrieveCookie('cartSession')) || {};
