@@ -9,3 +9,11 @@
 body {
   font-family: 'Open Sans Condensed', sans-serif;
 }
+
+.text-base {
+  letter-spacing: 0.03rem;
+}
+
+.text-lg {
+  letter-spacing: 0.05rem;
+}
