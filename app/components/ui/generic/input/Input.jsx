@@ -7,7 +7,7 @@ export const Input = (props) => {
         <input
           id={id}
           type={type}
-          className='peer/input border-b border-b-black p-2 text-xl outline-none'
+          className='border-b border-b-black py-2 text-base outline-none'
           value={value}
           onChange={onChange}
           placeholder={placeholder}
