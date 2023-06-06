@@ -1,7 +1,14 @@
 'use client';
 
-export const Button = (props) => {
-  const { variant, className, children, ...restOfProps } = props;
+interface ButtonProps {
+  variant?: string;
+  children: React.ReactNode;
+  type: 'button' | 'submit';
+  onClick: () => void;
+}
+
+export const Button = (props: ButtonProps) => {
+  const { variant, children, type, onClick } = props;
 
   const handleClassNames = () => {
     const standardClasses =
@@ -17,7 +24,7 @@ export const Button = (props) => {
   };
 
   return (
-    <button {...restOfProps} className={handleClassNames()}>
+    <button type={type} className={handleClassNames()} onClick={onClick}>
       {children}
     </button>
   );
