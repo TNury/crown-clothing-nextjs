@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 
 import { useFormik } from 'formik';
 
-import { Input } from '@/components/ui/generic/input/Input';
 import { Button } from '@/components/ui/generic/button/Button';
+import { Input } from '@/components/ui/generic/input/Input';
 
 import { loginUser } from '@/actions/auth/auth';
 
