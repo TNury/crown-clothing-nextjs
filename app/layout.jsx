@@ -1,3 +1,5 @@
+import { Open_Sans } from 'next/font/google';
+
 import { Header } from '@/components/layout/header/Header';
 
 import { retrieveCookie } from './actions/cookies/cookies';
@@ -8,6 +10,8 @@ export const metadata = {
   title: 'Crown Clothing | NextJS',
 };
 
+const openSans = Open_Sans({ subsets: ['latin'] });
+
 const RootLayout = async ({ children }) => {
   const userSession = (await retrieveCookie('userSession')) || {};
   const cartSession = (await retrieveCookie('cartSession')) || {};
@@ -15,7 +19,7 @@ const RootLayout = async ({ children }) => {
   return (
     <html>
       <head />
-      <body className='pt-20'>
+      <body className={`${openSans.className} pt-20`}>
         <Header userSession={userSession} cartSession={cartSession} />
         {children}
       </body>
