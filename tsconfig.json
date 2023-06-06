@@ -21,7 +21,7 @@
     "baseUrl": ".",
     "paths": {
       "@/actions/*": ["app/actions/*"],
-      "@/components/*": ["app/components/*"],
+      "@/components/*": ["components/*"],
       "@/redux/*": ["redux/*"],
       "@/utils/*": ["utils/*"],
       "@services/*": ["services/*"]

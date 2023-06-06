@@ -1,6 +1,6 @@
 import { Open_Sans } from 'next/font/google';
 
-import { Header } from '@/components/layout/header/Header';
+import { Header } from 'components/layout/header/Header';
 
 import { retrieveCookie } from './actions/cookies/cookies';
 

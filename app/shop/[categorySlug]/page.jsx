@@ -1,4 +1,4 @@
-import { ProductBox } from '@/components/product-box/ProductBox';
+import { ProductBox } from 'components/product-box/ProductBox';
 
 import callAPI from '@services/api';
 
