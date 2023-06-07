@@ -5,7 +5,7 @@ query homepageCollections {
       title
       handle
       image {
-        src
+        url
         altText
       }
     }
@@ -24,7 +24,7 @@ query shopPageQuery {
           handle
           title
           featuredImage {
-            src
+            url
           }
           priceRange {
             minVariantPrice {
@@ -60,7 +60,7 @@ query categorySlugCollection($handle: String!) {
         handle
         title
         featuredImage {
-          src
+          url
         }
         priceRange {
           minVariantPrice {
