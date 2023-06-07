@@ -1,16 +1,28 @@
+import type { Product } from '@services/graphql-types/schema-types';
+
+import AddToCart from '@/components/ui/specialized/add-to-cart/AddToCart';
+
 import { formatPrice } from '@/utils/misc/formatPrice';
 
-import AddToCart from '../ui/specialized/add-to-cart/AddToCart';
+interface ProductBoxProps
+  extends Pick<
+    Product,
+    'id' | 'title' | 'priceRange' | 'variants' | 'handle' | 'featuredImage'
+  > {}
 
-export const ProductBox = ({ productData }) => {
+export const ProductBox = ({
+  productData,
+}: {
+  productData: ProductBoxProps;
+}) => {
   return (
     <div className='flex h-full w-full flex-col gap-4'>
       <div className='group relative h-5/6 w-full cursor-pointer border border-black'>
         <img
-          src={productData.featuredImage.src}
+          src={productData.featuredImage.url}
           className='h-full w-full object-cover'
         />
-        <div className='absolute inset-0 flex items-end bg-opaque-white-30 py-4 px-8 opacity-0 transition-all duration-200 group-hover:opacity-100'>
+        <div className='absolute inset-0 flex items-end bg-opaque-white-30 px-8 py-4 opacity-0 transition-all duration-200 group-hover:opacity-100'>
           <AddToCart productData={productData} />
         </div>
       </div>
