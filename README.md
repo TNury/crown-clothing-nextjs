@@ -8,10 +8,6 @@ https://admin.shopify.com/store/nextjs13-crown-clothing/
 
 ## Resources
 
-- State persistence:
-
-https://www.npmjs.com/package/redux-persist-cookie-storage
-
 - Server actions:
 
 https://stackoverflow.com/questions/76269170/cant-access-values-from-next-server-actions-next-js-13-4
