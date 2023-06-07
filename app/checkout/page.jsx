@@ -1,29 +1,12 @@
 'use client';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem, decreaseQuantity, removeItem } from '@/redux/cart/cart.reducer';
-
 const Checkout = () => {
   const cartProps = useSelector((state) => state.cart);
 
-  const dispatch = useDispatch();
-
-  const triggerAddition = (itemData) => {
-    dispatch(addItem(itemData));
-  };
-
-  const triggerQuantityDecrease = (itemData) => {
-    dispatch(decreaseQuantity(itemData));
-  };
-
-  const triggerItemRemoval = (itemData) => {
-    dispatch(removeItem(itemData));
-  };
-
   return (
-    <main className='w-full min-h-[calc(100vh-5rem)] px-4 py-16 flex flex-col items-center'>
-      <div className='w-1/2 flex flex-col gap-4'>
-        <div className='py-2 flex border-b border-darkgray text-center'>
+    <main className='flex min-h-[calc(100vh-5rem)] w-full flex-col items-center px-4 py-16'>
+      <div className='flex w-1/2 flex-col gap-4'>
+        <div className='flex border-b border-darkgray py-2 text-center'>
           <span className='w-[23%] text-xl'>Product</span>
           <span className='w-[23%] text-xl'>Description</span>
           <span className='w-[23%] text-xl'>Quantity</span>
@@ -34,37 +17,21 @@ const Checkout = () => {
           {cartProps.items.map((item, index) => (
             <div
               key={index}
-              className='flex items-center text-center py-4 border-b border-darkgray'
-            >
+              className='flex items-center border-b border-darkgray py-4 text-center'>
               <img src={item.imageUrl} className='w-[23%]' />
-              <div className='w-[23%] flex items-center justify-center'>
+              <div className='flex w-[23%] items-center justify-center'>
                 <p className='text-xl'>{item.name}</p>
               </div>
-              <div className='w-[23%] flex items-center gap-2 justify-center'>
-                <button
-                  onClick={() => triggerQuantityDecrease(item)}
-                  className='cursor-pointer px-2'
-                >
-                  &#10094;
-                </button>
-                <p className='text-xl w-4'>{item.quantity}</p>
-                <button
-                  onClick={() => triggerAddition(item)}
-                  className='cursor-pointer px-2'
-                >
-                  &#10095;
-                </button>
+              <div className='flex w-[23%] items-center justify-center gap-2'>
+                <button className='cursor-pointer px-2'>&#10094;</button>
+                <p className='w-4 text-xl'>{item.quantity}</p>
+                <button className='cursor-pointer px-2'>&#10095;</button>
               </div>
-              <div className='w-[23%] flex items-center justify-center'>
+              <div className='flex w-[23%] items-center justify-center'>
                 <p className='text-xl'>€{item.price}</p>
               </div>
-              <div className='w-[23%] flex items-center justify-center'>
-                <button
-                  onClick={() => triggerItemRemoval(item)}
-                  className='px-2 text-xl'
-                >
-                  &#10005;
-                </button>
+              <div className='flex w-[23%] items-center justify-center'>
+                <button className='px-2 text-xl'>&#10005;</button>
               </div>
             </div>
           ))}
