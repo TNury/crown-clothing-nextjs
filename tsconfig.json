@@ -22,7 +22,6 @@
     "paths": {
       "@/actions/*": ["app/actions/*"],
       "@/components/*": ["components/*"],
-      "@/redux/*": ["redux/*"],
       "@/utils/*": ["utils/*"],
       "@services/*": ["services/*"]
     }
