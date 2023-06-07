@@ -24,7 +24,7 @@ const Home = async () => {
             className='group min-w-[30%] h-60 flex-auto flex items-center justify-center border border-black overflow-hidden relative cursor-pointer [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1 xl:h-80'
           >
             <img
-              src={entry.image.src}
+              src={entry.image.url}
               alt={entry.image.altText}
               className='w-full h-full object-cover -z-10 absolute group-hover:scale-110 transition-all duration-1000'
             />
