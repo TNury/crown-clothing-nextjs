@@ -19,11 +19,10 @@ const config: CodegenConfig = {
   documents: 'services/queries/*.graphql',
   generates: {
     './types/queries/queries.ts': {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-document-nodes',
-      ],
+      plugins: ['typescript', 'typescript-operations'],
+    },
+    './services/queries/generated-query-document-nodes.ts': {
+      plugins: ['typescript-document-nodes'],
     },
   },
 };
