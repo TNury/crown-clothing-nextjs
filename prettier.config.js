@@ -19,6 +19,7 @@ module.exports = {
     '^@/components',
     '^@/actions',
     '^@/utils',
+    '^@/types',
     '^[./]',
   ],
   importOrderSeparation: true,
