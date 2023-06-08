@@ -1,19 +1,19 @@
-import type { Product } from '@services/graphql-types/schema-types';
+// import type { Product } from '@/services/graphql-types/schema-types';
 
 import AddToCart from '@/components/ui/specialized/add-to-cart/AddToCart';
 
 import { formatPrice } from '@/utils/misc/formatPrice';
 
-interface ProductBoxProps
-  extends Pick<
-    Product,
-    'id' | 'title' | 'priceRange' | 'variants' | 'handle' | 'featuredImage'
-  > {}
+// interface ProductBoxProps
+//   extends Pick<
+//     Product,
+//     'id' | 'title' | 'priceRange' | 'variants' | 'handle' | 'featuredImage'
+//   > {}
 
 export const ProductBox = ({
   productData,
 }: {
-  productData: ProductBoxProps;
+  productData: any;
 }) => {
   return (
     <div className='flex h-full w-full flex-col gap-4'>
