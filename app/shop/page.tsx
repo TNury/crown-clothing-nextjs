@@ -1,13 +1,16 @@
 import Link from 'next/link';
 
-import callAPI from '@services/api';
-import { ProductBox } from 'components/product-box/ProductBox';
+import callAPI from '@/services/api';
 
+import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
+
+import type { ShopPageQueryQuery } from '@/types/queries/queries';
+
+// Fix this ShopPageQueryQuery bs
 const ShopPage = async () => {
-  const { collections: shopPageQuery } = await callAPI(
-    'services/queries/collections.graphql',
-    'shopPageQuery'
-  );
+  const response: ShopPageQueryQuery = await callAPI('ShopPageQuery');
+
+  const { collections: shopPageQuery } = response;
 
   return (
     <main id='shop' className='flex flex-col gap-16 px-4 py-16 md:px-16'>
