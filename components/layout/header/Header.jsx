@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
-import CartPreview from '@/components/CartPreview';
+import CartPreview from '@/components/layout/header/cart-preview/CartPreview';
+
 import { AuthButton } from './auth-button/AuthButton';
 
 export const Header = ({ userSession, cartSession }) => {
@@ -26,8 +27,7 @@ export const Header = ({ userSession, cartSession }) => {
         <AuthButton userSession={userSession} />
         <button
           onClick={toggleCartPreview}
-          className='relative flex cursor-pointer items-center justify-center p-2'
-        >
+          className='relative flex cursor-pointer items-center justify-center p-2'>
           <img
             src='/assets/shopping-bag.svg'
             alt='bag_icon'

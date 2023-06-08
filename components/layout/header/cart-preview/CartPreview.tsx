@@ -1,11 +1,18 @@
 'use client';
 
+import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
+
 import Link from 'next/link';
 
-import { useCallback, useEffect } from 'react';
+interface CartPreviewProps {
+  cartSession: any;
+  setOpenCartPreview: Dispatch<SetStateAction<boolean>>;
+}
 
-const CartPreview = ({ cartSession, setOpenCartPreview }) => {
-  const handleOnBlur = useCallback((event) => {
+const CartPreview = (props: CartPreviewProps) => {
+  const { cartSession, setOpenCartPreview } = props;
+
+  const handleOnBlur = useCallback((event: any) => {
     const cartPreviewRef = document.getElementById('cart_preview');
 
     if (!cartPreviewRef.contains(event.target)) {
@@ -28,12 +35,11 @@ const CartPreview = ({ cartSession, setOpenCartPreview }) => {
   return (
     <div
       id='cart_preview'
-      className='absolute right-14 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'
-    >
+      className='absolute right-14 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'>
       {cartSession.totalQuantity > 0 ? (
         <>
           <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
-            {cartSession.lines.nodes.map((entry, index) => (
+            {cartSession.lines.nodes.map((entry: any, index: number) => (
               <div key={index} className='flex h-20 w-full'>
                 <img
                   src={entry.merchandise.image.url}
@@ -48,8 +54,7 @@ const CartPreview = ({ cartSession, setOpenCartPreview }) => {
           </div>
           <Link
             href='/checkout'
-            className='mt-auto flex w-full items-center justify-center border border-black bg-black p-4 text-base font-bold uppercase text-white transition-all duration-200 hover:bg-white hover:text-black'
-          >
+            className='mt-auto flex w-full items-center justify-center border border-black bg-black p-4 text-base font-bold uppercase text-white transition-all duration-200 hover:bg-white hover:text-black'>
             Checkout
           </Link>
         </>
