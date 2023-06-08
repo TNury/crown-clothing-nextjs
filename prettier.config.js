@@ -16,6 +16,7 @@ module.exports = {
     '^react',
     '^next',
     '<THIRD_PARTY_MODULES>',
+    '^@/services',
     '^@/components',
     '^@/actions',
     '^@/utils',
