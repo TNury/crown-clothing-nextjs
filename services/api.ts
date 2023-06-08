@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { print } from 'graphql/language/printer';
+import * as mappedQueries from '@/services/queries/generated-query-document-nodes';
 
 import returnApiResponseData from '@/utils/misc/returnApiResponseData';
 
@@ -12,20 +12,13 @@ const api = axios.create({
   },
 });
 
-async function callAPI(queryPath, queryName, queryVariables) {
-  const queryModule = await import(`${queryPath}`);
-
-  const queryDefinition = queryModule.definitions.find(
-    (definition) => definition.name.value === queryName
-  );
+async function callAPI(queryName: string, variables?: Record<string, any>) {
+  const query = mappedQueries[queryName].loc.source.body;
 
   const objectToSend = {
-    query: print(queryDefinition),
+    query,
+    variables,
   };
-
-  if (queryVariables) {
-    objectToSend.variables = queryVariables;
-  }
 
   const response = await api.post('/', objectToSend);
 
