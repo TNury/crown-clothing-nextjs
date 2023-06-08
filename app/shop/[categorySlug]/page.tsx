@@ -1,15 +1,18 @@
-import callAPI from '@services/api';
+import callAPI from '@/services/api';
 
-import { ProductBox } from '@/components/product-box/ProductBox';
+import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
+
+import { CategorySlugCollectionQuery } from '@/types/queries/queries';
 
 const CategorySlug = async ({ params: { categorySlug } }) => {
-  const { collectionByHandle: categorySlugProps } = await callAPI(
-    'services/queries/collections.graphql',
-    'categorySlugCollection',
+  const response: CategorySlugCollectionQuery = await callAPI(
+    'CategorySlugCollection',
     {
       handle: categorySlug,
     }
   );
+
+  const { collectionByHandle: categorySlugProps } = response;
 
   return (
     <main className='flex flex-col items-center gap-6 px-4 py-16 md:pl-16 md:pr-12'>
