@@ -1,20 +1,14 @@
-// import type { Product } from '@/services/graphql-types/schema-types';
-
 import AddToCart from '@/components/ui/specialized/add-to-cart/AddToCart';
 
 import { formatPrice } from '@/utils/misc/formatPrice';
 
-// interface ProductBoxProps
-//   extends Pick<
-//     Product,
-//     'id' | 'title' | 'priceRange' | 'variants' | 'handle' | 'featuredImage'
-//   > {}
+import { ProductDataProps } from '@/types/product/product';
 
-export const ProductBox = ({
-  productData,
-}: {
-  productData: any;
-}) => {
+type ProductBoxProps = {
+  productData: ProductDataProps;
+};
+
+export const ProductBox: React.FC<ProductBoxProps> = ({ productData }) => {
   return (
     <div className='flex h-full w-full flex-col gap-4'>
       <div className='group relative h-5/6 w-full cursor-pointer border border-black'>
