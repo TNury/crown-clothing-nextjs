@@ -4,7 +4,7 @@ interface ButtonProps {
   variant?: string;
   children: React.ReactNode;
   type: 'button' | 'submit';
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const Button = (props: ButtonProps) => {
