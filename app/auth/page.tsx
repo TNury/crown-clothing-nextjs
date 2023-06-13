@@ -1,7 +1,7 @@
 import SignInForm from 'components/SignInForm';
 import SignUpForm from 'components/SignUpForm';
 
-const AuthPage = () => {
+const AuthPage: React.FC = () => {
   return (
     <main className='w-full min-h-[calc(100vh-5rem)] px-4 py-16 flex justify-center gap-28'>
       <div className='w-96 flex flex-col gap-16'>
