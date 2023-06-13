@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button: React.FC<ButtonProps> = (props) => {
   const { variant, children, type, onClick } = props;
 
   const handleClassNames = () => {
