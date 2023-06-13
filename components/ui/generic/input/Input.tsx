@@ -1,4 +1,14 @@
-export const Input = (props) => {
+interface InputProps {
+  id: string;
+  type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error: boolean;
+  placeholder: string;
+  helperText: string;
+}
+
+export const Input: React.FC<InputProps> = (props) => {
   const { id, type, value, onChange, error, placeholder, helperText } = props;
 
   return (
