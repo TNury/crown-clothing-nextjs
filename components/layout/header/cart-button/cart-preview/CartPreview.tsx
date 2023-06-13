@@ -11,10 +11,10 @@ interface CartPreviewProps {
   setOpenCartPreview: Dispatch<SetStateAction<boolean>>;
 }
 
-const CartPreview = (props: CartPreviewProps) => {
+const CartPreview: React.FC<CartPreviewProps> = (props) => {
   const { cartSession, setOpenCartPreview } = props;
 
-  const handleOnBlur = useCallback((event: MouseEvent) => {
+  const handleOnBlur = useCallback((event: MouseEvent): void => {
     const cartPreviewRef = document.getElementById('cart_preview');
 
     if (!cartPreviewRef?.contains(event.target as Node)) {

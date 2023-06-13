@@ -6,14 +6,14 @@ import { CartSessionProps } from '@/types/cart/cart';
 
 import CartPreview from './cart-preview/CartPreview';
 
-export const CartButton = ({
-  cartSession,
-}: {
+type CartButtonProps = {
   cartSession: CartSessionProps;
-}) => {
+};
+
+export const CartButton: React.FC<CartButtonProps> = ({ cartSession }) => {
   const [openCartPreview, setOpenCartPreview] = useState<boolean>(false);
 
-  const toggleCartPreview = () => {
+  const toggleCartPreview = (): void => {
     setOpenCartPreview(!openCartPreview);
   };
 

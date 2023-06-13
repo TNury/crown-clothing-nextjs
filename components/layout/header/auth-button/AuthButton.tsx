@@ -7,14 +7,14 @@ import { logoutUser } from '@/actions/auth/auth';
 
 import type { UserSessionProps } from '@/types/auth/auth';
 
-export const AuthButton = ({
-  userSession,
-}: {
+type AuthButtonProps = {
   userSession: UserSessionProps;
-}) => {
+};
+
+export const AuthButton: React.FC<AuthButtonProps> = ({ userSession }) => {
   const router = useRouter();
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     await logoutUser(userSession.accessToken);
 
     router.refresh();
