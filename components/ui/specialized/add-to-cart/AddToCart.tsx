@@ -1,10 +1,16 @@
 'use client';
 
-import { triggerItemAddition } from '@/actions/cart/cart';
-
 import { Button } from '@/components/ui/generic/button/Button';
 
-const AddToCart = ({ productData }: any) => {
+import { triggerItemAddition } from '@/actions/cart/cart';
+
+import { ProductDataProps } from '@/types/product/product';
+
+type AddToCartProps = {
+  productData: ProductDataProps;
+};
+
+const AddToCart: React.FC<AddToCartProps> = ({ productData }) => {
   return (
     <Button type='submit' onClick={() => triggerItemAddition(productData)}>
       Add to cart
