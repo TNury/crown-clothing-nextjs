@@ -1,12 +1,17 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { logoutUser } from '@/actions/auth/auth';
 
-export const AuthButton = ({ userSession }) => {
+import type { UserSessionProps } from '@/types/auth/auth';
+
+export const AuthButton = ({
+  userSession,
+}: {
+  userSession: UserSessionProps;
+}) => {
   const router = useRouter();
 
   const handleLogout = async () => {
