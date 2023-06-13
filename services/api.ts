@@ -12,7 +12,7 @@ const api = axios.create({
   },
 });
 
-async function callAPI(queryName: string, variables?: Record<string, any>) {
+async function callAPI(queryName: string, variables?: Record<string, any>): Promise<any> {
   const query = mappedQueries[queryName].loc.source.body;
 
   const objectToSend = {
