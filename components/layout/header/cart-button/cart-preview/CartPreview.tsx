@@ -45,7 +45,7 @@ const CartPreview: React.FC<CartPreviewProps> = (props) => {
                   src={entry.merchandise.image.url}
                   className='h-full w-1/3 object-cover'
                 />
-                <div className='p-4'>
+                <div className='p-4 text-left'>
                   <p>{entry.merchandise.product.title}</p>
                   <p>{entry.quantity} x €11</p>
                 </div>
