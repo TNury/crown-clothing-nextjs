@@ -2,7 +2,7 @@
 
 import { storeCookie, deleteCookie } from '../cookies/cookies';
 
-import callAPI from '@services/api';
+import callAPI from '@/services/api';
 
 export async function registerUser(formData) {
   const registrationResponse = await callAPI(

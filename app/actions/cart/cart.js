@@ -1,6 +1,6 @@
 'use server';
 
-import callAPI from '@services/api';
+import callAPI from '@/services/api';
 
 import { retrieveCookie, storeCookie } from '@/actions/cookies/cookies';
 

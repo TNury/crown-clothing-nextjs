@@ -31,7 +31,7 @@ export async function retrieveCookie(name) {
 export async function deleteCookie(name) {
   cookies().set(name, '', {
     path: '/',
-    maxAge: 0, // 1 hour
+    maxAge: 0,
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
