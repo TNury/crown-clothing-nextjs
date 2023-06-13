@@ -4,25 +4,25 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 
 import Link from 'next/link';
 
+import { CartSessionProps } from '@/types/cart/cart';
+
 interface CartPreviewProps {
-  cartSession: any;
+  cartSession: CartSessionProps;
   setOpenCartPreview: Dispatch<SetStateAction<boolean>>;
 }
 
 const CartPreview = (props: CartPreviewProps) => {
   const { cartSession, setOpenCartPreview } = props;
 
-  const handleOnBlur = useCallback((event: any) => {
+  const handleOnBlur = useCallback((event: MouseEvent) => {
     const cartPreviewRef = document.getElementById('cart_preview');
 
-    if (!cartPreviewRef.contains(event.target)) {
+    if (!cartPreviewRef?.contains(event.target as Node)) {
       setOpenCartPreview(false);
     }
   }, []);
 
   useEffect(() => {
-    // Timeout to prevent handleBlur from being triggered
-    // immediately after comp is rendered.
     setTimeout(() => {
       window.addEventListener('click', handleOnBlur);
     }, 100);
@@ -35,7 +35,7 @@ const CartPreview = (props: CartPreviewProps) => {
   return (
     <div
       id='cart_preview'
-      className='absolute right-14 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'>
+      className='absolute right-0 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'>
       {cartSession.totalQuantity > 0 ? (
         <>
           <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
