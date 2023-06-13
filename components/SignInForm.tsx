@@ -11,23 +11,20 @@ import { loginUser } from '@/actions/auth/auth';
 
 import { SignInFormValidationSchema } from '@/utils/auth/auth.utils';
 
-const SignInForm = () => {
+import type { SignInFormProps } from '@/types/forms/forms';
+
+const SignInForm: React.FC = () => {
   const router = useRouter();
 
-  const handleOnSubmit = async (formData) => {
+  const handleOnSubmit = async (formData: SignInFormProps): Promise<void> => {
     await loginUser(formData);
 
-    /*
-      loginUser stores a cookie after it successfully logs a user in.
-      For some reason if we don't set a timeout before redirecting the user,
-      it generates a TREE MISMATCH error.
-    */
     setTimeout(() => {
       router.push('/');
     }, 1);
   };
 
-  const formik = useFormik({
+  const formik = useFormik<SignInFormProps>({
     initialValues: {
       email: '',
       password: '',
