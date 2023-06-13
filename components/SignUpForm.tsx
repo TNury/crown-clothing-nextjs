@@ -4,17 +4,19 @@ import { useRouter } from 'next/navigation';
 
 import { useFormik } from 'formik';
 
-import { Input } from '@/components/ui/generic/input/Input';
 import { Button } from '@/components/ui/generic/button/Button';
+import { Input } from '@/components/ui/generic/input/Input';
 
 import { registerUser } from '@/actions/auth/auth';
 
 import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
 
-const SignUpForm = () => {
+import { SignUpFormProps } from '@/types/forms/forms';
+
+const SignUpForm: React.FC = () => {
   const router = useRouter();
 
-  const handleOnSubmit = async (formData) => {
+  const handleOnSubmit = async (formData: SignUpFormProps): Promise<void> => {
     await registerUser(formData);
 
     /*
@@ -27,13 +29,13 @@ const SignUpForm = () => {
     }, 1);
   };
 
-  const formik = useFormik({
+  const formik = useFormik<SignUpFormProps>({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      confirm_password: '',
+      confirmPassword: '',
     },
     validationSchema: SignUpFormValidationSchema,
     onSubmit: handleOnSubmit,
@@ -78,17 +80,17 @@ const SignUpForm = () => {
         helperText={formik.touched.password && formik.errors.password}
       />
       <Input
-        id='confirm_password'
+        id='confirmPassword'
         type='password'
         placeholder='Confirm Password'
-        value={formik.values.confirm_password}
+        value={formik.values.confirmPassword}
         onChange={formik.handleChange}
         error={
-          formik.touched.confirm_password &&
-          Boolean(formik.errors.confirm_password)
+          formik.touched.confirmPassword &&
+          Boolean(formik.errors.confirmPassword)
         }
         helperText={
-          formik.touched.confirm_password && formik.errors.confirm_password
+          formik.touched.confirmPassword && formik.errors.confirmPassword
         }
       />
       <Button type='submit'>Submit</Button>
