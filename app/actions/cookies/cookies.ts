@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 
-export async function storeCookie(name, value) {
+export async function storeCookie(name: string, value: any): Promise<void> {
   const stringifiedValue = JSON.stringify(value);
 
   cookies().set(name, stringifiedValue, {
@@ -14,7 +14,7 @@ export async function storeCookie(name, value) {
   });
 }
 
-export async function retrieveCookie(name) {
+export async function retrieveCookie(name: string): Promise<any> {
   const storedCookie = cookies().get(name);
 
   if (storedCookie) {
@@ -28,7 +28,7 @@ export async function retrieveCookie(name) {
   }
 }
 
-export async function deleteCookie(name) {
+export async function deleteCookie(name: string): Promise<void> {
   cookies().set(name, '', {
     path: '/',
     maxAge: 0,
