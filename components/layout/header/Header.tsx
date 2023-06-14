@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { retrieveCookie } from '@/actions/cookies/cookies';
@@ -12,7 +13,9 @@ export const Header = async () => {
   return (
     <header className='fixed top-0 z-20 flex h-20 w-full items-center justify-between bg-white pl-4 md:pl-16 md:pr-14'>
       <Link href='/'>
-        <img src='/assets/logo.svg' alt='brand_logo' className='h-14 w-14' />
+        <div className='relative h-14 w-14'>
+          <Image src='/assets/logo.svg' alt='brand_logo' fill />
+        </div>
       </Link>
       <div className='flex items-center gap-2'>
         <Link href='/shop' className='cursor-pointer p-2 text-base'>
