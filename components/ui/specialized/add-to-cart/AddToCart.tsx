@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/generic/button/Button';
 
 import { triggerItemAddition } from '@/actions/cart/cart';
@@ -11,8 +13,18 @@ type AddToCartProps = {
 };
 
 const AddToCart: React.FC<AddToCartProps> = ({ productData }) => {
+  const router = useRouter();
+
+  const handleClick = async (): Promise<void> => {
+    await triggerItemAddition(productData);
+
+    setTimeout(() => {
+      router.refresh();
+    }, 1);
+  };
+
   return (
-    <Button type='submit' onClick={() => triggerItemAddition(productData)}>
+    <Button type='submit' onClick={handleClick}>
       Add to cart
     </Button>
   );
