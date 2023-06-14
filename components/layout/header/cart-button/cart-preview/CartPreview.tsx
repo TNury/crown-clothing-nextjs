@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { CartSessionProps } from '@/types/cart/cart';
@@ -39,12 +40,15 @@ const CartPreview: React.FC<CartPreviewProps> = (props) => {
       {cartSession.totalQuantity > 0 ? (
         <>
           <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
-            {cartSession.lines.nodes.map((entry: any, index: number) => (
+            {cartSession.lines.nodes.map((entry, index: number) => (
               <div key={index} className='flex h-20 w-full'>
-                <img
-                  src={entry.merchandise.image.url}
-                  className='h-full w-1/3 object-cover'
-                />
+                <div className='relative h-full w-1/3'>
+                  <Image
+                    src={entry.merchandise.image.url}
+                    fill
+                    alt={entry.merchandise.image.altText}
+                  />
+                </div>
                 <div className='p-4 text-left'>
                   <p>{entry.merchandise.product.title}</p>
                   <p>{entry.quantity} x €11</p>
