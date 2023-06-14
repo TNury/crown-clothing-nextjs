@@ -25,6 +25,7 @@ query shopPageQuery {
           title
           featuredImage {
             url
+            altText
           }
           priceRange {
             minVariantPrice {
@@ -61,6 +62,7 @@ query categorySlugCollection($handle: String!) {
         title
         featuredImage {
           url
+          altText
         }
         priceRange {
           minVariantPrice {
