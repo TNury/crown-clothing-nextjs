@@ -186,6 +186,7 @@ export const ShopPageQuery = gql`
           title
           featuredImage {
             url
+            altText
           }
           priceRange {
             minVariantPrice {
@@ -224,6 +225,7 @@ export const CategorySlugCollection = gql`
         title
         featuredImage {
           url
+          altText
         }
         priceRange {
           minVariantPrice {
