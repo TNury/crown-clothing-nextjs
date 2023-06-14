@@ -1,8 +1,4 @@
-'use client';
-
-const Checkout = () => {
-  const cartProps = useSelector((state) => state.cart);
-
+const Checkout: React.FC = () => {
   return (
     <main className='flex min-h-[calc(100vh-5rem)] w-full flex-col items-center px-4 py-16'>
       <div className='flex w-1/2 flex-col gap-4'>
@@ -14,7 +10,7 @@ const Checkout = () => {
           <span className='w-[23%] text-xl'>Remove</span>
         </div>
         <div className='flex flex-col'>
-          {cartProps.items.map((item, index) => (
+          {/* {cartProps.items.map((item, index) => (
             <div
               key={index}
               className='flex items-center border-b border-darkgray py-4 text-center'>
@@ -34,10 +30,10 @@ const Checkout = () => {
                 <button className='px-2 text-xl'>&#10005;</button>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
         <div className='ml-auto mt-8'>
-          <span className='text-4xl'>Total: €{cartProps.total}</span>
+          <span className='text-4xl'>Total: €0</span>
         </div>
       </div>
     </main>
