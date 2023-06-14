@@ -29,6 +29,7 @@ const Home = async () => {
               alt={entry.image.altText}
               className='-z-10 object-cover transition-all duration-1000 group-hover:scale-110'
               fill
+              priority
             />
             <div className='flex h-24 flex-col items-center gap-4 border border-black bg-white px-6 opacity-70 transition-all duration-500 group-hover:opacity-90'>
               <h2 className='text-2xl font-bold uppercase'>{entry.title}</h2>
