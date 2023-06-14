@@ -68,6 +68,7 @@ export const CreateCart = gql`
               id
               image {
                 url
+                altText
               }
               price {
                 amount
@@ -124,6 +125,7 @@ export const AddItemToCart = gql`
               id
               image {
                 url
+                altText
               }
               price {
                 amount
