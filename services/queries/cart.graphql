@@ -19,6 +19,7 @@ mutation createCart($quantity: Int!, $merchandiseId: ID!) {
               id
               image {
                 url
+                altText
               }
               price {
                 amount
@@ -74,6 +75,7 @@ mutation addItemToCart($cartId: ID!, $quantity: Int!, $merchandiseId: ID!) {
               id
               image {
                 url
+                altText
               }
               price {
                 amount
