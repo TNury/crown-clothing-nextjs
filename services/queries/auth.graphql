@@ -29,6 +29,9 @@ mutation createAccessToken($email: String!, $password: String!) {
     customerAccessToken {
       accessToken
     }
+    userErrors {
+      message
+    }
   }
 }
 

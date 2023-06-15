@@ -23,6 +23,9 @@ export const CreateAccessToken = gql`
     customerAccessToken {
       accessToken
     }
+    userErrors {
+      message
+    }
   }
 }
     `;

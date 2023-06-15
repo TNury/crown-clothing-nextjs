@@ -7678,7 +7678,7 @@ export type CreateAccessTokenMutationVariables = Exact<{
 }>;
 
 
-export type CreateAccessTokenMutation = { __typename?: 'Mutation', customerAccessTokenCreate?: { __typename?: 'CustomerAccessTokenCreatePayload', customerAccessToken?: { __typename?: 'CustomerAccessToken', accessToken: string } | null } | null };
+export type CreateAccessTokenMutation = { __typename?: 'Mutation', customerAccessTokenCreate?: { __typename?: 'CustomerAccessTokenCreatePayload', customerAccessToken?: { __typename?: 'CustomerAccessToken', accessToken: string } | null, userErrors: Array<{ __typename?: 'UserError', message: string }> } | null };
 
 export type DeleteCustomerAccessTokenMutationVariables = Exact<{
   accessToken: Scalars['String']['input'];
