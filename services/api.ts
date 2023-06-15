@@ -1,18 +1,4 @@
-import axios from 'axios';
-
 import * as mappedQueries from '@/services/queries/generated-query-document-nodes';
-
-const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
-  timeout: 10000,
-  headers: {
-    'X-Shopify-Storefront-Access-Token': `${process.env.NEXT_PUBLIC_API_KEY}`,
-  },
-});
-
-function returnApiResponseData(response: Record<string, any>) {
-  return response.data.data;
-}
 
 async function callAPI(
   queryName: string,
@@ -25,9 +11,23 @@ async function callAPI(
     variables,
   };
 
-  const response = await api.post('/', objectToSend);
+  const requestOptions: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': `${process.env.NEXT_PUBLIC_API_KEY}`,
+    },
+    body: JSON.stringify(objectToSend),
+  };
 
-  return returnApiResponseData(response);
+  const rawResponse = await fetch(
+    process.env.NEXT_PUBLIC_BACKEND_URL,
+    requestOptions
+  );
+
+  const parsedResponse = await rawResponse.json();
+
+  return parsedResponse.data;
 }
 
 export default callAPI;
