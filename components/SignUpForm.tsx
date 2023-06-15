@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/generic/input/Input';
 
 import { registerUser } from '@/actions/auth/auth';
 
-import { SignUpFormValidationSchema } from '@/utils/auth/auth.utils';
+import { SignUpFormValidationSchema } from '@/lib/auth/auth';
 
 import { SignUpFormProps } from '@/types/forms/forms';
 

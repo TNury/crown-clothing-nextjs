@@ -19,7 +19,7 @@ module.exports = {
     '^@/services',
     '^@/components',
     '^@/actions',
-    '^@/utils',
+    '^@/lib',
     '^@/types',
     '^[./]',
   ],

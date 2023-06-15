@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import AddToCart from '@/components/ui/specialized/add-to-cart/AddToCart';
 
-import { formatPrice } from '@/utils/misc/formatPrice';
+import { formatPrice } from '@/lib/utils/utils';
 
 import { ProductDataProps } from '@/types/product/product';
 
@@ -14,7 +14,7 @@ export const ProductBox: React.FC<ProductBoxProps> = ({ productData }) => {
   return (
     <div className='flex w-full flex-col gap-4'>
       <div className='group relative w-full cursor-pointer border border-black'>
-        <div className='h-[25vw] w-full relative'>
+        <div className='relative h-[25vw] w-full'>
           <Image
             src={productData.featuredImage.url}
             alt={productData.featuredImage.altText}

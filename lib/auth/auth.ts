@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { especialCharRegex } from 'utils/regular-expressions/regularExpressions';
+import { especialCharRegex } from '@/lib/regular-expressions/regularExpressions';
 
 export const SignInFormValidationSchema = yup.object({
   email: yup
