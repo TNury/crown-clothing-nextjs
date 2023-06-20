@@ -35,28 +35,39 @@ export async function registerUser(formData: SignUpFormProps): Promise<void> {
   });
 }
 
-export async function loginUser(formData: SignInFormProps): Promise<void> {
+export async function loginUser(
+  formData: SignInFormProps
+): Promise<CreateAccessTokenMutation> {
   const accessTokenResponse: CreateAccessTokenMutation = await callAPI(
     'CreateAccessToken',
     {
       ...formData,
     }
   );
-  const accessToken =
-    accessTokenResponse.customerAccessTokenCreate.customerAccessToken
-      .accessToken;
 
-  const loginResponse: RetrieveCustomerQuery = await callAPI(
-    'RetrieveCustomer',
-    {
+  if (
+    !Boolean(
+      accessTokenResponse.customerAccessTokenCreate.userErrors.length > 0
+    )
+  ) {
+    const accessToken =
+      accessTokenResponse.customerAccessTokenCreate.customerAccessToken
+        .accessToken;
+
+    const loginResponse: RetrieveCustomerQuery = await callAPI(
+      'RetrieveCustomer',
+      {
+        accessToken,
+      }
+    );
+
+    storeCookie('userSession', {
+      ...loginResponse.customer,
       accessToken,
-    }
-  );
+    });
+  }
 
-  storeCookie('userSession', {
-    ...loginResponse.customer,
-    accessToken,
-  });
+  return accessTokenResponse;
 }
 
 export async function logoutUser(accessToken: string): Promise<void> {
