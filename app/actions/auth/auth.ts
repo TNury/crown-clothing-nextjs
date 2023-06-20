@@ -11,7 +11,9 @@ import {
 
 import { deleteCookie, storeCookie } from '../cookies/cookies';
 
-export async function registerUser(formData: SignUpFormProps): Promise<void> {
+export async function registerUser(
+  formData: SignUpFormProps
+): Promise<CreateCustomerMutation> {
   const registrationResponse: CreateCustomerMutation = await callAPI(
     'CreateCustomer',
     { ...formData }
@@ -25,14 +27,18 @@ export async function registerUser(formData: SignUpFormProps): Promise<void> {
     }
   );
 
-  const accessToken =
-    accessTokenResponse.customerAccessTokenCreate.customerAccessToken
-      .accessToken;
+  if (!Boolean(registrationResponse.customerCreate.userErrors.length > 0)) {
+    const accessToken =
+      accessTokenResponse.customerAccessTokenCreate.customerAccessToken
+        .accessToken;
 
-  storeCookie('userSession', {
-    ...registrationResponse.customerCreate.customer,
-    accessToken,
-  });
+    storeCookie('userSession', {
+      ...registrationResponse.customerCreate.customer,
+      accessToken,
+    });
+  }
+
+  return registrationResponse;
 }
 
 export async function loginUser(
