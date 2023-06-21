@@ -1,3 +1,3 @@
-import { CreateCartMutation } from '../queries/queries';
+import { CartFieldsFragment } from '../queries/queries';
 
-export type CartSessionProps = CreateCartMutation['cartCreate']['cart'] & {};
+export type CartItemProps = CartFieldsFragment['lines']['nodes'][0];
