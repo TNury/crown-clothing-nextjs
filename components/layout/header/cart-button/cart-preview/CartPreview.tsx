@@ -5,10 +5,12 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CartSessionProps } from '@/types/cart/cart';
+import { CartFieldsFragment } from '@/types/queries/queries';
+
+import { CartPreviewItem } from './cart-preview-item/CartPreviewItem';
 
 interface CartPreviewProps {
-  cartSession: CartSessionProps;
+  cartSession: CartFieldsFragment;
   setOpenCartPreview: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -36,24 +38,12 @@ const CartPreview: React.FC<CartPreviewProps> = (props) => {
   return (
     <div
       id='cart_preview'
-      className='absolute right-0 top-20 flex h-96 w-60 flex-col gap-4 border border-black bg-white p-4'>
+      className='absolute right-0 top-20 flex h-96 w-80 flex-col gap-4 border border-black bg-white p-4'>
       {cartSession.totalQuantity > 0 ? (
         <>
-          <div className='flex flex-col gap-4 overflow-auto overscroll-contain'>
+          <div className='flex flex-col gap-4 h-full overflow-auto overscroll-contain'>
             {cartSession.lines.nodes.map((entry, index: number) => (
-              <div key={index} className='flex h-20 w-full'>
-                <div className='relative h-full w-1/3'>
-                  <Image
-                    src={entry.merchandise.image.url}
-                    fill
-                    alt={entry.merchandise.image.altText}
-                  />
-                </div>
-                <div className='p-4 text-left'>
-                  <p>{entry.merchandise.product.title}</p>
-                  <p>{entry.quantity} x €11</p>
-                </div>
-              </div>
+              <CartPreviewItem key={index} {...entry} />
             ))}
           </div>
           <Link
