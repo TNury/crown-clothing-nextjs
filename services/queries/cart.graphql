@@ -1,54 +1,58 @@
+fragment CartFields on Cart {
+  id
+  totalQuantity
+  lines(first: 10) {
+    nodes {
+      id
+      quantity
+      cost {
+        totalAmount {
+          amount
+        }
+      }
+      merchandise {
+        ... on ProductVariant {
+          id
+          image {
+            url
+            altText
+          }
+          price {
+            amount
+          }
+          product {
+            title
+          }
+        }
+      }
+    }
+  }
+  cost {
+    totalAmount {
+      amount
+      currencyCode
+    }
+    subtotalAmount {
+      amount
+      currencyCode
+    }
+    totalTaxAmount {
+      amount
+      currencyCode
+    }
+    totalDutyAmount {
+      amount
+      currencyCode
+    }
+  }
+}
+
 mutation createCart($quantity: Int!, $merchandiseId: ID!) {
   cartCreate(
     input: { lines: [{ quantity: $quantity, merchandiseId: $merchandiseId }] }
   ) {
     cart {
-      id
-      totalQuantity
-      lines(first: 10) {
-        nodes {
-          id
-          quantity
-          cost {
-            totalAmount {
-              amount
-            }
-          }
-          merchandise {
-            ... on ProductVariant {
-              id
-              image {
-                url
-                altText
-              }
-              price {
-                amount
-              }
-              product {
-                title
-              }
-            }
-          }
-        }
-      }
-      cost {
-        totalAmount {
-          amount
-          currencyCode
-        }
-        subtotalAmount {
-          amount
-          currencyCode
-        }
-        totalTaxAmount {
-          amount
-          currencyCode
-        }
-        totalDutyAmount {
-          amount
-          currencyCode
-        }
-      }
+      ...CartFields
     }
   }
 }
@@ -59,52 +63,7 @@ mutation addItemToCart($cartId: ID!, $quantity: Int!, $merchandiseId: ID!) {
     lines: [{ quantity: $quantity, merchandiseId: $merchandiseId }]
   ) {
     cart {
-      id
-      totalQuantity
-      lines(first: 10) {
-        nodes {
-          id
-          quantity
-          cost {
-            totalAmount {
-              amount
-            }
-          }
-          merchandise {
-            ... on ProductVariant {
-              id
-              image {
-                url
-                altText
-              }
-              price {
-                amount
-              }
-              product {
-                title
-              }
-            }
-          }
-        }
-      }
-      cost {
-        totalAmount {
-          amount
-          currencyCode
-        }
-        subtotalAmount {
-          amount
-          currencyCode
-        }
-        totalTaxAmount {
-          amount
-          currencyCode
-        }
-        totalDutyAmount {
-          amount
-          currencyCode
-        }
-      }
+      ...CartFields
     }
   }
 }

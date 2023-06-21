@@ -1,5 +1,54 @@
 import gql from 'graphql-tag';
-
+export const CartFields = gql`
+    fragment CartFields on Cart {
+  id
+  totalQuantity
+  lines(first: 10) {
+    nodes {
+      id
+      quantity
+      cost {
+        totalAmount {
+          amount
+        }
+      }
+      merchandise {
+        ... on ProductVariant {
+          id
+          image {
+            url
+            altText
+          }
+          price {
+            amount
+          }
+          product {
+            title
+          }
+        }
+      }
+    }
+  }
+  cost {
+    totalAmount {
+      amount
+      currencyCode
+    }
+    subtotalAmount {
+      amount
+      currencyCode
+    }
+    totalTaxAmount {
+      amount
+      currencyCode
+    }
+    totalDutyAmount {
+      amount
+      currencyCode
+    }
+  }
+}
+    `;
 export const CreateCustomer = gql`
     mutation createCustomer($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
   customerCreate(
@@ -55,56 +104,11 @@ export const CreateCart = gql`
     input: {lines: [{quantity: $quantity, merchandiseId: $merchandiseId}]}
   ) {
     cart {
-      id
-      totalQuantity
-      lines(first: 10) {
-        nodes {
-          id
-          quantity
-          cost {
-            totalAmount {
-              amount
-            }
-          }
-          merchandise {
-            ... on ProductVariant {
-              id
-              image {
-                url
-                altText
-              }
-              price {
-                amount
-              }
-              product {
-                title
-              }
-            }
-          }
-        }
-      }
-      cost {
-        totalAmount {
-          amount
-          currencyCode
-        }
-        subtotalAmount {
-          amount
-          currencyCode
-        }
-        totalTaxAmount {
-          amount
-          currencyCode
-        }
-        totalDutyAmount {
-          amount
-          currencyCode
-        }
-      }
+      ...CartFields
     }
   }
 }
-    `;
+    ${CartFields}`;
 export const AddItemToCart = gql`
     mutation addItemToCart($cartId: ID!, $quantity: Int!, $merchandiseId: ID!) {
   cartLinesAdd(
@@ -112,56 +116,11 @@ export const AddItemToCart = gql`
     lines: [{quantity: $quantity, merchandiseId: $merchandiseId}]
   ) {
     cart {
-      id
-      totalQuantity
-      lines(first: 10) {
-        nodes {
-          id
-          quantity
-          cost {
-            totalAmount {
-              amount
-            }
-          }
-          merchandise {
-            ... on ProductVariant {
-              id
-              image {
-                url
-                altText
-              }
-              price {
-                amount
-              }
-              product {
-                title
-              }
-            }
-          }
-        }
-      }
-      cost {
-        totalAmount {
-          amount
-          currencyCode
-        }
-        subtotalAmount {
-          amount
-          currencyCode
-        }
-        totalTaxAmount {
-          amount
-          currencyCode
-        }
-        totalDutyAmount {
-          amount
-          currencyCode
-        }
-      }
+      ...CartFields
     }
   }
 }
-    `;
+    ${CartFields}`;
 export const HomepageCollections = gql`
     query homepageCollections {
   collections(first: 5) {

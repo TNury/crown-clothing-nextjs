@@ -7694,6 +7694,8 @@ export type RetrieveCustomerQueryVariables = Exact<{
 
 export type RetrieveCustomerQuery = { __typename?: 'QueryRoot', customer?: { __typename?: 'Customer', id: string, email?: string | null, firstName?: string | null, lastName?: string | null } | null };
 
+export type CartFieldsFragment = { __typename?: 'Cart', id: string, totalQuantity: number, lines: { __typename?: 'BaseCartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', totalAmount: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', id: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null, price: { __typename?: 'MoneyV2', amount: any }, product: { __typename?: 'Product', title: string } } }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null } };
+
 export type CreateCartMutationVariables = Exact<{
   quantity: Scalars['Int']['input'];
   merchandiseId: Scalars['ID']['input'];
