@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
-import { CartSessionProps } from '@/types/cart/cart';
+import { CartFieldsFragment } from '@/types/queries/queries';
 
 import CartPreview from './cart-preview/CartPreview';
 
 type CartButtonProps = {
-  cartSession: CartSessionProps;
+  cartSession: CartFieldsFragment;
 };
 
 export const CartButton: React.FC<CartButtonProps> = ({ cartSession }) => {
