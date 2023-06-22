@@ -18,19 +18,25 @@ export const CartButton: React.FC<CartButtonProps> = ({ cartSession }) => {
   };
 
   return (
-    <button
-      onClick={toggleCartPreview}
-      className='relative flex cursor-pointer items-center justify-center p-2'>
-      <img src='/assets/shopping-bag.svg' alt='bag_icon' className='h-6 w-6' />
-      <span className='absolute top-4 text-[10px] font-bold'>
-        {cartSession.totalQuantity ? cartSession.totalQuantity : 0}
-      </span>
+    <div className='relative'>
+      <button
+        onClick={toggleCartPreview}
+        className='relative flex cursor-pointer items-center justify-center p-2'>
+        <img
+          src='/assets/shopping-bag.svg'
+          alt='bag_icon'
+          className='h-6 w-6'
+        />
+        <span className='absolute top-4 text-[10px] font-bold'>
+          {cartSession.totalQuantity ? cartSession.totalQuantity : 0}
+        </span>
+      </button>
       {openCartPreview && (
         <CartPreview
           cartSession={cartSession}
           setOpenCartPreview={setOpenCartPreview}
         />
       )}
-    </button>
+    </div>
   );
 };
