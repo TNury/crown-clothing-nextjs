@@ -9,7 +9,7 @@ export const CartPreviewItem: React.FC = (props: CartItemProps) => {
         src={props.merchandise.image.url}
         width={60}
         height={80}
-        alt={props.merchandise.image.altText}
+        alt={props.merchandise.image.url}
       />
 
       <div className='p-4 text-left text-base'>
