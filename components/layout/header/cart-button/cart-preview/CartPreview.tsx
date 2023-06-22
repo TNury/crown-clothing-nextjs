@@ -1,9 +1,10 @@
 'use client';
 
-import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { useClickOutside } from 'hooks/useClickOutside';
 
 import { CartFieldsFragment } from '@/types/queries/queries';
 
@@ -17,28 +18,15 @@ interface CartPreviewProps {
 const CartPreview: React.FC<CartPreviewProps> = (props) => {
   const { cartSession, setOpenCartPreview } = props;
 
-  const handleOnBlur = useCallback((event: MouseEvent): void => {
-    const cartPreviewRef = document.getElementById('cart_preview');
-
-    if (!cartPreviewRef?.contains(event.target as Node)) {
-      setOpenCartPreview(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      window.addEventListener('click', handleOnBlur);
-    }, 100);
-
-    return () => {
-      window.removeEventListener('click', handleOnBlur);
-    };
-  }, []);
+  useClickOutside({
+    elementId: 'cart_preview',
+    onOutsideClick: () => setOpenCartPreview(false),
+  });
 
   return (
     <div
       id='cart_preview'
-      className='absolute right-0 top-20 flex h-96 w-80 flex-col gap-4 border border-black bg-white p-4'>
+      className='absolute right-0 top-16 flex h-96 w-80 flex-col gap-4 border border-black bg-white p-4 cursor-auto'>
       {cartSession.totalQuantity > 0 ? (
         <>
           <div className='flex flex-col gap-4 h-full overflow-auto overscroll-contain'>
