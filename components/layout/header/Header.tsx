@@ -3,12 +3,17 @@ import Link from 'next/link';
 
 import { retrieveCookie } from '@/actions/cookies/cookies';
 
+import { UserSessionProps } from '@/types/auth/auth';
+import { CartFieldsFragment } from '@/types/queries/queries';
+
 import { AuthButton } from './auth-button/AuthButton';
 import { CartButton } from './cart-button/CartButton';
 
 export const Header = async () => {
-  const userSession = (await retrieveCookie('userSession')) || {};
-  const cartSession = (await retrieveCookie('cartSession')) || {};
+  const userSession: UserSessionProps =
+    (await retrieveCookie('userSession')) || {};
+  const cartSession: CartFieldsFragment =
+    (await retrieveCookie('cartSession')) || {};
 
   return (
     <header className='fixed top-0 z-20 flex h-20 w-full items-center justify-between bg-white pl-4 md:pl-16 md:pr-14'>
