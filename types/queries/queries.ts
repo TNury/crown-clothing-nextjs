@@ -7,7 +7,7 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
@@ -1159,7 +1159,11 @@ export type CartLinesUpdatePayload = {
 
 /** The input fields to delete a cart metafield. */
 export type CartMetafieldDeleteInput = {
-  /** The key name of the cart metafield. */
+  /**
+   * The key name of the cart metafield. Can either be a composite key (`namespace.key`) or a simple key
+   *  that relies on the default app-reserved namespace.
+   *
+   */
   key: Scalars['String']['input'];
   /** The ID of the cart resource. */
   ownerId: Scalars['ID']['input'];
@@ -7734,3 +7738,10 @@ export type CategorySlugCollectionQueryVariables = Exact<{
 
 
 export type CategorySlugCollectionQuery = { __typename?: 'QueryRoot', collectionByHandle?: { __typename?: 'Collection', id: string, title: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } } | null };
+
+export type ProductSlugQueryVariables = Exact<{
+  handle: Scalars['String']['input'];
+}>;
+
+
+export type ProductSlugQuery = { __typename?: 'QueryRoot', productByHandle?: { __typename?: 'Product', id: string, title: string, handle: string, description: string, images: { __typename?: 'ImageConnection', nodes: Array<{ __typename?: 'Image', url: any, altText?: string | null }> }, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string, title: string, sku?: string | null, availableForSale: boolean, priceV2: { __typename?: 'MoneyV2', amount: any }, selectedOptions: Array<{ __typename?: 'SelectedOption', name: string, value: string }> }> } } | null };

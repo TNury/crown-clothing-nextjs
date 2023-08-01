@@ -206,3 +206,39 @@ export const CategorySlugCollection = gql`
   }
 }
     `;
+export const ProductSlug = gql`
+    query productSlug($handle: String!) {
+  productByHandle(handle: $handle) {
+    id
+    title
+    handle
+    description
+    images(first: 10) {
+      nodes {
+        url
+        altText
+      }
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+      }
+    }
+    variants(first: 1) {
+      nodes {
+        id
+        title
+        sku
+        priceV2 {
+          amount
+        }
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
+  }
+}
+    `;

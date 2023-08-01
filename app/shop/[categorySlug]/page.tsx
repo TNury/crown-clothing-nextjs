@@ -9,6 +9,9 @@ const CategorySlug = async ({ params: { categorySlug } }) => {
     'CategorySlugCollection',
     {
       handle: categorySlug,
+    },
+    {
+      cache: 'no-cache',
     }
   );
 
