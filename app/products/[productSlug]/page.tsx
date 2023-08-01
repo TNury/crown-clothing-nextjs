@@ -1,16 +1,13 @@
 import Image from 'next/image';
 
-import callAPI from '@/services/api';
-
 import { ProductDetails } from '@/components/ui/specialized/product-details/ProductDetails';
 
-import { ProductSlugQuery } from '@/types/queries/queries';
+import { getProductSlug } from '@/actions/pages/pages.actions';
 
 type ProductSlugProps = {
   params: {
     productSlug: string;
   };
-  searchParams: Record<string, any>;
 };
 
 const ProductSlug = async (props: ProductSlugProps) => {
@@ -18,17 +15,7 @@ const ProductSlug = async (props: ProductSlugProps) => {
     params: { productSlug },
   } = props;
 
-  const response: ProductSlugQuery = await callAPI(
-    'ProductSlug',
-    {
-      handle: productSlug,
-    },
-    {
-      cache: 'no-cache',
-    }
-  );
-
-  const { productByHandle: productData } = response;
+  const productData = await getProductSlug(productSlug);
 
   return (
     <main className='flex px-4 py-16'>
