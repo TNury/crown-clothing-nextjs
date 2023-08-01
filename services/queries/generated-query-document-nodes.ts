@@ -177,8 +177,8 @@ export const CategorySlugParams = gql`
   }
 }
     `;
-export const CategorySlugCollection = gql`
-    query categorySlugCollection($handle: String!) {
+export const CategorySlug = gql`
+    query categorySlug($handle: String!) {
   collectionByHandle(handle: $handle) {
     id
     title

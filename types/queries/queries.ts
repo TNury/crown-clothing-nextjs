@@ -526,7 +526,7 @@ export type Cart = HasMetafields & Node & {
   attribute?: Maybe<Attribute>;
   /** The attributes associated with the cart. Attributes are represented as key-value pairs. */
   attributes: Array<Attribute>;
-  /** Information about the buyer that is interacting with the cart. */
+  /** Information about the buyer that's interacting with the cart. */
   buyerIdentity: CartBuyerIdentity;
   /** The URL of the checkout for the cart. */
   checkoutUrl: Scalars['URL']['output'];
@@ -567,7 +567,7 @@ export type Cart = HasMetafields & Node & {
    *
    */
   metafields: Array<Maybe<Metafield>>;
-  /** A note that is associated with the cart. For example, the note can be a personalized message to the buyer. */
+  /** A note that's associated with the cart. For example, the note can be a personalized message to the buyer. */
   note?: Maybe<Scalars['String']['output']>;
   /** The total number of items in the cart. */
   totalQuantity: Scalars['Int']['output'];
@@ -676,9 +676,9 @@ export type CartBuyerIdentity = {
    *
    */
   deliveryAddressPreferences: Array<DeliveryAddress>;
-  /** The email address of the buyer that is interacting with the cart. */
+  /** The email address of the buyer that's interacting with the cart. */
   email?: Maybe<Scalars['String']['output']>;
-  /** The phone number of the buyer that is interacting with the cart. */
+  /** The phone number of the buyer that's interacting with the cart. */
   phone?: Maybe<Scalars['String']['output']>;
   /**
    * A set of wallet preferences tied to the buyer that is interacting with the cart.
@@ -1025,7 +1025,7 @@ export type CartInput = {
   lines?: InputMaybe<Array<CartLineInput>>;
   /** The metafields to associate with this cart. */
   metafields?: InputMaybe<Array<CartInputMetafieldInput>>;
-  /** A note that is associated with the cart. For example, the note can be a personalized message to the buyer. */
+  /** A note that's associated with the cart. For example, the note can be a personalized message to the buyer. */
   note?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1329,7 +1329,7 @@ export type Checkout = Node & {
   createdAt: Scalars['DateTime']['output'];
   /** The currency code for the checkout. */
   currencyCode: CurrencyCode;
-  /** A list of extra information that is added to the checkout. */
+  /** A list of extra information that's added to the checkout. */
   customAttributes: Array<Attribute>;
   /** Discounts that have been applied on the checkout. */
   discountApplications: DiscountApplicationConnection;
@@ -1345,7 +1345,7 @@ export type Checkout = Node & {
   note?: Maybe<Scalars['String']['output']>;
   /** The resulting order from a paid checkout. */
   order?: Maybe<Order>;
-  /** The Order Status Page for this Checkout, null when checkout is not completed. */
+  /** The Order Status Page for this Checkout, null when checkout isn't completed. */
   orderStatusUrl?: Maybe<Scalars['URL']['output']>;
   /** The amount left to be paid. This is equal to the cost of the line items, taxes, and shipping, minus discounts and gift cards. */
   paymentDue: MoneyV2;
@@ -1371,7 +1371,7 @@ export type Checkout = Node & {
    *
    */
   shippingDiscountAllocations: Array<DiscountAllocation>;
-  /** Once a shipping rate is selected by the customer it is transitioned to a `shipping_line` object. */
+  /** Once a shipping rate is selected by the customer it's transitioned to a `shipping_line` object. */
   shippingLine?: Maybe<ShippingRate>;
   /** The price at checkout before shipping and taxes. */
   subtotalPrice: MoneyV2;
@@ -1436,7 +1436,7 @@ export type CheckoutAttributesUpdateV2Input = {
    *
    */
   allowPartialAddresses?: InputMaybe<Scalars['Boolean']['input']>;
-  /** A list of extra information that is added to the checkout. */
+  /** A list of extra information that's added to the checkout. */
   customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The text of an optional note that a shop owner can attach to the checkout. */
   note?: InputMaybe<Scalars['String']['input']>;
@@ -1531,7 +1531,7 @@ export type CheckoutCreateInput = {
   allowPartialAddresses?: InputMaybe<Scalars['Boolean']['input']>;
   /** The identity of the customer associated with the checkout. */
   buyerIdentity?: InputMaybe<CheckoutBuyerIdentityInput>;
-  /** A list of extra information that is added to the checkout. */
+  /** A list of extra information that's added to the checkout. */
   customAttributes?: InputMaybe<Array<AttributeInput>>;
   /** The email with which the customer wants to checkout. */
   email?: InputMaybe<Scalars['String']['input']>;
@@ -3822,7 +3822,7 @@ export type Image = {
   __typename?: 'Image';
   /** A word or phrase to share the nature or contents of an image. */
   altText?: Maybe<Scalars['String']['output']>;
-  /** The original height of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
+  /** The original height of the image in pixels. Returns `null` if the image isn't hosted by Shopify. */
   height?: Maybe<Scalars['Int']['output']>;
   /** A unique ID for the image. */
   id?: Maybe<Scalars['ID']['output']>;
@@ -3843,7 +3843,7 @@ export type Image = {
    * The location of the transformed image as a URL.
    *
    * All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-   * Otherwise any transformations which an image type does not support will be ignored.
+   * Otherwise any transformations which an image type doesn't support will be ignored.
    *
    * @deprecated Use `url(transform:)` instead
    */
@@ -3859,7 +3859,7 @@ export type Image = {
    *
    */
   url: Scalars['URL']['output'];
-  /** The original width of the image in pixels. Returns `null` if the image is not hosted by Shopify. */
+  /** The original width of the image in pixels. Returns `null` if the image isn't hosted by Shopify. */
   width?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -5513,7 +5513,7 @@ export type Order = HasMetafields & Node & {
   canceledAt?: Maybe<Scalars['DateTime']['output']>;
   /** The code of the currency used for the payment. */
   currencyCode: CurrencyCode;
-  /** The subtotal of line items and their discounts, excluding line items that have been removed. Does not contain order-level discounts, duties, shipping costs, or shipping discounts. Taxes are not included unless the order is a taxes-included order. */
+  /** The subtotal of line items and their discounts, excluding line items that have been removed. Does not contain order-level discounts, duties, shipping costs, or shipping discounts. Taxes aren't included unless the order is a taxes-included order. */
   currentSubtotalPrice: MoneyV2;
   /** The total cost of duties for the order, including refunds. */
   currentTotalDuties?: Maybe<MoneyV2>;
@@ -5749,7 +5749,7 @@ export type OrderLineItem = {
   discountAllocations: Array<DiscountAllocation>;
   /** The total price of the line item, including discounts, and displayed in the presentment currency. */
   discountedTotalPrice: MoneyV2;
-  /** The total price of the line item, not including any discounts. The total price is calculated using the original unit price multiplied by the quantity, and it is displayed in the presentment currency. */
+  /** The total price of the line item, not including any discounts. The total price is calculated using the original unit price multiplied by the quantity, and it's displayed in the presentment currency. */
   originalTotalPrice: MoneyV2;
   /** The number of products variants associated to the line item. */
   quantity: Scalars['Int']['output'];
@@ -7442,7 +7442,7 @@ export type TokenizedPaymentInputV3 = {
   paymentAmount: MoneyInput;
   /** A simple string or JSON containing the required payment data for the tokenized payment. */
   paymentData: Scalars['String']['input'];
-  /** Whether to execute the payment in test mode, if possible. Test mode is not supported in production stores. Defaults to `false`. */
+  /** Whether to execute the payment in test mode, if possible. Test mode isn't supported in production stores. Defaults to `false`. */
   test?: InputMaybe<Scalars['Boolean']['input']>;
   /** The type of payment token. */
   type: PaymentTokenType;
@@ -7732,12 +7732,12 @@ export type CategorySlugParamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CategorySlugParamsQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', handle: string }> } };
 
-export type CategorySlugCollectionQueryVariables = Exact<{
+export type CategorySlugQueryVariables = Exact<{
   handle: Scalars['String']['input'];
 }>;
 
 
-export type CategorySlugCollectionQuery = { __typename?: 'QueryRoot', collectionByHandle?: { __typename?: 'Collection', id: string, title: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } } | null };
+export type CategorySlugQuery = { __typename?: 'QueryRoot', collectionByHandle?: { __typename?: 'Collection', id: string, title: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } } | null };
 
 export type ProductSlugQueryVariables = Exact<{
   handle: Scalars['String']['input'];

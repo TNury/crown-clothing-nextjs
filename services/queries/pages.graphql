@@ -51,7 +51,7 @@ query categorySlugParams {
   }
 }
 
-query categorySlugCollection($handle: String!) {
+query categorySlug($handle: String!) {
   collectionByHandle(handle: $handle) {
     id
     title

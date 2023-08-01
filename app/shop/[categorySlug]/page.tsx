@@ -1,21 +1,22 @@
-import callAPI from '@/services/api';
-
 import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
-import { CategorySlugCollectionQuery } from '@/types/queries/queries';
+import {
+  getCategorySlug,
+  // getCategorySlugParams,
+} from '@/actions/pages/pages.actions';
+
+// export async function generateStaticParams() {
+//   const params = await getCategorySlugParams();
+
+//   const categorySlugParams = params.map((entry) => ({
+//     categorySlug: entry.handle,
+//   }));
+
+//   return categorySlugParams;
+// }
 
 const CategorySlug = async ({ params: { categorySlug } }) => {
-  const response: CategorySlugCollectionQuery = await callAPI(
-    'CategorySlugCollection',
-    {
-      handle: categorySlug,
-    },
-    {
-      cache: 'no-cache',
-    }
-  );
-
-  const { collectionByHandle: categorySlugProps } = response;
+  const categorySlugProps = await getCategorySlug(categorySlug);
 
   return (
     <main className='flex flex-col items-center gap-6 px-4 py-16 md:pl-16 md:pr-12'>
@@ -32,16 +33,3 @@ const CategorySlug = async ({ params: { categorySlug } }) => {
 };
 
 export default CategorySlug;
-
-// export async function generateStaticParams() {
-//   const response = await callAPI(
-//     'services/queries/collections.graphql',
-//     'categorySlugParams'
-//   );
-
-//   const categorySlugParams = response.collections.nodes.map((entry) => ({
-//     categorySlug: entry.handle,
-//   }));
-
-//   return categorySlugParams;
-// }
