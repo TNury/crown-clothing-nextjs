@@ -12,7 +12,7 @@ query homepageCollections {
   }
 }
 
-query shopPageQuery {
+query shopPage {
   collections(first: 5) {
     nodes {
       id

@@ -1,20 +1,15 @@
 import Link from 'next/link';
 
-import callAPI from '@/services/api';
-
 import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
-import type { ShopPageQueryQuery } from '@/types/queries/queries';
+import { getShopPage } from '@/actions/pages/pages.actions';
 
-// Fix this ShopPageQueryQuery bs
 const ShopPage = async () => {
-  const response: ShopPageQueryQuery = await callAPI('ShopPageQuery');
-
-  const { collections: shopPageQuery } = response;
+  const response = await getShopPage();
 
   return (
     <main id='shop' className='flex flex-col gap-16 px-4 py-16 md:px-16'>
-      {shopPageQuery.nodes.map((entry, index) => (
+      {response.map((entry, index) => (
         <section key={index} className='flex flex-col gap-4'>
           <Link
             href={`shop/${entry.handle}`}

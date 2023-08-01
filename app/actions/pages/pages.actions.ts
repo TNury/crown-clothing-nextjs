@@ -6,7 +6,18 @@ import {
   CategorySlugCollectionResponse,
   CategorySlugParamsResponse,
   GetProductSlugResponse,
+  ShopPageResponse,
 } from '@/types/pages/pages.types';
+
+export async function getShopPage(): Promise<
+  ShopPageResponse['collections']['nodes']
+> {
+  const response: ShopPageResponse = await callAPI('ShopPage', null, {
+    cache: 'no-cache',
+  });
+
+  return response.collections.nodes;
+}
 
 export async function getCategorySlugParams(): Promise<
   CategorySlugParamsResponse['collections']['nodes']

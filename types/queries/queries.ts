@@ -7722,10 +7722,10 @@ export type HomepageCollectionsQueryVariables = Exact<{ [key: string]: never; }>
 
 export type HomepageCollectionsQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', id: string, title: string, handle: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null }> } };
 
-export type ShopPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type ShopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ShopPageQueryQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', id: string, title: string, handle: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } }> } };
+export type ShopPageQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', id: string, title: string, handle: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } }> } };
 
 export type CategorySlugParamsQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -136,8 +136,8 @@ export const HomepageCollections = gql`
   }
 }
     `;
-export const ShopPageQuery = gql`
-    query shopPageQuery {
+export const ShopPage = gql`
+    query shopPage {
   collections(first: 5) {
     nodes {
       id
