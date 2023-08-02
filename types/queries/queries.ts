@@ -7717,10 +7717,10 @@ export type AddItemToCartMutationVariables = Exact<{
 
 export type AddItemToCartMutation = { __typename?: 'Mutation', cartLinesAdd?: { __typename?: 'CartLinesAddPayload', cart?: { __typename?: 'Cart', id: string, totalQuantity: number, lines: { __typename?: 'BaseCartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', totalAmount: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', id: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null, price: { __typename?: 'MoneyV2', amount: any }, product: { __typename?: 'Product', title: string } } }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null } } | null } | null };
 
-export type HomepageCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomepageCollectionsQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', id: string, title: string, handle: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null }> } };
+export type HomePageQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', id: string, title: string, handle: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null }> } };
 
 export type ShopPageQueryVariables = Exact<{ [key: string]: never; }>;
 

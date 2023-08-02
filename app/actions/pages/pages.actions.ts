@@ -6,8 +6,19 @@ import {
   CategorySlugCollectionResponse,
   CategorySlugParamsResponse,
   GetProductSlugResponse,
+  HomePageResponse,
   ShopPageResponse,
 } from '@/types/pages/pages.types';
+
+export async function getHomePage(): Promise<
+  HomePageResponse['collections']['nodes']
+> {
+  const response: HomePageResponse = await callAPI('HomePage', null, {
+    cache: 'no-cache',
+  });
+
+  return response.collections.nodes;
+}
 
 export async function getShopPage(): Promise<
   ShopPageResponse['collections']['nodes']

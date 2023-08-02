@@ -121,8 +121,8 @@ export const AddItemToCart = gql`
   }
 }
     ${CartFields}`;
-export const HomepageCollections = gql`
-    query homepageCollections {
+export const HomePage = gql`
+    query homePage {
   collections(first: 5) {
     nodes {
       id

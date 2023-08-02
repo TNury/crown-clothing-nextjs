@@ -1,4 +1,4 @@
-query homepageCollections {
+query homePage {
   collections(first: 5) {
     nodes {
       id

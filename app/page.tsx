@@ -1,16 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import callAPI from '@/services/api';
-
-import type { HomepageCollectionsQuery } from '@/types/queries/queries';
+import { getHomePage } from '@/actions/pages/pages.actions';
 
 const Home = async () => {
-  const response: HomepageCollectionsQuery = await callAPI(
-    'HomepageCollections'
-  );
-
-  const { collections: homepageCollections } = response;
+  const response = await getHomePage();
 
   return (
     <div
@@ -18,8 +12,8 @@ const Home = async () => {
       className='flex min-h-[calc(100vh-5rem)] items-center justify-center'>
       <section
         id='categories'
-        className='flex w-full max-w-screen-xl flex-wrap justify-between gap-4 px-4 md:px-16'>
-        {homepageCollections.nodes.map((entry) => (
+        className='flex w-full max-w-screen-xl flex-wrap justify-between gap-1 px-4 md:px-16'>
+        {response.map((entry) => (
           <Link
             href={`shop/${entry.handle}`}
             key={entry.id}
