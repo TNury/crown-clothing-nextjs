@@ -5,6 +5,7 @@ import callAPI from '@/services/api';
 import {
   CategorySlugCollectionResponse,
   CategorySlugParamsResponse,
+  GetProductSlugParamsResponse,
   GetProductSlugResponse,
   HomePageResponse,
   ShopPageResponse,
@@ -56,6 +57,18 @@ export async function getCategorySlug(
   );
 
   return response.collectionByHandle;
+}
+
+export async function getProductSlugParams(): Promise<
+  GetProductSlugParamsResponse['collections']['nodes']
+> {
+  const response: GetProductSlugParamsResponse = await callAPI(
+    'ProductSlugParams',
+    null,
+    { cache: 'no-cache' }
+  );
+
+  return response.collections.nodes;
 }
 
 export async function getProductSlug(

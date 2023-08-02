@@ -79,6 +79,19 @@ query categorySlug($handle: String!) {
   }
 }
 
+query productSlugParams {
+  collections(first: 5) {
+    nodes {
+      handle
+      products(first: 50) {
+        nodes {
+          handle
+        }
+      }
+    }
+  }
+}
+
 query productSlug($handle: String!) {
   productByHandle(handle: $handle) {
     id

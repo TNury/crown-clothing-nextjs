@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
 import {
@@ -35,7 +37,11 @@ const CategorySlug: React.FC<CategorySlugProps> = async ({
       </h1>
       <section className='grid w-full grid-cols-4 gap-4'>
         {categorySlugProps.products.nodes.map((productData, index) => (
-          <ProductBox key={index} productData={productData} />
+          <Link
+            href={`/shop/${categorySlug}/${productData.handle}`}
+            key={index}>
+            <ProductBox productData={productData} />
+          </Link>
         ))}
       </section>
     </main>

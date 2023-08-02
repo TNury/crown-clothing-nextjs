@@ -206,6 +206,20 @@ export const CategorySlug = gql`
   }
 }
     `;
+export const ProductSlugParams = gql`
+    query productSlugParams {
+  collections(first: 5) {
+    nodes {
+      handle
+      products(first: 50) {
+        nodes {
+          handle
+        }
+      }
+    }
+  }
+}
+    `;
 export const ProductSlug = gql`
     query productSlug($handle: String!) {
   productByHandle(handle: $handle) {

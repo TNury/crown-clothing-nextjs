@@ -7739,6 +7739,11 @@ export type CategorySlugQueryVariables = Exact<{
 
 export type CategorySlugQuery = { __typename?: 'QueryRoot', collectionByHandle?: { __typename?: 'Collection', id: string, title: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', id: string, handle: string, title: string, featuredImage?: { __typename?: 'Image', url: any, altText?: string | null } | null, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any } }, variants: { __typename?: 'ProductVariantConnection', nodes: Array<{ __typename?: 'ProductVariant', id: string }> } }> } } | null };
 
+export type ProductSlugParamsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductSlugParamsQuery = { __typename?: 'QueryRoot', collections: { __typename?: 'CollectionConnection', nodes: Array<{ __typename?: 'Collection', handle: string, products: { __typename?: 'ProductConnection', nodes: Array<{ __typename?: 'Product', handle: string }> } }> } };
+
 export type ProductSlugQueryVariables = Exact<{
   handle: Scalars['String']['input'];
 }>;
