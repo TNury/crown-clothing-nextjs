@@ -2,20 +2,30 @@ import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
 import {
   getCategorySlug,
-  // getCategorySlugParams,
+  getCategorySlugParams,
 } from '@/actions/pages/pages.actions';
 
-// export async function generateStaticParams() {
-//   const params = await getCategorySlugParams();
+export const dynamic = 'force-static';
 
-//   const categorySlugParams = params.map((entry) => ({
-//     categorySlug: entry.handle,
-//   }));
+export async function generateStaticParams() {
+  const params = await getCategorySlugParams();
 
-//   return categorySlugParams;
-// }
+  const categorySlugParams = params.map((entry) => ({
+    categorySlug: entry.handle,
+  }));
 
-const CategorySlug = async ({ params: { categorySlug } }) => {
+  return categorySlugParams;
+}
+
+type CategorySlugProps = {
+  params: {
+    categorySlug: string;
+  };
+};
+
+const CategorySlug: React.FC<CategorySlugProps> = async ({
+  params: { categorySlug },
+}) => {
   const categorySlugProps = await getCategorySlug(categorySlug);
 
   return (
