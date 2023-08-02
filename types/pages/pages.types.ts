@@ -7,13 +7,13 @@ import {
   ShopPageQuery,
 } from '@/types/queries/queries';
 
-export type HomePageResponse = HomePageQuery;
+export type GetHomePageResponse = HomePageQuery;
 
-export type ShopPageResponse = ShopPageQuery;
+export type GetShopPageResponse = ShopPageQuery;
 
-export type CategorySlugParamsResponse = CategorySlugParamsQuery;
+export type GetCategorySlugParamsResponse = CategorySlugParamsQuery;
 
-export type CategorySlugCollectionResponse = CategorySlugQuery;
+export type GetCategorySlugCollectionResponse = CategorySlugQuery;
 
 export type GetProductSlugParamsResponse = ProductSlugParamsQuery;
 

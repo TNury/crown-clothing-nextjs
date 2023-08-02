@@ -3,18 +3,18 @@
 import callAPI from '@/services/api';
 
 import {
-  CategorySlugCollectionResponse,
-  CategorySlugParamsResponse,
+  GetCategorySlugParamsResponse,
+  GetCategorySlugCollectionResponse,
   GetProductSlugParamsResponse,
   GetProductSlugResponse,
-  HomePageResponse,
-  ShopPageResponse,
+  GetHomePageResponse,
+  GetShopPageResponse,
 } from '@/types/pages/pages.types';
 
 export async function getHomePage(): Promise<
-  HomePageResponse['collections']['nodes']
+  GetHomePageResponse['collections']['nodes']
 > {
-  const response: HomePageResponse = await callAPI('HomePage', null, {
+  const response: GetHomePageResponse = await callAPI('HomePage', null, {
     cache: 'no-cache',
   });
 
@@ -22,9 +22,9 @@ export async function getHomePage(): Promise<
 }
 
 export async function getShopPage(): Promise<
-  ShopPageResponse['collections']['nodes']
+  GetShopPageResponse['collections']['nodes']
 > {
-  const response: ShopPageResponse = await callAPI('ShopPage', null, {
+  const response: GetShopPageResponse = await callAPI('ShopPage', null, {
     cache: 'no-cache',
   });
 
@@ -32,9 +32,9 @@ export async function getShopPage(): Promise<
 }
 
 export async function getCategorySlugParams(): Promise<
-  CategorySlugParamsResponse['collections']['nodes']
+  GetCategorySlugParamsResponse['collections']['nodes']
 > {
-  const response: CategorySlugParamsResponse = await callAPI(
+  const response: GetCategorySlugParamsResponse = await callAPI(
     'CategorySlugParams',
     null,
     { cache: 'no-cache' }
@@ -45,8 +45,8 @@ export async function getCategorySlugParams(): Promise<
 
 export async function getCategorySlug(
   slug: string
-): Promise<CategorySlugCollectionResponse['collectionByHandle']> {
-  const response: CategorySlugCollectionResponse = await callAPI(
+): Promise<GetCategorySlugCollectionResponse['collectionByHandle']> {
+  const response: GetCategorySlugCollectionResponse = await callAPI(
     'CategorySlug',
     {
       handle: slug,
