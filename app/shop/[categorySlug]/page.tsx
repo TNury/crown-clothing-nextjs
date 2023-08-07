@@ -4,20 +4,20 @@ import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
 import {
   getCategorySlug,
-  getCategorySlugParams,
+  // getCategorySlugParams,
 } from '@/actions/pages/pages.actions';
 
 export const dynamic = 'force-static';
 
-export async function generateStaticParams() {
-  const params = await getCategorySlugParams();
+// export async function generateStaticParams() {
+//   const params = await getCategorySlugParams();
 
-  const categorySlugParams = params.map((entry) => ({
-    categorySlug: entry.handle,
-  }));
+//   const categorySlugParams = params.map((entry) => ({
+//     categorySlug: entry.handle,
+//   }));
 
-  return categorySlugParams;
-}
+//   return categorySlugParams;
+// }
 
 type CategorySlugProps = {
   params: {
