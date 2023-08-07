@@ -35,7 +35,6 @@ const SignInForm: React.FC = () => {
     } else {
       setTimeout(() => {
         router.refresh();
-        router.push('/');
       }, 0);
     }
   };

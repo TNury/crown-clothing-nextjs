@@ -34,7 +34,6 @@ const SignUpForm: React.FC = () => {
     } else {
       setTimeout(() => {
         router.refresh();
-        router.push('/');
       }, 0);
     }
 
