@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/generic/button/Button';
 
-import { addItemToCart, createCart } from '@/actions/cart/cart';
+import { addItemToCart, createCart } from '@/actions/cart/cart.actions';
 import { retrieveCookie } from '@/actions/cookies/cookies';
 
 import { formatPrice } from '@/lib/utils/utils';
