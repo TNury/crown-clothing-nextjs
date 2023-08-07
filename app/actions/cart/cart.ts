@@ -4,7 +4,7 @@ import callAPI from '@/services/api';
 
 import { storeCookie } from '@/actions/cookies/cookies';
 
-import { CartAdditionResponse, CartCreationResponse } from '@/types/cart/cart';
+import { CartAdditionResponse, CartCreationResponse } from '@/types/cart/cart.types';
 
 export async function createCart(
   merchandiseId: string

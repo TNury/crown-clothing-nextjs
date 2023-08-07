@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { CartItemProps } from '@/types/cart/cart';
+import { CartItemProps } from '@/types/cart/cart.types';
 
 export const CartPreviewItem: React.FC = (props: CartItemProps) => {
   return (

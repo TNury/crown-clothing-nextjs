@@ -11,7 +11,7 @@ import { retrieveCookie } from '@/actions/cookies/cookies';
 
 import { formatPrice } from '@/lib/utils/utils';
 
-import { CartSessionProps } from '@/types/cart/cart';
+import { CartSessionProps } from '@/types/cart/cart.types';
 import { GetProductSlugResponse } from '@/types/pages/pages.types';
 
 type ProductDetaisProps = {
