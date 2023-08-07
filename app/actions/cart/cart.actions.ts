@@ -4,8 +4,16 @@ import callAPI from '@/services/api';
 
 import { storeCookie } from '@/actions/cookies/cookies';
 
-import { CartAdditionResponse, CartCreationResponse } from '@/types/cart/cart.types';
+import {
+  CartAdditionResponse,
+  CartCreationResponse,
+} from '@/types/cart/cart.types';
 
+/**
+ * Creates a new cart with the given merchandise ID.
+ * @param merchandiseId The ID of the merchandise to add to the cart.
+ * @returns A Promise that resolves to the created cart.
+ */
 export async function createCart(
   merchandiseId: string
 ): Promise<CartCreationResponse['cartCreate']['cart']> {
@@ -25,6 +33,12 @@ export async function createCart(
   return response.cartCreate.cart;
 }
 
+/**
+ * Adds an item to the cart.
+ * @param cartId - The ID of the cart.
+ * @param merchandiseId - The ID of the merchandise to add to the cart.
+ * @returns A Promise that resolves with the updated cart object.
+ */
 export async function addItemToCart(
   cartId: string,
   merchandiseId: string
