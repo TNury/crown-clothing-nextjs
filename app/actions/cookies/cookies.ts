@@ -7,7 +7,7 @@ export async function storeCookie(name: string, value: any): Promise<void> {
 
   cookies().set(name, stringifiedValue, {
     path: '/',
-    maxAge: 3600, // 1 hour
+    maxAge: 14400, // 4 hours
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
