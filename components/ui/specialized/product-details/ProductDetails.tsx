@@ -1,14 +1,21 @@
 'use client';
 
+import { useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/generic/button/Button';
-import { OptionsSelector } from '@/components/ui/generic/options-selector/OptionsSelector';
+
+import { addItemToCart, createCart } from '@/actions/cart/cart';
+import { retrieveCookie } from '@/actions/cookies/cookies';
 
 import { formatPrice } from '@/lib/utils/utils';
 
-import { ProductSlugQuery } from '@/types/queries/queries';
+import { CartSessionProps } from '@/types/cart/cart';
+import { GetProductSlugResponse } from '@/types/pages/pages.types';
 
 type ProductDetaisProps = {
-  productData: ProductSlugQuery['productByHandle'];
+  productData: GetProductSlugResponse['productByHandle'];
 };
 
 const mockedSizes = [
@@ -55,6 +62,34 @@ const mockedColors = [
 export const ProductDetails: React.FC<ProductDetaisProps> = ({
   productData,
 }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  // You were wondering if you could keep the generateStaticParams for productSlug
+  // while also having nested components that relied on actions that called upon cookies
+  const handleAddToCart = async () => {
+    setLoading(true);
+
+    const merchandiseId = productData.variants.nodes[0].id;
+
+    const existingCartSession: CartSessionProps = await retrieveCookie(
+      'cartSession'
+    );
+
+    if (!existingCartSession) {
+      await createCart(merchandiseId);
+    } else {
+      await addItemToCart(existingCartSession.id, merchandiseId);
+    }
+
+    setTimeout(() => {
+      router.refresh();
+    });
+
+    setLoading(false);
+  };
+
   return (
     <div className='sticky top-20 flex h-fit w-[25vw] flex-col gap-8 p-8 pr-4 lg:p-16 lg:pr-12'>
       <div className='flex flex-col gap-2'>
@@ -85,7 +120,9 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
           ))}
         </div>
       </div>
-      <Button className='mt-8'>Add to cart</Button>
+      <Button disabled={loading} className='mt-8' onClick={handleAddToCart}>
+        Add to cart
+      </Button>
     </div>
   );
 };

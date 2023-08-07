@@ -7,29 +7,29 @@ import {
   getProductSlugParams,
 } from '@/actions/pages/pages.actions';
 
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';
 
-export async function generateStaticParams() {
-  const collections = await getProductSlugParams();
+// export async function generateStaticParams() {
+//   const collections = await getProductSlugParams();
 
-  const result = [];
+//   const result = [];
 
-  // Iterate over the collections nodes and extract the required data
-  for (const collection of collections) {
-    const categorySlug = collection.handle;
+//   // Iterate over the collections nodes and extract the required data
+//   for (const collection of collections) {
+//     const categorySlug = collection.handle;
 
-    // Extract the products nodes
-    const products = collection.products.nodes;
+//     // Extract the products nodes
+//     const products = collection.products.nodes;
 
-    // Iterate over the products nodes and push data to the result array
-    for (const product of products) {
-      const productSlug = product.handle;
-      result.push({ categorySlug, productSlug });
-    }
-  }
+//     // Iterate over the products nodes and push data to the result array
+//     for (const product of products) {
+//       const productSlug = product.handle;
+//       result.push({ categorySlug, productSlug });
+//     }
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
 type ProductSlugProps = {
   params: {

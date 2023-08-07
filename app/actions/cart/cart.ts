@@ -2,31 +2,46 @@
 
 import callAPI from '@/services/api';
 
-import { retrieveCookie, storeCookie } from '@/actions/cookies/cookies';
+import { storeCookie } from '@/actions/cookies/cookies';
 
-import { ProductDataProps } from '@/types/product/product';
+import { CartAdditionResponse, CartCreationResponse } from '@/types/cart/cart';
 
-export async function triggerItemAddition(
-  productData: ProductDataProps
-): Promise<void> {
-  const merchandiseId = productData.variants.nodes[0].id;
-
-  const existingCartSession = await retrieveCookie('cartSession');
-
-  if (!existingCartSession) {
-    const response = await callAPI('CreateCart', {
+export async function createCart(
+  merchandiseId: string
+): Promise<CartCreationResponse['cartCreate']['cart']> {
+  const response: CartCreationResponse = await callAPI(
+    'CreateCart',
+    {
       quantity: 1,
       merchandiseId,
-    });
+    },
+    {
+      cache: 'no-cache',
+    }
+  );
 
-    storeCookie('cartSession', response.cartCreate.cart);
-  } else {
-    const response = await callAPI('AddItemToCart', {
-      cartId: existingCartSession.id,
+  storeCookie('cartSession', response.cartCreate.cart);
+
+  return response.cartCreate.cart;
+}
+
+export async function addItemToCart(
+  cartId: string,
+  merchandiseId: string
+): Promise<CartCreationResponse['cartCreate']['cart']> {
+  const response: CartAdditionResponse = await callAPI(
+    'AddItemToCart',
+    {
+      cartId,
       quantity: 1,
       merchandiseId,
-    });
+    },
+    {
+      cache: 'no-cache',
+    }
+  );
 
-    storeCookie('cartSession', response.cartLinesAdd.cart);
-  }
+  storeCookie('cartSession', response.cartLinesAdd.cart);
+
+  return response.cartLinesAdd.cart;
 }
