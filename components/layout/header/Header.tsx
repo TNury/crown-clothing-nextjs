@@ -7,7 +7,6 @@ import { UserSessionProps } from '@/types/auth/auth';
 import { CartFieldsFragment } from '@/types/queries/queries';
 
 import { AuthButton } from './auth-button/AuthButton';
-import { CartButton } from './cart-button/CartButton';
 
 export const Header = async () => {
   const userSession: UserSessionProps =
@@ -46,7 +45,16 @@ export const Header = async () => {
       </div>
       <div className='absolute right-8 flex items-center gap-2'>
         <AuthButton userSession={userSession} />
-        <CartButton cartSession={cartSession} />
+        <Link
+          href='/cart'
+          className='relative flex cursor-pointer items-center justify-center p-2'>
+          <div className='relative h-6 w-6'>
+            <Image src='/assets/shopping-bag.svg' alt='bag_icon' fill />
+          </div>
+          <span className='absolute top-4 text-[10px] font-bold'>
+            {cartSession.totalQuantity ? cartSession.totalQuantity : 0}
+          </span>
+        </Link>
       </div>
     </header>
   );
