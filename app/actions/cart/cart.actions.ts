@@ -7,6 +7,8 @@ import { storeCookie } from '@/actions/cookies/cookies';
 import {
   CartAdditionResponse,
   CartCreationResponse,
+  CartItemRemoveInput,
+  CartItemRemoveResponse,
   CartItemUpdateInput,
   CartItemUpdateResponse,
 } from '@/types/cart/cart.types';
@@ -63,7 +65,9 @@ export async function addItemToCart(
   return response.cartLinesAdd.cart;
 }
 
-export async function updateCartItem(cartItemUpdateInput: CartItemUpdateInput) {
+export async function updateCartItem(
+  cartItemUpdateInput: CartItemUpdateInput
+): Promise<CartItemUpdateResponse> {
   const response: CartItemUpdateResponse = await callAPI(
     'UpdateCartItem',
     cartItemUpdateInput,
@@ -73,6 +77,22 @@ export async function updateCartItem(cartItemUpdateInput: CartItemUpdateInput) {
   );
 
   storeCookie('cartSession', response.cartLinesUpdate.cart);
+
+  return response;
+}
+
+export async function removeCartItem(
+  cartItemRemoveInput: CartItemRemoveInput
+): Promise<CartItemRemoveResponse> {
+  const response: CartItemRemoveResponse = await callAPI(
+    'RemoveCartItem',
+    cartItemRemoveInput,
+    {
+      cache: 'no-cache',
+    }
+  );
+
+  storeCookie('cartSession', response.cartLinesRemove.cart);
 
   return response;
 }

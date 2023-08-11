@@ -75,3 +75,11 @@ mutation updateCartItem($cartId: ID!, $updateInfo: [CartLineUpdateInput!]!) {
     }
   }
 }
+
+mutation removeCartItem($cartId: ID!, $itemIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $itemIds) {
+    cart {
+      ...CartFields
+    }
+  }
+}

@@ -130,6 +130,15 @@ export const UpdateCartItem = gql`
   }
 }
     ${CartFields}`;
+export const RemoveCartItem = gql`
+    mutation removeCartItem($cartId: ID!, $itemIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $itemIds) {
+    cart {
+      ...CartFields
+    }
+  }
+}
+    ${CartFields}`;
 export const HomePage = gql`
     query homePage {
   collections(first: 5) {
