@@ -67,3 +67,11 @@ mutation addItemToCart($cartId: ID!, $quantity: Int!, $merchandiseId: ID!) {
     }
   }
 }
+
+mutation updateCartItem($cartId: ID!, $updateInfo: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $updateInfo) {
+    cart {
+      ...CartFields
+    }
+  }
+}

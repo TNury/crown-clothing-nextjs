@@ -7,6 +7,8 @@ import { storeCookie } from '@/actions/cookies/cookies';
 import {
   CartAdditionResponse,
   CartCreationResponse,
+  CartItemUpdateInput,
+  CartItemUpdateResponse,
 } from '@/types/cart/cart.types';
 
 /**
@@ -41,13 +43,14 @@ export async function createCart(
  */
 export async function addItemToCart(
   cartId: string,
-  merchandiseId: string
+  merchandiseId: string,
+  quantity: number = 1
 ): Promise<CartCreationResponse['cartCreate']['cart']> {
   const response: CartAdditionResponse = await callAPI(
     'AddItemToCart',
     {
       cartId,
-      quantity: 1,
+      quantity,
       merchandiseId,
     },
     {
@@ -58,4 +61,18 @@ export async function addItemToCart(
   storeCookie('cartSession', response.cartLinesAdd.cart);
 
   return response.cartLinesAdd.cart;
+}
+
+export async function updateCartItem(cartItemUpdateInput: CartItemUpdateInput) {
+  const response: CartItemUpdateResponse = await callAPI(
+    'UpdateCartItem',
+    cartItemUpdateInput,
+    {
+      cache: 'no-cache',
+    }
+  );
+
+  storeCookie('cartSession', response.cartLinesUpdate.cart);
+
+  return response;
 }

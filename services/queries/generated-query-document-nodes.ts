@@ -121,6 +121,15 @@ export const AddItemToCart = gql`
   }
 }
     ${CartFields}`;
+export const UpdateCartItem = gql`
+    mutation updateCartItem($cartId: ID!, $updateInfo: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $updateInfo) {
+    cart {
+      ...CartFields
+    }
+  }
+}
+    ${CartFields}`;
 export const HomePage = gql`
     query homePage {
   collections(first: 5) {

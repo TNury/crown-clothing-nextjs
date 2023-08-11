@@ -5151,7 +5151,7 @@ export type Mutation = {
    * [`customerReset`](https://shopify.dev/api/storefront/latest/mutations/customerReset) mutation to reset the
    * customer password.
    *
-   * This mutation is throttled by IP. With authenticated access,
+   * This mutation is throttled by IP. With private access,
    * you can provide a [`Shopify-Storefront-Buyer-IP`](https://shopify.dev/api/usage/authentication#optional-ip-header) instead of the request IP.
    *
    * Make sure that the value provided to `Shopify-Storefront-Buyer-IP` is trusted. Unthrottled access to this
@@ -7716,6 +7716,14 @@ export type AddItemToCartMutationVariables = Exact<{
 
 
 export type AddItemToCartMutation = { __typename?: 'Mutation', cartLinesAdd?: { __typename?: 'CartLinesAddPayload', cart?: { __typename?: 'Cart', id: string, totalQuantity: number, lines: { __typename?: 'BaseCartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', totalAmount: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', id: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null, price: { __typename?: 'MoneyV2', amount: any }, product: { __typename?: 'Product', title: string } } }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null } } | null } | null };
+
+export type UpdateCartItemMutationVariables = Exact<{
+  cartId: Scalars['ID']['input'];
+  updateInfo: Array<CartLineUpdateInput> | CartLineUpdateInput;
+}>;
+
+
+export type UpdateCartItemMutation = { __typename?: 'Mutation', cartLinesUpdate?: { __typename?: 'CartLinesUpdatePayload', cart?: { __typename?: 'Cart', id: string, totalQuantity: number, lines: { __typename?: 'BaseCartLineConnection', nodes: Array<{ __typename?: 'CartLine', id: string, quantity: number, cost: { __typename?: 'CartLineCost', totalAmount: { __typename?: 'MoneyV2', amount: any } }, merchandise: { __typename?: 'ProductVariant', id: string, image?: { __typename?: 'Image', url: any, altText?: string | null } | null, price: { __typename?: 'MoneyV2', amount: any }, product: { __typename?: 'Product', title: string } } }> }, cost: { __typename?: 'CartCost', totalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, subtotalAmount: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, totalTaxAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null, totalDutyAmount?: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } | null } } | null } | null };
 
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 

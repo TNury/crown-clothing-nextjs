@@ -10,5 +10,5 @@ export function formatPrice(rawPrice: number, currency: string) {
     minimumFractionDigits: 2,
   }).format(Number(rawPrice));
 
-  return `${currency} ${formattedPrice}`;
+  return `${currency}${formattedPrice}`;
 }
