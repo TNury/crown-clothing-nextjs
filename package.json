@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start --port 4000",
+    "start": "node server.ts",
     "codegen": "graphql-codegen"
   },
   "dependencies": {
