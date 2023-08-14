@@ -18,7 +18,7 @@ const CartPage = async () => {
   return (
     <main className='flex w-full flex-col items-center justify-center px-4 py-16'>
       <div className='w-full max-w-screen-md'>
-        {cartSession.lines.nodes.length > 0 ? (
+        {cartSession?.lines.nodes.length > 0 ? (
           <div className='flex w-full gap-8'>
             <div className='flex w-2/3 flex-col gap-8'>
               <div className='flex flex-col gap-4'>
@@ -85,7 +85,10 @@ const CartPage = async () => {
               get started?
             </p>
             <Link href='/'>
-              <Button className='w-fit'>Get Started</Button>
+              <Button className='flex w-fit items-center justify-between gap-4'>
+                <p className='text-base'>Get started</p>
+                <span className='h-8 text-lg'>&#8594;</span>
+              </Button>{' '}
             </Link>
           </div>
         )}
