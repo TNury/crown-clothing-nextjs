@@ -46,7 +46,7 @@ export const Header = async () => {
       <div className='absolute right-8 flex items-center gap-2'>
         <AuthButton userSession={userSession} />
         <Link
-          href='/cart'
+          href='/bag'
           className='relative flex cursor-pointer items-center justify-center p-2'>
           <div className='relative h-6 w-6'>
             <Image src='/assets/shopping-bag.svg' alt='bag_icon' fill />
