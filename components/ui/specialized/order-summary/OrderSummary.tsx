@@ -1,22 +1,24 @@
 import { formatPrice } from '@/lib/utils/utils';
 
-import { CartSessionProps } from '@/types/cart/cart.types';
-
 type OrderSummaryProps = {
-  cartSession: CartSessionProps;
+  itemsQuantity: number;
+  itemsTotal: number;
+  total: number;
 };
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ cartSession }) => {
+const OrderSummary: React.FC<OrderSummaryProps> = ({
+  itemsQuantity,
+  itemsTotal,
+  total,
+}) => {
   return (
     <div className='flex flex-col gap-8'>
       <h1 className='text-lg font-bold uppercase'>Order summary</h1>
       <div className='flex flex-col gap-4'>
         <div className='flex flex-col'>
           <div className='flex justify-between'>
-            <p className='text-base'>{cartSession.totalQuantity} items: </p>
-            <p className='text-base'>
-              {formatPrice(cartSession.cost.totalAmount.amount, '€')}
-            </p>
+            <p className='text-base'>{itemsQuantity} items:</p>
+            <p className='text-base'>{formatPrice(itemsTotal, '€')}</p>
           </div>
           <div className='flex justify-between'>
             <p className='text-base'>Sales Tax:</p>
@@ -29,9 +31,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cartSession }) => {
         </div>
         <div className='flex justify-between'>
           <p className='text-base font-bold'>Total: </p>
-          <p className='text-base font-bold'>
-            {formatPrice(cartSession.cost.totalAmount.amount, '€')}
-          </p>
+          <p className='text-base font-bold'>{formatPrice(total, '€')}</p>
         </div>
       </div>
     </div>

@@ -49,6 +49,57 @@ export const CartFields = gql`
   }
 }
     `;
+export const CheckoutProps = gql`
+    fragment CheckoutProps on Checkout {
+  id
+  lineItems(first: 10) {
+    nodes {
+      id
+      quantity
+      title
+      unitPrice {
+        amount
+      }
+      variant {
+        ... on ProductVariant {
+          id
+          image {
+            url
+            altText
+          }
+          price {
+            amount
+          }
+          product {
+            title
+          }
+        }
+      }
+    }
+  }
+  totalTax {
+    amount
+  }
+  totalPrice {
+    amount
+  }
+  lineItemsSubtotalPrice {
+    amount
+  }
+  email
+  shippingAddress {
+    address1
+    address2
+    city
+    country
+    firstName
+    lastName
+    phone
+    zip
+    province
+  }
+}
+    `;
 export const CreateCustomer = gql`
     mutation createCustomer($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
   customerCreate(
@@ -139,6 +190,44 @@ export const RemoveCartItem = gql`
   }
 }
     ${CartFields}`;
+export const CreateCheckout = gql`
+    mutation createCheckout($input: CheckoutCreateInput!) {
+  checkoutCreate(input: $input) {
+    checkout {
+      ...CheckoutProps
+    }
+  }
+}
+    ${CheckoutProps}`;
+export const UpdateCheckoutShippingAddress = gql`
+    mutation updateCheckoutShippingAddress($checkoutId: ID!, $input: MailingAddressInput!) {
+  checkoutShippingAddressUpdateV2(
+    checkoutId: $checkoutId
+    shippingAddress: $input
+  ) {
+    checkout {
+      ...CheckoutProps
+    }
+    checkoutUserErrors {
+      field
+      code
+    }
+  }
+}
+    ${CheckoutProps}`;
+export const UpdateCheckoutContactEmail = gql`
+    mutation updateCheckoutContactEmail($checkoutId: ID!, $input: String!) {
+  checkoutEmailUpdateV2(checkoutId: $checkoutId, email: $input) {
+    checkout {
+      ...CheckoutProps
+    }
+    checkoutUserErrors {
+      field
+      code
+    }
+  }
+}
+    ${CheckoutProps}`;
 export const HomePage = gql`
     query homePage {
   collections(first: 5) {

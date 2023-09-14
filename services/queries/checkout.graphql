@@ -1,0 +1,87 @@
+fragment CheckoutProps on Checkout {
+  id
+  lineItems(first: 10) {
+    nodes {
+      id
+      quantity
+      title
+      unitPrice {
+        amount
+      }
+      variant {
+        ... on ProductVariant {
+          id
+          image {
+            url
+            altText
+          }
+          price {
+            amount
+          }
+          product {
+            title
+          }
+        }
+      }
+    }
+  }
+  totalTax {
+    amount
+  }
+  totalPrice {
+    amount
+  }
+  lineItemsSubtotalPrice {
+    amount
+  }
+  email
+  shippingAddress {
+    address1
+    address2
+    city
+    country
+    firstName
+    lastName
+    phone
+    zip
+    province
+  }
+}
+
+mutation createCheckout($input: CheckoutCreateInput!) {
+  checkoutCreate(input: $input) {
+    checkout {
+      ...CheckoutProps
+    }
+  }
+}
+
+mutation updateCheckoutShippingAddress(
+  $checkoutId: ID!
+  $input: MailingAddressInput!
+) {
+  checkoutShippingAddressUpdateV2(
+    checkoutId: $checkoutId
+    shippingAddress: $input
+  ) {
+    checkout {
+      ...CheckoutProps
+    }
+    checkoutUserErrors {
+      field
+      code
+    }
+  }
+}
+
+mutation updateCheckoutContactEmail($checkoutId: ID!, $input: String!) {
+  checkoutEmailUpdateV2(checkoutId: $checkoutId, email: $input) {
+    checkout {
+      ...CheckoutProps
+    }
+    checkoutUserErrors {
+      field
+      code
+    }
+  }
+}

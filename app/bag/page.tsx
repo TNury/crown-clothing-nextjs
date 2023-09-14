@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/generic/button/Button';
-import { CloseButton } from '@/components/ui/generic/close-button/CloseButton';
-import { OptionsSelector } from '@/components/ui/generic/options-selector/OptionsSelector';
 import { CartItem } from '@/components/ui/specialized/cart-item/CartItem';
+import CheckoutButton from '@/components/ui/specialized/checkout-button/CheckoutButton';
 import OrderSummary from '@/components/ui/specialized/order-summary/OrderSummary';
 
 import { retrieveCookie } from '@/actions/cookies/cookies';
@@ -43,11 +41,13 @@ const CartPage = async () => {
               </div>
             </div>
             <div className='flex w-1/3 flex-col gap-12'>
-              <Button className='flex items-center justify-between'>
-                <p className='text-base'>Checkout</p>
-                <span className='h-8 text-lg'>&#8594;</span>
-              </Button>
-              <OrderSummary cartSession={cartSession} />
+              <CheckoutButton cartSession={cartSession} />
+
+              <OrderSummary
+                itemsQuantity={cartSession.totalQuantity}
+                itemsTotal={cartSession.cost.totalAmount.amount}
+                total={cartSession.cost.totalAmount.amount}
+              />
             </div>
           </div>
         ) : (
