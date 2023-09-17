@@ -144,7 +144,7 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
           <OptionsSelector
             value={formik.values.shipping_address.country}
             options={[{ country: 'GB' }, { country: 'US' }, { country: 'BR' }]}
-            placeholder='Country'
+            placeholder='Pick your country'
             onOptionClick={(optionProps: { country: string }) => {
               handleCountryField(optionProps.country);
             }}
