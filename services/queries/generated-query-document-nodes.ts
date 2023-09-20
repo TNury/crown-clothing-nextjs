@@ -248,10 +248,10 @@ export const UpdateCheckoutContactEmail = gql`
 }
     ${CheckoutProps}`;
 export const CompleteCheckout = gql`
-    mutation completeCheckout($checkoutId: ID!, $paymentData: String!) {
+    mutation completeCheckout($checkoutId: ID!, $payment: TokenizedPaymentInputV3!) {
   checkoutCompleteWithTokenizedPaymentV3(
     checkoutId: $checkoutId
-    payment: {type: STRIPE_VAULT_TOKEN, paymentAmount: {amount: "120", currencyCode: BRL}, idempotencyKey: "placeholder_1234", billingAddress: {firstName: "Yuri", lastName: "Pereira", address1: "Estudante Idalvo 67", address2: "", zip: "58057450", city: "João Pessoa", province: "Paraíba", country: "BR", phone: "+55 83 981264559"}, test: true, paymentData: $paymentData}
+    payment: $payment
   ) {
     checkout {
       id

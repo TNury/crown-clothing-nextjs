@@ -30,7 +30,7 @@ export const CheckoutPaymentForm: React.FC<CheckoutPaymentFormProps> = ({
         </p>
       </div>
       <Elements stripe={stripePromise}>
-        <PaymentFormGroup checkoutId={checkoutSession.id} />
+        <PaymentFormGroup checkoutSession={checkoutSession} />
       </Elements>
     </div>
   );

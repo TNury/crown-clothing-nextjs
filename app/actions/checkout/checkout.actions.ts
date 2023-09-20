@@ -7,6 +7,7 @@ import { storeCookie } from '@/actions/cookies/cookies';
 import {
   CheckoutDeliveryFormFieldProps,
   CheckoutSessionProps,
+  CompleteCheckoutArgs,
   CompleteCheckoutResponse,
   CreateCheckoutArgs,
   CreateCheckoutResponse,
@@ -119,26 +120,34 @@ export async function updateCheckoutContactEmail(
 
 export async function completeCheckout(
   checkoutId: string,
-  paymentData: string
+  payment: CompleteCheckoutArgs
 ): Promise<CompleteCheckoutResponse['checkoutCompleteWithTokenizedPaymentV3']> {
   try {
     const response: CompleteCheckoutResponse = await callAPI(
       'CompleteCheckout',
       {
-        checkoutId: checkoutId,
-        paymentData,
+        checkoutId,
+        payment,
       },
       {
         cache: 'no-cache',
       }
     );
 
+    if (response.checkoutCompleteWithTokenizedPaymentV3.checkoutUserErrors[0]) {
+      throw new Error(
+        response.checkoutCompleteWithTokenizedPaymentV3.checkoutUserErrors[0].message
+      );
+    }
+
     if (response.checkoutCompleteWithTokenizedPaymentV3.payment) {
       storeCookie('checkoutSession', null);
       storeCookie('cartSession', null);
-    }
 
-    return response.checkoutCompleteWithTokenizedPaymentV3;
+      return response.checkoutCompleteWithTokenizedPaymentV3;
+    } else {
+      throw new Error('Payment could not be processed');
+    }
   } catch (error) {
     console.error(error);
   }

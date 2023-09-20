@@ -41,8 +41,6 @@ export type CheckoutDeliveryFormFieldProps = {
   email: UpdateCheckoutContactEmailArgs['input'];
 };
 
-export type CompleteCheckoutArgs = {
-  paymentData: string;
-};
+export type CompleteCheckoutArgs = TokenizedPaymentInputV3;
 
 export type CompleteCheckoutResponse = CompleteCheckoutMutation;

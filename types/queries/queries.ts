@@ -7827,7 +7827,7 @@ export type UpdateCheckoutContactEmailMutation = { __typename?: 'Mutation', chec
 
 export type CompleteCheckoutMutationVariables = Exact<{
   checkoutId: Scalars['ID']['input'];
-  paymentData: Scalars['String']['input'];
+  payment: TokenizedPaymentInputV3;
 }>;
 
 

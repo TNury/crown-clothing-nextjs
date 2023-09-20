@@ -1,9 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
-
 import {
   CardCvcElement,
   CardExpiryElement,
@@ -11,10 +7,14 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/ui/generic/button/Button';
 
 import { completeCheckout } from '@/actions/checkout/checkout.actions';
+
+import { CheckoutSessionProps } from '@/types/checkout/checkout.types';
+import { CurrencyCode, PaymentTokenType } from '@/types/queries/queries';
 
 import {
   cardCvcElementOptions,
@@ -23,11 +23,11 @@ import {
 } from './utils/paymentFormGroup.utils';
 
 type PaymentFormGroupProps = {
-  checkoutId: string;
+  checkoutSession: CheckoutSessionProps;
 };
 
 export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
-  checkoutId,
+  checkoutSession,
 }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -40,15 +40,26 @@ export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
 
     const cardNumberElement = elements.getElement('cardNumber');
 
-    const result = await stripe.createToken(cardNumberElement, {
+    const tokenResult = await stripe.createToken(cardNumberElement, {
       currency: 'BRL',
     });
 
-    if (result.error) {
-      // Show error to your customer (e.g., insufficient funds)
-      console.log(result.error.message);
+    if (tokenResult.error) {
+      console.log(tokenResult.error.message);
     } else {
-      await completeCheckout(checkoutId, result.token.id);
+      await completeCheckout(checkoutSession.id, {
+        type: PaymentTokenType.StripeVaultToken,
+        paymentAmount: {
+          amount: checkoutSession.totalPrice.amount,
+          currencyCode: CurrencyCode.Brl,
+        },
+        idempotencyKey: uuidv4(),
+        billingAddress: {
+          ...checkoutSession.shippingAddress,
+        },
+        test: true,
+        paymentData: tokenResult.token.id,
+      });
     }
   };
 
