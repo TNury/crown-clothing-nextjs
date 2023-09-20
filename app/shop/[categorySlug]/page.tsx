@@ -7,7 +7,7 @@ import {
   // getCategorySlugParams,
 } from '@/actions/pages/pages.actions';
 
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';
 
 // export async function generateStaticParams() {
 //   const params = await getCategorySlugParams();
