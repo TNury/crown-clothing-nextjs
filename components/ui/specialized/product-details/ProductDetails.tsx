@@ -66,8 +66,6 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
 
   const router = useRouter();
 
-  // You were wondering if you could keep the generateStaticParams for productSlug
-  // while also having nested components that relied on actions that called upon cookies
   const handleAddToCart = async () => {
     setLoading(true);
 
@@ -83,9 +81,7 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
       await addItemToCart(existingCartSession.id, merchandiseId);
     }
 
-    setTimeout(() => {
-      router.refresh();
-    });
+    router.refresh();
 
     setLoading(false);
   };

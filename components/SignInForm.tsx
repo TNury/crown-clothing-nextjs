@@ -33,9 +33,7 @@ const SignInForm: React.FC = () => {
       setErrorMessage(userErrors[0].message);
       setLoading(false);
     } else {
-      setTimeout(() => {
-        router.refresh();
-      }, 0);
+      router.refresh();
     }
   };
 

@@ -32,9 +32,7 @@ const SignUpForm: React.FC = () => {
     if (userErrors.length > 0) {
       setErrorMessage(userErrors[0].message);
     } else {
-      setTimeout(() => {
-        router.refresh();
-      }, 0);
+      router.refresh();
     }
 
     setLoading(false);

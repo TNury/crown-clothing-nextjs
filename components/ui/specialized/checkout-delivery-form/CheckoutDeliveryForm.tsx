@@ -64,9 +64,7 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
     if (checkoutResponse.checkoutUserErrors[0]) {
       setErrorMessage(checkoutResponse.checkoutUserErrors[0].code);
     } else {
-      setTimeout(() => {
-        router.push('/payment');
-      }, 1);
+      router.push('/payment');
     }
 
     setLoading(false);
