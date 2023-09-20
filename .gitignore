@@ -21,6 +21,7 @@
 *.pem
 tasks.md
 .env
+start_prod.sh
 
 # debug
 npm-debug.log*

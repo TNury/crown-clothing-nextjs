@@ -121,21 +121,25 @@ export async function completeCheckout(
   checkoutId: string,
   paymentData: string
 ): Promise<CompleteCheckoutResponse['checkoutCompleteWithTokenizedPaymentV3']> {
-  const response: CompleteCheckoutResponse = await callAPI(
-    'CompleteCheckout',
-    {
-      checkoutId: checkoutId,
-      paymentData,
-    },
-    {
-      cache: 'no-cache',
+  try {
+    const response: CompleteCheckoutResponse = await callAPI(
+      'CompleteCheckout',
+      {
+        checkoutId: checkoutId,
+        paymentData,
+      },
+      {
+        cache: 'no-cache',
+      }
+    );
+
+    if (response.checkoutCompleteWithTokenizedPaymentV3.payment) {
+      storeCookie('checkoutSession', null);
+      storeCookie('cartSession', null);
     }
-  );
 
-  if (response.checkoutCompleteWithTokenizedPaymentV3.payment) {
-    storeCookie('checkoutSession', null);
-    storeCookie('cartSession', null);
+    return response.checkoutCompleteWithTokenizedPaymentV3;
+  } catch (error) {
+    console.error(error);
   }
-
-  return response.checkoutCompleteWithTokenizedPaymentV3;
 }
