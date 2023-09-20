@@ -2,47 +2,51 @@
 
 import { useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { useFormik } from 'formik';
 
 import { Button } from '@/components/ui/generic/button/Button';
 import { Input } from '@/components/ui/generic/input/Input';
 import { ShippingFormGroup } from '@/components/ui/specialized/shipping-form-group/ShippingFormGroup';
 
-import {
-  handleCheckoutDeliveryStep,
-  updateCheckoutShippingAddress,
-} from '@/actions/checkout/checkout.actions';
+import { handleCheckoutDeliveryStep } from '@/actions/checkout/checkout.actions';
 
 import { checkoutDeliveryFormSchema } from '@/lib/validation/validation';
 
-import { CheckoutDeliveryFormFieldProps } from '@/types/checkout/checkout.types';
+import {
+  CheckoutDeliveryFormFieldProps,
+  CheckoutSessionProps,
+} from '@/types/checkout/checkout.types';
 
 import { Alert } from '../../generic/alert/Alert';
 
 type CheckoutDeliveryFormProps = {
-  checkoutId: string;
+  checkoutSession: CheckoutSessionProps;
 };
 
 export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
-  checkoutId,
+  checkoutSession,
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
+  const router = useRouter();
+
   const formik = useFormik<CheckoutDeliveryFormFieldProps>({
     initialValues: {
       shipping_address: {
-        firstName: '',
-        lastName: '',
-        address1: '',
+        firstName: 'Yuri',
+        lastName: 'Pereira',
+        address1: 'Estudante Idalvo 67',
         address2: '',
-        zip: '',
-        city: '',
-        province: '',
-        country: '',
-        phone: '',
+        zip: '58057450',
+        city: 'João Pessoa',
+        province: 'Paraíba',
+        country: 'BR',
+        phone: '+55 83 981264559',
       },
-      email: '',
+      email: 'yurdesou@gmail.com',
     },
     onSubmit: handleSubmit,
     validationSchema: checkoutDeliveryFormSchema,
@@ -51,15 +55,18 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
   async function handleSubmit(formData: CheckoutDeliveryFormFieldProps) {
     setLoading(true);
 
-    const checkoutShippingAddressResponse = await handleCheckoutDeliveryStep(
-      checkoutId,
-      formData
+    const checkoutResponse = await handleCheckoutDeliveryStep(
+      checkoutSession.id,
+      formData,
+      Number(checkoutSession.totalPrice.amount)
     );
 
-    if (checkoutShippingAddressResponse.checkoutUserErrors[0]) {
-      setErrorMessage(
-        checkoutShippingAddressResponse.checkoutUserErrors[0].code
-      );
+    if (checkoutResponse.checkoutUserErrors[0]) {
+      setErrorMessage(checkoutResponse.checkoutUserErrors[0].code);
+    } else {
+      setTimeout(() => {
+        router.push('/payment');
+      }, 1);
     }
 
     setLoading(false);

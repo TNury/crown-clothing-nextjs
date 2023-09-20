@@ -10,7 +10,7 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-b bg-gray-1 outline-none placeholder:text-gray-3',
+        default: 'border-b bg-gray-1 outline-none placeholder:text-lightgray',
         secondary: 'border',
       },
     },
@@ -46,7 +46,11 @@ export const Input: React.FC<InputProps> = (props) => {
 
   return (
     <div className='flex w-full flex-col gap-2'>
-      {label && <label htmlFor={id} className='text-base'>{label}</label>}
+      {label && (
+        <label htmlFor={id} className='text-base'>
+          {label}
+        </label>
+      )}
       <div className='relative flex w-full flex-col justify-center'>
         <input
           id={id}

@@ -6,6 +6,8 @@ import { storeCookie } from '@/actions/cookies/cookies';
 
 import {
   CheckoutDeliveryFormFieldProps,
+  CheckoutSessionProps,
+  CompleteCheckoutResponse,
   CreateCheckoutArgs,
   CreateCheckoutResponse,
   UpdateCheckoutContactEmailArgs,
@@ -34,12 +36,13 @@ export async function createCheckout(
 
 export async function handleCheckoutDeliveryStep(
   checkoutId: string,
-  args: CheckoutDeliveryFormFieldProps
+  deliveryFormProps: CheckoutDeliveryFormFieldProps,
+  amount: number
 ): Promise<
   | UpdateCheckoutShippingAddressResponse['checkoutShippingAddressUpdateV2']
   | UpdateCheckoutContactEmailResponse['checkoutEmailUpdateV2']
 > {
-  const { shipping_address, email } = args;
+  const { shipping_address, email } = deliveryFormProps;
 
   const shippingAddressUpdateResponse = await updateCheckoutShippingAddress(
     checkoutId,
@@ -67,7 +70,11 @@ export async function handleCheckoutDeliveryStep(
     return checkoutEmailUpdateResponse;
   }
 
-  storeCookie('checkoutSession', checkoutEmailUpdateResponse.checkout);
+  const updatedCheckoutSession: CheckoutSessionProps = {
+    ...checkoutEmailUpdateResponse.checkout,
+  };
+
+  storeCookie('checkoutSession', updatedCheckoutSession);
 
   return checkoutEmailUpdateResponse;
 }
@@ -108,4 +115,27 @@ export async function updateCheckoutContactEmail(
   );
 
   return response.checkoutEmailUpdateV2;
+}
+
+export async function completeCheckout(
+  checkoutId: string,
+  paymentData: string
+): Promise<CompleteCheckoutResponse['checkoutCompleteWithTokenizedPaymentV3']> {
+  const response: CompleteCheckoutResponse = await callAPI(
+    'CompleteCheckout',
+    {
+      checkoutId: checkoutId,
+      paymentData,
+    },
+    {
+      cache: 'no-cache',
+    }
+  );
+
+  if (response.checkoutCompleteWithTokenizedPaymentV3.payment) {
+    storeCookie('checkoutSession', null);
+    storeCookie('cartSession', null);
+  }
+
+  return response.checkoutCompleteWithTokenizedPaymentV3;
 }

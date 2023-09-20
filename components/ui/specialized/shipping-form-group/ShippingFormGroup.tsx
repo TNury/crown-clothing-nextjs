@@ -43,6 +43,7 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
           label='Last name'
           variant='secondary'
           placeholder='Doe'
+          value={formik.values.shipping_address.lastName}
           onChange={formik.handleChange}
           error={
             formik.touched.shipping_address?.lastName &&
