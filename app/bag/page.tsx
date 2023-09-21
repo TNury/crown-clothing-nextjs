@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import SignInForm from '@/components/SignInForm';
 import { Button } from '@/components/ui/generic/button/Button';
 import { CartItem } from '@/components/ui/specialized/cart-item/CartItem';
 import CheckoutButton from '@/components/ui/specialized/checkout-button/CheckoutButton';
@@ -9,10 +10,12 @@ import { retrieveCookie } from '@/actions/cookies/cookies';
 
 import { formatPrice } from '@/lib/utils/utils';
 
+import { UserSessionProps } from '@/types/auth/auth.types';
 import { CartSessionProps } from '@/types/cart/cart.types';
 
 const CartPage = async () => {
   const cartSession: CartSessionProps = await retrieveCookie('cartSession');
+  const userSession: UserSessionProps = await retrieveCookie('userSession');
 
   return (
     <main className='flex w-full flex-col items-center justify-center px-4 py-16'>
@@ -20,6 +23,13 @@ const CartPage = async () => {
         {cartSession?.lines.nodes.length > 0 ? (
           <div className='flex w-full gap-8'>
             <div className='flex w-2/3 flex-col gap-8'>
+              {userSession && (
+                <div className='bg-gray-1 p-8'>
+                  <h2 className='text-lg font-bold uppercase'>
+                    Hello {userSession.user.firstName}
+                  </h2>
+                </div>
+              )}
               <div className='flex flex-col gap-4'>
                 <h1 className='text-4xl font-bold uppercase'>Your bag</h1>
                 <p className='text-base'>
@@ -40,14 +50,28 @@ const CartPage = async () => {
                 ))}
               </div>
             </div>
-            <div className='flex w-1/3 flex-col gap-12'>
-              <CheckoutButton cartSession={cartSession} />
+            <div className='flex w-1/3 flex-col gap-8'>
+              {!userSession && (
+                <>
+                  <div className='flex flex-col gap-4'>
+                    <h1 className='text-4xl font-bold uppercase'>Log in</h1>
+                    <p className='mb-[-7px] text-base'>
+                      Please log in to continue to checkout.
+                    </p>
+                  </div>
+                  <SignInForm returnUrl='/bag' />
+                </>
+              )}
 
-              <OrderSummary
-                itemsQuantity={cartSession.totalQuantity}
-                itemsTotal={cartSession.cost.totalAmount.amount}
-                total={cartSession.cost.totalAmount.amount}
-              />
+              <div className='flex flex-col gap-12'>
+                {userSession && <CheckoutButton cartSession={cartSession} />}
+
+                <OrderSummary
+                  itemsQuantity={cartSession.totalQuantity}
+                  itemsTotal={cartSession.cost.totalAmount.amount}
+                  total={cartSession.cost.totalAmount.amount}
+                />
+              </div>
             </div>
           </div>
         ) : (

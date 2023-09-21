@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { logoutUser } from '@/actions/auth/auth';
+import { logoutUser } from '@/actions/auth/auth.actions';
 
-import type { UserSessionProps } from '@/types/auth/auth';
+import type { UserSessionProps } from '@/types/auth/auth.types';
 
 type AuthButtonProps = {
   userSession: UserSessionProps;

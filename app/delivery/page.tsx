@@ -4,12 +4,15 @@ import OrderSummary from '@/components/ui/specialized/order-summary/OrderSummary
 
 import { retrieveCookie } from '@/actions/cookies/cookies';
 
+import { UserSessionProps } from '@/types/auth/auth.types';
 import { CheckoutSessionProps } from '@/types/checkout/checkout.types';
 
 const DeliveryPage = async () => {
   const checkoutSession: CheckoutSessionProps = await retrieveCookie(
     'checkoutSession'
   );
+
+  const userSession: UserSessionProps = await retrieveCookie('userSession');
 
   const returnItemsQuantity = (): number => {
     let totalQuantity = 0;

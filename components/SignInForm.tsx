@@ -16,7 +16,11 @@ import { SignInFormValidationSchema } from '@/lib/auth/auth';
 
 import { LoginUserArgs } from '@/types/auth/auth.types';
 
-const SignInForm: React.FC = () => {
+type SignInFormProps = {
+  returnUrl?: string;
+};
+
+const SignInForm: React.FC<SignInFormProps> = ({ returnUrl }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -34,6 +38,10 @@ const SignInForm: React.FC = () => {
       setLoading(false);
     } else {
       router.refresh();
+
+      if (returnUrl) {
+        router.push(returnUrl);
+      }
     }
   };
 

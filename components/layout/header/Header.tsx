@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { retrieveCookie } from '@/actions/cookies/cookies';
 
-import { UserSessionProps } from '@/types/auth/auth';
+import { UserSessionProps } from '@/types/auth/auth.types';
 import { CartFieldsFragment } from '@/types/queries/queries';
 
 import { AuthButton } from './auth-button/AuthButton';
