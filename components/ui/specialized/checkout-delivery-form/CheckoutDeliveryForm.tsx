@@ -98,7 +98,6 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
             <Input
               id='email'
               label='Email'
-              variant='secondary'
               placeholder='John_doe@gmail.com'
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -108,7 +107,6 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
             <Input
               id='shipping_address.phone'
               label='Phone number'
-              variant='secondary'
               placeholder='+44 1234 567890'
               onChange={formik.handleChange}
               value={formik.values.shipping_address.phone}
