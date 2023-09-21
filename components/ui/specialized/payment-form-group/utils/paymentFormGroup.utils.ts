@@ -8,7 +8,8 @@ import {
 const baseOptions = {
   classes: {
     base: 'w-full p-4 border border-black h-[58px] flex justify-center flex-col',
-    invalid: 'text-red-500',
+    empty: 'border-red-500',
+    invalid: 'border-red-500',
   },
   style: {
     base: {
