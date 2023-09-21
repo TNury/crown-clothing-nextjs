@@ -9,7 +9,10 @@ module.exports = {
         xl: '1920px',
       },
       colors: {
-        lightgray: '#ACACAC',
+        'gray-1': '#F5F5F5',
+        'gray-2': '#D9D9D9',
+        'gray-3': '#ACACAC',
+        'gray-4': '#8F8F8F',
         'opaque-white': {
           30: '#ffffff30',
           90: '#ffffff90',

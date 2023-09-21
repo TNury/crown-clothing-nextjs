@@ -10,8 +10,9 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-b bg-gray-1 outline-none placeholder:text-lightgray',
-        secondary: 'border',
+        default:
+          'border-b bg-gray-1 outline-none placeholder:text-gray-3',
+        secondary: 'border bg-gray-1',
       },
     },
     defaultVariants: {
@@ -62,6 +63,7 @@ export const Input: React.FC<InputProps> = (props) => {
           placeholder={placeholder}
         />
       </div>
+
       {error && (
         <span className='block text-base text-red-500'>{helperText}</span>
       )}
