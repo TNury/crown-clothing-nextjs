@@ -49,7 +49,7 @@ export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
     const cardNumberElement = elements.getElement('cardNumber');
 
     const tokenResult = await stripe.createToken(cardNumberElement, {
-      currency: 'BRL',
+      currency: 'EUR',
     });
 
     if (tokenResult.error) {
@@ -60,7 +60,7 @@ export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
         type: PaymentTokenType.StripeVaultToken,
         paymentAmount: {
           amount: checkoutSession.totalPrice.amount,
-          currencyCode: CurrencyCode.Brl,
+          currencyCode: CurrencyCode.Eur,
         },
         idempotencyKey: uuidv4(),
         billingAddress: {
