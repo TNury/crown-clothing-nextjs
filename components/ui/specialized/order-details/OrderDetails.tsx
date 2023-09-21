@@ -22,7 +22,7 @@ const OrderDetails: React.FC<OrderSummaryProps> = ({ checkoutSession }) => {
               <div className='flex flex-col'>
                 <p className='text-base'>{entry.title}</p>
                 <p className='text-base'>
-                  {formatPrice(entry.variant.price.amount, '€')}
+                  {formatPrice(entry.variant.price.amount)}
                 </p>
               </div>
 

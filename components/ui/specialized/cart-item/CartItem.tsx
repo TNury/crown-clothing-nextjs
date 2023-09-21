@@ -33,7 +33,7 @@ export const CartItem: React.FC<CartItemProps> = ({ cartId, itemData }) => {
             <p className='text-base'>Black / White</p>
           </div>
           <p className='mr-10 text-base'>
-            {formatPrice(itemData.cost.totalAmount.amount, '€')}
+            {formatPrice(itemData.cost.totalAmount.amount)}
           </p>
           <RemoveButton
             onClick={() =>

@@ -25,7 +25,7 @@ const CartPage = async () => {
                 <p className='text-base'>
                   Total:{' '}
                   <span className='text-base font-bold'>
-                    {formatPrice(cartSession.cost.totalAmount.amount, '€')}
+                    {formatPrice(cartSession.cost.totalAmount.amount)}
                   </span>{' '}
                   ({cartSession.totalQuantity} items)
                 </p>

@@ -22,7 +22,7 @@ export const ProductBox: React.FC<ProductBoxProps> = ({ productData }) => {
       <div className='flex justify-between'>
         <p className='text-lg'>{productData.title}</p>
         <p className='text-lg'>
-          {formatPrice(productData.priceRange.minVariantPrice.amount, '€')}
+          {formatPrice(productData.priceRange.minVariantPrice.amount)}
         </p>
       </div>
     </div>

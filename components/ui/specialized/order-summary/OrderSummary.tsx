@@ -18,7 +18,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         <div className='flex flex-col'>
           <div className='flex justify-between'>
             <p className='text-base'>{itemsQuantity} items:</p>
-            <p className='text-base'>{formatPrice(itemsTotal, '€')}</p>
+            <p className='text-base'>{formatPrice(itemsTotal)}</p>
           </div>
           <div className='flex justify-between'>
             <p className='text-base'>Sales Tax:</p>
@@ -31,7 +31,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         </div>
         <div className='flex justify-between'>
           <p className='text-base font-bold'>Total: </p>
-          <p className='text-base font-bold'>{formatPrice(total, '€')}</p>
+          <p className='text-base font-bold'>{formatPrice(total)}</p>
         </div>
       </div>
     </div>

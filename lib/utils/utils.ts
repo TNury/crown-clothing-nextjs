@@ -5,10 +5,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatPrice(rawPrice: number, currency: string) {
-  let formattedPrice = new Intl.NumberFormat('en-GB', {
+export function formatPrice(rawPrice: number, currency: string = '€') {
+  let price = new Intl.NumberFormat('en-GB', {
     minimumFractionDigits: 2,
   }).format(Number(rawPrice));
 
-  return `${currency}${formattedPrice}`;
+  let formattedPrice: string;
+
+  if (currency === 'R$') {
+    formattedPrice = `${currency} ${price}`;
+  } else {
+    formattedPrice = `${price} ${currency}`;
+  }
+
+  return formattedPrice;
 }

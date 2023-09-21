@@ -91,7 +91,7 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
       <div className='flex flex-col gap-2'>
         <h1 className='text-4xl font-bold'>{productData.title}</h1>
         <p className='text-2xl font-bold'>
-          {formatPrice(productData.priceRange.minVariantPrice.amount, '€')}
+          {formatPrice(productData.priceRange.minVariantPrice.amount)}
         </p>
         <p className='mt-2 text-base'>{productData.description}</p>
       </div>
