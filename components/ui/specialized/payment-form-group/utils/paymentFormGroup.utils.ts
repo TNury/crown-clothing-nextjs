@@ -7,8 +7,8 @@ import {
 
 const baseOptions = {
   classes: {
-    base: 'w-full p-4 border border-black h-[58px] flex justify-center flex-col',
-    invalid: 'border-red-500',
+    base: 'w-full p-4 border-b bg-gray-1 border-black h-[58px] flex justify-center flex-col transition-all duration-200 ease-in-out',
+    invalid: 'border-red-500 bg-red-100',
   },
   style: {
     base: {

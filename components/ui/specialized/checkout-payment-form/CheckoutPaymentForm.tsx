@@ -21,7 +21,7 @@ export const CheckoutPaymentForm: React.FC<CheckoutPaymentFormProps> = ({
   checkoutSession,
 }) => {
   return (
-    <div className='flex flex-col gap-16'>
+    <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-4'>
         <h1 className='text-4xl font-bold uppercase'>Payment Details</h1>
         <p className='text-base'>
