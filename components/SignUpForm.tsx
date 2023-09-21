@@ -10,11 +10,11 @@ import { Alert } from '@/components/ui/generic/alert/Alert';
 import { Button } from '@/components/ui/generic/button/Button';
 import { Input } from '@/components/ui/generic/input/Input';
 
-import { registerUser } from '@/actions/auth/auth';
+import { registerUser } from '@/actions/auth/auth.actions';
 
 import { SignUpFormValidationSchema } from '@/lib/auth/auth';
 
-import { SignUpFormProps } from '@/types/forms/forms';
+import { RegisterUserArgs } from '@/types/auth/auth.types';
 
 const SignUpForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,7 +22,7 @@ const SignUpForm: React.FC = () => {
 
   const router = useRouter();
 
-  const handleOnSubmit = async (formData: SignUpFormProps): Promise<void> => {
+  const handleOnSubmit = async (formData: RegisterUserArgs): Promise<void> => {
     setLoading(true);
 
     const response = await registerUser(formData);
@@ -38,7 +38,7 @@ const SignUpForm: React.FC = () => {
     setLoading(false);
   };
 
-  const formik = useFormik<SignUpFormProps>({
+  const formik = useFormik<RegisterUserArgs>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -53,61 +53,68 @@ const SignUpForm: React.FC = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit} className='flex flex-col gap-10'>
-        <Input
-          id='firstName'
-          type='text'
-          placeholder='First Name'
-          disabled={loading}
-          value={formik.values.firstName}
-          onChange={formik.handleChange}
-          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-          helperText={formik.touched.firstName && formik.errors.firstName}
-        />
-        <Input
-          id='lastName'
-          type='text'
-          placeholder='Last Name'
-          disabled={loading}
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.lastName && formik.errors.lastName}
-        />
-        <Input
-          id='email'
-          type='email'
-          placeholder='Email'
-          disabled={loading}
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <Input
-          id='password'
-          type='password'
-          placeholder='Password'
-          disabled={loading}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-        <Input
-          id='confirmPassword'
-          type='password'
-          placeholder='Confirm Password'
-          value={formik.values.confirmPassword}
-          disabled={loading}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.confirmPassword &&
-            Boolean(formik.errors.confirmPassword)
-          }
-          helperText={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-          }
-        />
+        <div className='flex flex-col gap-4'>
+          <Input
+            id='firstName'
+            type='text'
+            label='First Name'
+            placeholder='John'
+            disabled={loading}
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+          />
+          <Input
+            id='lastName'
+            type='text'
+            label='Last Name'
+            placeholder='Doe'
+            disabled={loading}
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+          />
+          <Input
+            id='email'
+            type='email'
+            label='Email'
+            placeholder='john_doe@gmail.com'
+            disabled={loading}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <Input
+            id='password'
+            type='password'
+            label='Password'
+            placeholder='******'
+            disabled={loading}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Input
+            id='confirmPassword'
+            type='password'
+            label='Confirm Password'
+            placeholder='******'
+            value={formik.values.confirmPassword}
+            disabled={loading}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
+          />
+        </div>
         <Button disabled={loading} type='submit'>
           Submit
         </Button>

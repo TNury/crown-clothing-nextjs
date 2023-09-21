@@ -10,11 +10,11 @@ import { Alert } from '@/components/ui/generic/alert/Alert';
 import { Button } from '@/components/ui/generic/button/Button';
 import { Input } from '@/components/ui/generic/input/Input';
 
-import { loginUser } from '@/actions/auth/auth';
+import { loginUser } from '@/actions/auth/auth.actions';
 
 import { SignInFormValidationSchema } from '@/lib/auth/auth';
 
-import type { SignInFormProps } from '@/types/forms/forms';
+import { LoginUserArgs } from '@/types/auth/auth.types';
 
 const SignInForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,7 +22,7 @@ const SignInForm: React.FC = () => {
 
   const router = useRouter();
 
-  const handleOnSubmit = async (formData: SignInFormProps): Promise<void> => {
+  const handleOnSubmit = async (formData: LoginUserArgs): Promise<void> => {
     setLoading(true);
 
     const response = await loginUser(formData);
@@ -37,7 +37,7 @@ const SignInForm: React.FC = () => {
     }
   };
 
-  const formik = useFormik<SignInFormProps>({
+  const formik = useFormik<LoginUserArgs>({
     initialValues: {
       email: '',
       password: '',
@@ -49,26 +49,30 @@ const SignInForm: React.FC = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit} className='flex flex-col gap-10'>
-        <Input
-          id='email'
-          type='email'
-          placeholder='Email'
-          disabled={loading}
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <Input
-          id='password'
-          type='password'
-          placeholder='Password'
-          disabled={loading}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
+        <div className='flex flex-col gap-4'>
+          <Input
+            id='email'
+            type='email'
+            label='Email'
+            placeholder='john_doe@gmail.com'
+            disabled={loading}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <Input
+            id='password'
+            type='password'
+            label='Password'
+            placeholder='******'
+            disabled={loading}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+        </div>
         <Button disabled={loading} type='submit'>
           Submit
         </Button>
