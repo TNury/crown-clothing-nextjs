@@ -25,7 +25,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.firstName'
           label='First name'
-          variant='secondary'
           placeholder='John'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.firstName}
@@ -41,7 +40,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.lastName'
           label='Last name'
-          variant='secondary'
           placeholder='Doe'
           value={formik.values.shipping_address.lastName}
           onChange={formik.handleChange}
@@ -59,7 +57,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.address1'
           label='Street and number'
-          variant='secondary'
           placeholder='67 Christchurch Ave'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.address1}
@@ -75,7 +72,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.zip'
           label='Zipcode'
-          variant='secondary'
           placeholder='NW67PB'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.zip}
@@ -93,7 +89,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.address2'
           label='Complement'
-          variant='secondary'
           placeholder='Block. 2, Apt. 3'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.address2}
@@ -109,7 +104,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.city'
           label='City'
-          variant='secondary'
           placeholder='London'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.city}
@@ -127,7 +121,6 @@ export const ShippingFormGroup: React.FC<ShippingFormGroupProps> = ({
         <Input
           id='shipping_address.province'
           label='State'
-          variant='secondary'
           placeholder='London'
           onChange={formik.handleChange}
           value={formik.values.shipping_address.province}
