@@ -3,6 +3,7 @@ import {
   CompleteCheckoutMutation,
   CreateCheckoutMutation,
   CreateCheckoutMutationVariables,
+  MailingAddressInput,
   TokenizedPaymentInputV3,
   UpdateCheckoutContactEmailMutation,
   UpdateCheckoutContactEmailMutationVariables,
@@ -20,9 +21,7 @@ export type CreateCheckoutArgs = CreateCheckoutMutationVariables;
 
 export type CreateCheckoutResponse = CreateCheckoutMutation;
 
-export type CheckoutSessionProps = CheckoutPropsFragment & {
-  clientSecret?: string;
-};
+export type CheckoutSessionProps = CheckoutPropsFragment;
 
 export type UpdateCheckoutShippingAddressArgs =
   UpdateCheckoutShippingAddressMutationVariables;
@@ -37,9 +36,11 @@ export type UpdateCheckoutContactEmailResponse =
   UpdateCheckoutContactEmailMutation;
 
 export type CheckoutDeliveryFormFieldProps = {
-  shipping_address: UpdateCheckoutShippingAddressArgs['input'];
+  shipping_address: MailingAddressInput;
   email: UpdateCheckoutContactEmailArgs['input'];
 };
+
+export type CheckoutBillingFormFieldProps = MailingAddressInput;
 
 export type CompleteCheckoutArgs = TokenizedPaymentInputV3;
 

@@ -17,6 +17,7 @@ module.exports = {
     '^next',
     '<THIRD_PARTY_MODULES>',
     '^@/services',
+    '^@/icons',
     '^@/components',
     '^@/actions',
     '^@/hooks',

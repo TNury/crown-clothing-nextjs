@@ -6,23 +6,27 @@ import { useRouter } from 'next/navigation';
 
 import { useFormik } from 'formik';
 
+import { Alert } from '@/components/ui/generic/alert/Alert';
 import { Button } from '@/components/ui/generic/button/Button';
+import { CheckBox } from '@/components/ui/generic/check-box/CheckBox';
 import { Input } from '@/components/ui/generic/input/Input';
-import { ShippingFormGroup } from '@/components/ui/specialized/shipping-form-group/ShippingFormGroup';
+import { AddressFormGroup } from '@/components/ui/specialized/address-form-group/AddressFormGroup';
 
 import { handleCheckoutDeliveryStep } from '@/actions/checkout/checkout.actions';
 
 import { checkoutDeliveryFormSchema } from '@/lib/validation/validation';
 
+import { UserSessionProps } from '@/types/auth/auth.types';
 import {
   CheckoutDeliveryFormFieldProps,
   CheckoutSessionProps,
 } from '@/types/checkout/checkout.types';
 
-import { Alert } from '../../generic/alert/Alert';
+import { getCheckoutDeliveryFormInitialValue } from './utils/getCheckoutDeliveryFormInitialValues';
 
 type CheckoutDeliveryFormProps = {
   checkoutSession: CheckoutSessionProps;
+  userSession: UserSessionProps;
 };
 
 export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
@@ -34,32 +38,7 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
   const router = useRouter();
 
   const formik = useFormik<CheckoutDeliveryFormFieldProps>({
-    initialValues: {
-      shipping_address: {
-        firstName: '',
-        lastName: '',
-        address1: '',
-        address2: '',
-        zip: '',
-        city: '',
-        province: '',
-        country: '',
-        phone: '',
-      },
-      email: '',
-      // shipping_address: {
-      //   firstName: 'Yuri',
-      //   lastName: 'Pereira',
-      //   address1: 'Estudante Idalvo 67',
-      //   address2: '',
-      //   zip: '58057450',
-      //   city: 'João Pessoa',
-      //   province: 'Paraíba',
-      //   country: 'BR',
-      //   phone: '+55 83 981264559',
-      // },
-      // email: 'yurdesou@gmail.com',
-    },
+    initialValues: getCheckoutDeliveryFormInitialValue(checkoutSession),
     onSubmit: handleSubmit,
     validationSchema: checkoutDeliveryFormSchema,
   });
@@ -69,8 +48,7 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
 
     const checkoutResponse = await handleCheckoutDeliveryStep(
       checkoutSession.id,
-      formData,
-      Number(checkoutSession.totalPrice.amount)
+      formData
     );
 
     if (checkoutResponse.checkoutUserErrors[0]) {
@@ -88,7 +66,10 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
         onSubmit={formik.handleSubmit}
         aria-disabled={loading}
         className='flex w-full flex-col gap-16 aria-disabled:pointer-events-none aria-disabled:opacity-50'>
-        <ShippingFormGroup formik={formik} />
+        <div className='flex flex-col gap-4'>
+          <h1 className='text-4xl font-bold uppercase'>Shipping Address</h1>
+          <AddressFormGroup path='shipping_address' formik={formik} />
+        </div>
         <div className='flex flex-col gap-4'>
           <h1 className='text-4xl font-bold uppercase'>Contact Details</h1>
           <p className='text-base'>

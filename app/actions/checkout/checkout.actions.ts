@@ -37,8 +37,7 @@ export async function createCheckout(
 
 export async function handleCheckoutDeliveryStep(
   checkoutId: string,
-  deliveryFormProps: CheckoutDeliveryFormFieldProps,
-  amount: number
+  deliveryFormProps: CheckoutDeliveryFormFieldProps
 ): Promise<
   | UpdateCheckoutShippingAddressResponse['checkoutShippingAddressUpdateV2']
   | UpdateCheckoutContactEmailResponse['checkoutEmailUpdateV2']
@@ -135,9 +134,7 @@ export async function completeCheckout(
     );
 
     if (response.checkoutCompleteWithTokenizedPaymentV3.checkoutUserErrors[0]) {
-      throw new Error(
-        response.checkoutCompleteWithTokenizedPaymentV3.checkoutUserErrors[0].message
-      );
+      return response.checkoutCompleteWithTokenizedPaymentV3;
     }
 
     if (response.checkoutCompleteWithTokenizedPaymentV3.payment) {

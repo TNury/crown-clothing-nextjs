@@ -1,3 +1,22 @@
+fragment CustomerProps on Customer {
+  id
+  email
+  firstName
+  lastName
+  addresses {
+    nodes {
+      firstName
+      lastName
+      address1
+      address2
+      zip
+      city
+      country
+      province
+    }
+  }
+}
+
 mutation createCustomer(
   $email: String!
   $password: String!
@@ -16,10 +35,7 @@ mutation createCustomer(
       message
     }
     customer {
-      id
-      email
-      firstName
-      lastName
+      ...CustomerProps
     }
   }
 }
@@ -46,9 +62,6 @@ mutation deleteCustomerAccessToken($accessToken: String!) {
 
 query retrieveCustomer($accessToken: String!) {
   customer(customerAccessToken: $accessToken) {
-    id
-    email
-    firstName
-    lastName
+    ...CustomerProps
   }
 }

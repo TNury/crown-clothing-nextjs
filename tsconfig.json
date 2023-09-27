@@ -26,7 +26,8 @@
       "@/services/*": ["services/*"],
       "@/types/*": ["types/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/assets/*": ["assets/*"],
+      "@/icons/*": ["components/ui/generic/icons/*"],
+      "@/assets/*": ["assets/*"]
     }
   },
   "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],

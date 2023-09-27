@@ -45,7 +45,25 @@ fragment CheckoutProps on Checkout {
     phone
     zip
     province
+    countryCodeV2
   }
+}
+
+fragment PaymentProps on Payment {
+  id
+  billingAddress {
+    address1
+    address2
+    city
+    country
+    firstName
+    lastName
+    phone
+    zip
+    province
+    countryCodeV2
+  }
+  errorMessage
 }
 
 mutation createCheckout($input: CheckoutCreateInput!) {
@@ -117,7 +135,7 @@ mutation completeCheckout(
       id
     }
     payment {
-      id
+      ...PaymentProps
     }
     checkoutUserErrors {
       field

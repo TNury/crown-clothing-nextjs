@@ -1,13 +1,22 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { useFormik } from 'formik';
 
+import { Alert } from '@/components/ui/generic/alert/Alert';
+import { CheckBox } from '@/components/ui/generic/check-box/CheckBox';
+import { AddressFormGroup } from '@/components/ui/specialized/address-form-group/AddressFormGroup';
 import { PaymentFormGroup } from '@/components/ui/specialized/payment-form-group/PaymentFormGroup';
 
-import { CheckoutSessionProps } from '@/types/checkout/checkout.types';
+import { billingAddressFormSchema } from '@/lib/validation/validation';
+
+import {
+  CheckoutBillingFormFieldProps,
+  CheckoutSessionProps,
+} from '@/types/checkout/checkout.types';
 
 const stripePromise = loadStripe(
   'pk_test_51JDDw8FcRQWdCUNX8vvnirOihRxh6yftU5OYL6ZAM4gR6BijUFs8uxXlZKqxw7aYqXMoJwAWIYaifWtylafwFb3Q00pZS0KQny'
@@ -20,18 +29,85 @@ type CheckoutPaymentFormProps = {
 export const CheckoutPaymentForm: React.FC<CheckoutPaymentFormProps> = ({
   checkoutSession,
 }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const formik = useFormik<CheckoutBillingFormFieldProps>({
+    initialValues: {
+      address1: '',
+      address2: '',
+      city: '',
+      country: '',
+      firstName: '',
+      lastName: '',
+      province: '',
+      zip: '',
+    },
+    onSubmit: () => {},
+    validationSchema: billingAddressFormSchema,
+  });
+
+  const handleOnCheckedChange = (checkedState: boolean) => {
+    if (checkedState) {
+      formik.setFormikState((prevState) => ({
+        ...prevState,
+        values: {
+          address1: checkoutSession.shippingAddress.address1,
+          address2: checkoutSession.shippingAddress.address2,
+          city: checkoutSession.shippingAddress.city,
+          country: checkoutSession.shippingAddress.countryCodeV2,
+          firstName: checkoutSession.shippingAddress.firstName,
+          lastName: checkoutSession.shippingAddress.lastName,
+          province: checkoutSession.shippingAddress.province,
+          zip: checkoutSession.shippingAddress.zip,
+        },
+      }));
+    } else {
+      formik.setFormikState((prevState) => ({
+        ...prevState,
+        values: {
+          ...formik.initialValues,
+        },
+      }));
+    }
+  };
+
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex flex-col gap-4'>
-        <h1 className='text-4xl font-bold uppercase'>Payment Details</h1>
-        <p className='text-base'>
-          Please enter your payment details below. We accept all major credit
-          cards.
-        </p>
+    <>
+      <div
+        aria-disabled={loading}
+        className='flex w-full flex-col gap-16 transition-all duration-200 aria-disabled:pointer-events-none aria-disabled:opacity-50'>
+        <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-4'>
+            <h1 className='text-4xl font-bold uppercase'>Billing Address</h1>
+            <AddressFormGroup formik={formik} />
+            <CheckBox
+              label='Same as shipping address'
+              onCheckedChange={handleOnCheckedChange}
+            />
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4'>
+          <h1 className='text-4xl font-bold uppercase'>Payment Details</h1>
+
+          <Elements stripe={stripePromise}>
+            <PaymentFormGroup
+              loading={loading}
+              setLoading={setLoading}
+              setErrorMessage={setErrorMessage}
+              formik={formik}
+              checkoutSession={checkoutSession}
+            />
+          </Elements>
+        </div>
       </div>
-      <Elements stripe={stripePromise}>
-        <PaymentFormGroup checkoutSession={checkoutSession} />
-      </Elements>
-    </div>
+      <Alert
+        open={Boolean(errorMessage)}
+        message={errorMessage}
+        variant='error'
+        onClose={() => setErrorMessage('')}
+      />
+    </>
   );
 };

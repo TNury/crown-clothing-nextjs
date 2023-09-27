@@ -1,4 +1,24 @@
 import gql from 'graphql-tag';
+export const CustomerProps = gql`
+    fragment CustomerProps on Customer {
+  id
+  email
+  firstName
+  lastName
+  addresses {
+    nodes {
+      firstName
+      lastName
+      address1
+      address2
+      zip
+      city
+      country
+      province
+    }
+  }
+}
+    `;
 export const CartFields = gql`
     fragment CartFields on Cart {
   id
@@ -97,7 +117,26 @@ export const CheckoutProps = gql`
     phone
     zip
     province
+    countryCodeV2
   }
+}
+    `;
+export const PaymentProps = gql`
+    fragment PaymentProps on Payment {
+  id
+  billingAddress {
+    address1
+    address2
+    city
+    country
+    firstName
+    lastName
+    phone
+    zip
+    province
+    countryCodeV2
+  }
+  errorMessage
 }
     `;
 export const CreateCustomer = gql`
@@ -109,14 +148,11 @@ export const CreateCustomer = gql`
       message
     }
     customer {
-      id
-      email
-      firstName
-      lastName
+      ...CustomerProps
     }
   }
 }
-    `;
+    ${CustomerProps}`;
 export const CreateAccessToken = gql`
     mutation createAccessToken($email: String!, $password: String!) {
   customerAccessTokenCreate(input: {email: $email, password: $password}) {
@@ -142,13 +178,10 @@ export const DeleteCustomerAccessToken = gql`
 export const RetrieveCustomer = gql`
     query retrieveCustomer($accessToken: String!) {
   customer(customerAccessToken: $accessToken) {
-    id
-    email
-    firstName
-    lastName
+    ...CustomerProps
   }
 }
-    `;
+    ${CustomerProps}`;
 export const CreateCart = gql`
     mutation createCart($quantity: Int!, $merchandiseId: ID!) {
   cartCreate(
@@ -257,7 +290,7 @@ export const CompleteCheckout = gql`
       id
     }
     payment {
-      id
+      ...PaymentProps
     }
     checkoutUserErrors {
       field
@@ -270,7 +303,7 @@ export const CompleteCheckout = gql`
     }
   }
 }
-    `;
+    ${PaymentProps}`;
 export const HomePage = gql`
     query homePage {
   collections(first: 5) {

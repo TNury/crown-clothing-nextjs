@@ -29,7 +29,10 @@ const DeliveryPage = async () => {
       <div className='w-full max-w-screen-md'>
         <div className='flex w-full gap-8'>
           <div className='w-2/3'>
-            <CheckoutDeliveryForm checkoutSession={checkoutSession} />
+            <CheckoutDeliveryForm
+              checkoutSession={checkoutSession}
+              userSession={userSession}
+            />
           </div>
           <div className='flex w-1/3 flex-col gap-12'>
             <OrderSummary
