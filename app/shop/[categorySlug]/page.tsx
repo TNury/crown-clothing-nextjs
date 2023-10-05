@@ -2,22 +2,7 @@ import Link from 'next/link';
 
 import { ProductBox } from '@/components/ui/specialized/product-box/ProductBox';
 
-import {
-  getCategorySlug,
-  // getCategorySlugParams,
-} from '@/actions/pages/pages.actions';
-
-// export const dynamic = 'force-static';
-
-// export async function generateStaticParams() {
-//   const params = await getCategorySlugParams();
-
-//   const categorySlugParams = params.map((entry) => ({
-//     categorySlug: entry.handle,
-//   }));
-
-//   return categorySlugParams;
-// }
+import { getCategorySlug } from '@/actions/pages/pages.actions';
 
 type CategorySlugProps = {
   params: {
@@ -35,7 +20,7 @@ const CategorySlug: React.FC<CategorySlugProps> = async ({
       <h1 className='text-4xl font-bold uppercase'>
         {categorySlugProps.title}
       </h1>
-      <section className='grid w-full grid-cols-4 gap-4'>
+      <section className='grid w-full grid-cols-2 gap-4 md:grid-cols-4'>
         {categorySlugProps.products.nodes.map((productData, index) => (
           <Link
             href={`/shop/${categorySlug}/${productData.handle}`}
