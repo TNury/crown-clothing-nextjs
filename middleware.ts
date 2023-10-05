@@ -8,18 +8,26 @@ import type { NextRequest } from 'next/server';
 */
 export async function middleware(request: NextRequest) {
   const userSession = request.cookies.get('userSession');
+  const checkoutSession = request.cookies.get('checkoutSession');
 
   const nextURL = request.nextUrl.pathname;
 
-  // If the user tries to access auth page while logged in
+  // If the user tries to access any auth page while logged in
   // redirect him to homepage
-  if (nextURL === '/sign-in' && userSession?.value || nextURL === '/sign-up' && userSession?.value) {
+  if (
+    (nextURL === '/sign-in' && userSession?.value) ||
+    (nextURL === '/sign-up' && userSession?.value)
+  ) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // If the user tries to access checkout page while not logged in
+  // If the user tries to access delivery or payment pages
+  // while not logged in or without a checkout session
   // redirect him to homepage
-  if (nextURL === '/checkout' && !userSession?.value) {
+  if (
+    (nextURL === '/delivery' && !checkoutSession?.value) ||
+    (nextURL === '/payment' && !checkoutSession?.value)
+  ) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
