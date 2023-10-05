@@ -16,7 +16,7 @@ const ShopPage = async () => {
             className='cursor-pointer text-3xl font-bold uppercase'>
             {entry.title}
           </Link>
-          <div className='grid w-full grid-cols-4 gap-4'>
+          <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-4'>
             {entry.products.nodes.map((productData, index) => (
               <ProductBox key={index} productData={productData} />
             ))}
