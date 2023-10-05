@@ -13,7 +13,7 @@ import { formatPrice } from '@/lib/utils/utils';
 import { UserSessionProps } from '@/types/auth/auth.types';
 import { CartSessionProps } from '@/types/cart/cart.types';
 
-const CartPage = async () => {
+const BagPage = async () => {
   const cartSession: CartSessionProps = await retrieveCookie('cartSession');
   const userSession: UserSessionProps = await retrieveCookie('userSession');
 
@@ -21,8 +21,8 @@ const CartPage = async () => {
     <main className='flex w-full flex-col items-center justify-center px-4 py-16'>
       <div className='w-full max-w-screen-md'>
         {cartSession?.lines.nodes.length > 0 ? (
-          <div className='flex w-full gap-8'>
-            <div className='flex w-2/3 flex-col gap-8'>
+          <div className='flex w-full flex-col gap-8 md:flex-row'>
+            <div className='flex w-full flex-col gap-8 md:w-2/3'>
               {userSession && (
                 <div className='bg-gray-1 p-8'>
                   <h2 className='text-lg font-bold uppercase'>
@@ -50,7 +50,7 @@ const CartPage = async () => {
                 ))}
               </div>
             </div>
-            <div className='flex w-1/3 flex-col gap-8'>
+            <div className='flex w-full flex-col gap-8 md:w-1/3'>
               {!userSession && (
                 <>
                   <div className='flex flex-col gap-4'>
@@ -63,14 +63,14 @@ const CartPage = async () => {
                 </>
               )}
 
-              <div className='flex flex-col gap-12'>
-                {userSession && <CheckoutButton cartSession={cartSession} />}
-
+              <div className='flex flex-col gap-12 md:flex-col-reverse'>
                 <OrderSummary
                   itemsQuantity={cartSession.totalQuantity}
                   itemsTotal={cartSession.cost.totalAmount.amount}
                   total={cartSession.cost.totalAmount.amount}
                 />
+
+                {userSession && <CheckoutButton cartSession={cartSession} />}
               </div>
             </div>
           </div>
@@ -94,4 +94,4 @@ const CartPage = async () => {
   );
 };
 
-export default CartPage;
+export default BagPage;

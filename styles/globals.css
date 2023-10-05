@@ -13,3 +13,10 @@
 .text-lg {
   letter-spacing: 0.05rem;
 }
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
