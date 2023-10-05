@@ -100,4 +100,5 @@ export async function logoutUser(accessToken: string): Promise<void> {
   );
 
   deleteCookie('userSession');
+  deleteCookie('checkoutSession');
 }
