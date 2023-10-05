@@ -104,7 +104,7 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({
         <Input
           id={returnId('address1')}
           label='Street'
-          placeholder='67 Christchurch Ave'
+          placeholder='123 Main St'
           onChange={formik.handleChange}
           value={returnPathValue('values', 'address1')}
           error={
@@ -119,7 +119,7 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({
         <Input
           id={returnId('zip')}
           label='Zipcode'
-          placeholder='NW67PB'
+          placeholder='123 456'
           onChange={formik.handleChange}
           value={returnPathValue('values', 'zip')}
           error={
