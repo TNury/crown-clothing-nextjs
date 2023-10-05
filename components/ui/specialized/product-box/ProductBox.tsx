@@ -10,18 +10,18 @@ type ProductBoxProps = {
 
 export const ProductBox: React.FC<ProductBoxProps> = ({ productData }) => {
   return (
-    <div className='flex w-full flex-col gap-4 transition-all duration-200 hover:opacity-70'>
-      <div className='relative h-[25vw] w-full border border-black'>
+    <div className='flex w-full flex-col gap-2 transition-all duration-200 hover:opacity-70'>
+      <div className='relative h-[50vw] w-full border border-black md:h-[25vw]'>
         <Image
           src={productData.featuredImage.url}
-          alt={productData.featuredImage.altText}
+          alt={productData.title}
           className='object-cover'
           fill
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col'>
         <p className='text-lg'>{productData.title}</p>
-        <p className='text-lg'>
+        <p className='text-lg text-gray-3'>
           {formatPrice(productData.priceRange.minVariantPrice.amount)}
         </p>
       </div>
