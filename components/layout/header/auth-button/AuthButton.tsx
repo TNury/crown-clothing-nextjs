@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { logoutUser } from '@/actions/auth/auth.actions';
 
@@ -12,12 +11,8 @@ type AuthButtonProps = {
 };
 
 export const AuthButton: React.FC<AuthButtonProps> = ({ userSession }) => {
-  const router = useRouter();
-
   const handleLogout = async (): Promise<void> => {
     await logoutUser(userSession.accessToken);
-
-    router.refresh();
   };
 
   return userSession.accessToken ? (
@@ -25,7 +20,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({ userSession }) => {
       SIGN OUT
     </button>
   ) : (
-    <Link href='/auth' className='cursor-pointer p-2 text-base'>
+    <Link href='/sign-in' className='cursor-pointer p-2 text-base'>
       SIGN IN
     </Link>
   );

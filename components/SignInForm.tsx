@@ -37,10 +37,10 @@ const SignInForm: React.FC<SignInFormProps> = ({ returnUrl }) => {
       setErrorMessage(userErrors[0].message);
       setLoading(false);
     } else {
-      router.refresh();
-
       if (returnUrl) {
         router.push(returnUrl);
+      } else {
+        router.push('/');
       }
     }
   };
@@ -73,7 +73,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ returnUrl }) => {
             id='password'
             type='password'
             label='Password'
-            placeholder='******'
+            placeholder='************'
             disabled={loading}
             value={formik.values.password}
             onChange={formik.handleChange}

@@ -81,8 +81,6 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
       await addItemToCart(existingCartSession.id, merchandiseId);
     }
 
-    router.refresh();
-
     setLoading(false);
   };
 

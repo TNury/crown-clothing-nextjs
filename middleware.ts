@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
 
   // If the user tries to access auth page while logged in
   // redirect him to homepage
-  if (nextURL === '/auth' && userSession?.value) {
+  if (nextURL === '/sign-in' && userSession?.value || nextURL === '/sign-up' && userSession?.value) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 

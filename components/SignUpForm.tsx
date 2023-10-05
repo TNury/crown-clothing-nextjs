@@ -32,7 +32,7 @@ const SignUpForm: React.FC = () => {
     if (userErrors.length > 0) {
       setErrorMessage(userErrors[0].message);
     } else {
-      router.refresh();
+      router.push('/');
     }
 
     setLoading(false);
@@ -91,7 +91,7 @@ const SignUpForm: React.FC = () => {
             id='password'
             type='password'
             label='Password'
-            placeholder='******'
+            placeholder='************'
             disabled={loading}
             value={formik.values.password}
             onChange={formik.handleChange}
@@ -102,7 +102,7 @@ const SignUpForm: React.FC = () => {
             id='confirmPassword'
             type='password'
             label='Confirm Password'
-            placeholder='******'
+            placeholder='************'
             value={formik.values.confirmPassword}
             disabled={loading}
             onChange={formik.handleChange}
