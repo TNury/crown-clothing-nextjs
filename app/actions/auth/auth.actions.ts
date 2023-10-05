@@ -16,7 +16,10 @@ export async function registerUser(
 ): Promise<CreateCustomerMutation> {
   const registrationResponse: CreateCustomerMutation = await callAPI(
     'CreateCustomer',
-    { ...formData }
+    { ...formData },
+    {
+      cache: 'no-cache',
+    }
   );
 
   const accessTokenResponse: CreateAccessTokenMutation = await callAPI(
@@ -24,6 +27,9 @@ export async function registerUser(
     {
       email: formData.email,
       password: formData.password,
+    },
+    {
+      cache: 'no-cache',
     }
   );
 
@@ -48,6 +54,9 @@ export async function loginUser(
     'CreateAccessToken',
     {
       ...formData,
+    },
+    {
+      cache: 'no-cache',
     }
   );
 
@@ -64,6 +73,9 @@ export async function loginUser(
       'RetrieveCustomer',
       {
         accessToken,
+      },
+      {
+        cache: 'no-cache',
       }
     );
 
@@ -77,9 +89,15 @@ export async function loginUser(
 }
 
 export async function logoutUser(accessToken: string): Promise<void> {
-  await callAPI('DeleteCustomerAccessToken', {
-    accessToken,
-  });
+  await callAPI(
+    'DeleteCustomerAccessToken',
+    {
+      accessToken,
+    },
+    {
+      cache: 'no-cache',
+    }
+  );
 
   deleteCookie('userSession');
 }

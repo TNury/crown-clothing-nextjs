@@ -124,8 +124,6 @@ export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
       if (response.checkoutUserErrors[0]) {
         setErrorMessage(response.checkoutUserErrors[0].message);
       }
-
-      // console.log(response);
     }
 
     setLoading(false);

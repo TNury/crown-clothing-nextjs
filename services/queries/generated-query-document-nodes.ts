@@ -5,7 +5,7 @@ export const CustomerProps = gql`
   email
   firstName
   lastName
-  addresses {
+  addresses(first: 10) {
     nodes {
       firstName
       lastName

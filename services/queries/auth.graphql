@@ -3,7 +3,7 @@ fragment CustomerProps on Customer {
   email
   firstName
   lastName
-  addresses {
+  addresses(first: 10) {
     nodes {
       firstName
       lastName
