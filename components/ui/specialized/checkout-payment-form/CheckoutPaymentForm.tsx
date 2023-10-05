@@ -90,6 +90,21 @@ export const CheckoutPaymentForm: React.FC<CheckoutPaymentFormProps> = ({
 
         <div className='flex flex-col gap-4'>
           <h1 className='text-4xl font-bold uppercase'>Payment Details</h1>
+          <div className='flex flex-col'>
+            <p className='text-base text-red-500'>
+              This website is just a demo, please do <strong>NOT</strong> insert
+              any real credit card numbers.
+            </p>
+            <p className='text-base text-red-500'>
+              In order to test a successful purchase, please use the following
+              credit card details:
+            </p>
+            <p className='text-base text-red-500'>
+              <strong>Card Number:</strong> 4242 4242 4242 4242 <br />
+              <strong>Expiration Date:</strong> 08/29 <br />
+              <strong>CVV:</strong> 242 <br />
+            </p>
+          </div>
 
           <Elements stripe={stripePromise}>
             <PaymentFormGroup
