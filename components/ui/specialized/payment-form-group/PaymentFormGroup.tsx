@@ -131,7 +131,7 @@ export const PaymentFormGroup: React.FC<PaymentFormGroupProps> = ({
 
   return (
     <>
-      <div className='flex w-1/2 flex-col gap-10'>
+      <div className='flex w-full flex-col gap-10 md:w-1/2'>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-col gap-2'>
             <p className='text-base'>Card number</p>

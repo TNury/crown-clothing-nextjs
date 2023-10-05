@@ -29,16 +29,16 @@ const Payment = async () => {
   return (
     <main className='flex w-full flex-col items-center justify-center px-4 py-16'>
       <div className='w-full max-w-screen-md'>
-        <div className='flex w-full gap-8'>
-          <div className='flex w-2/3 flex-col gap-16'>
-            <CheckoutPaymentForm checkoutSession={checkoutSession} />
-          </div>
-          <div className='flex w-1/3 flex-col gap-12'>
+        <div className='flex w-full flex-col gap-8 md:flex-row-reverse'>
+          <div className='flex w-full flex-col gap-12 md:w-1/3'>
             <OrderSummary
               itemsQuantity={returnItemsQuantity()}
               itemsTotal={checkoutSession.lineItemsSubtotalPrice.amount}
               total={checkoutSession.totalPrice.amount}
             />
+          </div>
+          <div className='flex w-full flex-col gap-16 md:w-2/3'>
+            <CheckoutPaymentForm checkoutSession={checkoutSession} />
           </div>
         </div>
       </div>
