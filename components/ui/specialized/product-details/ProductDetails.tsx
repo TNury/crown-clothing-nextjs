@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 
-import { useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/generic/button/Button';
 
 import { addItemToCart, createCart } from '@/actions/cart/cart.actions';
@@ -64,8 +62,6 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const router = useRouter();
-
   const handleAddToCart = async () => {
     setLoading(true);
 
@@ -85,15 +81,15 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
   };
 
   return (
-    <div className='sticky top-20 flex h-fit w-[25vw] flex-col gap-8 p-8 pr-4 lg:p-16 lg:pr-12'>
+    <div className='sticky top-20 flex h-fit w-full flex-col gap-8 py-8 md:w-[25vw] md:p-8 md:pr-4 lg:p-16 lg:pr-12'>
       <div className='flex flex-col gap-2'>
         <h1 className='text-4xl font-bold'>{productData.title}</h1>
-        <p className='text-2xl font-bold'>
+        <p className='text-2xl font-bold text-gray-3'>
           {formatPrice(productData.priceRange.minVariantPrice.amount)}
         </p>
         <p className='mt-2 text-base'>{productData.description}</p>
       </div>
-      <div className='flex flex-col gap-2'>
+      {/* <div className='flex flex-col gap-2'>
         <p className='text-base font-bold'>Size</p>
         <div className='grid grid-cols-5 gap-1'>
           {mockedSizes.map((props: any, index) => (
@@ -102,8 +98,8 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
             </Button>
           ))}
         </div>
-      </div>
-      <div className='flex flex-col gap-2'>
+      </div> */}
+      {/* <div className='flex flex-col gap-2'>
         <p className='text-base font-bold'>Colors</p>
         <div className='grid grid-cols-5 gap-1'>
           {mockedColors.map((props: any, index) => (
@@ -113,7 +109,7 @@ export const ProductDetails: React.FC<ProductDetaisProps> = ({
             />
           ))}
         </div>
-      </div>
+      </div> */}
       <Button disabled={loading} className='mt-8' onClick={handleAddToCart}>
         Add to cart
       </Button>
