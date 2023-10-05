@@ -6,6 +6,7 @@ import { getHomePage } from '@/actions/pages/pages.actions';
 const Home = async () => {
   const response = await getHomePage();
 
+  // Must refactor this for mobile
   return (
     <div
       id='home'
@@ -20,7 +21,7 @@ const Home = async () => {
             className='group relative flex h-60 min-w-[30%] flex-auto cursor-pointer items-center justify-center overflow-hidden border border-black xl:h-80 [&:nth-child(4)]:flex-1 [&:nth-child(5)]:flex-1'>
             <Image
               src={entry.image.url}
-              alt={entry.handle}
+              alt={entry.title}
               className='-z-10 object-cover transition-all duration-1000 group-hover:scale-110'
               fill
               priority
