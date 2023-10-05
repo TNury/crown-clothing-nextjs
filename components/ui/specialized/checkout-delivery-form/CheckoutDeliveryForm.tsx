@@ -75,7 +75,7 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
           <p className='text-base'>
             We'll use these details to keep you informed on your delivery.
           </p>
-          <div className='flex gap-4'>
+          <div className='flex flex-col gap-4 md:flex-row'>
             <Input
               id='email'
               label='Email'
@@ -105,7 +105,7 @@ export const CheckoutDeliveryForm: React.FC<CheckoutDeliveryFormProps> = ({
 
         <Button
           type='submit'
-          className='flex w-fit items-center justify-between gap-4'>
+          className='flex w-full items-center justify-between gap-4 md:w-fit'>
           <p className='text-base'>Continue with payment</p>
           <span className='h-8 text-lg'>&#8594;</span>
         </Button>

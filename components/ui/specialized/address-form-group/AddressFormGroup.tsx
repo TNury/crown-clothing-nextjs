@@ -67,8 +67,8 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({
   };
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex gap-4'>
+    <div className='flex w-full flex-col gap-4'>
+      <div className='flex w-full gap-4'>
         <Input
           id={returnId('firstName')}
           label='First name'
@@ -164,7 +164,7 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({
           }
         />
       </div>
-      <div className='flex gap-4'>
+      <div className='flex flex-col gap-4 md:flex-row'>
         <Input
           id={returnId('province')}
           label='Province'

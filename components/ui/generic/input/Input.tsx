@@ -6,12 +6,11 @@ import { FormikHandlers } from 'formik';
 import { cn } from '@/lib/utils/utils';
 
 const inputVariants = cva(
-  'bg-gray-1 border-black outline-none p-4 text-base transition-all duration-200 disabled:opacity-70 disabled:pointer-events-none',
+  'w-full bg-gray-1 border-black outline-none p-4 text-base transition-all duration-200 disabled:opacity-70 disabled:pointer-events-none',
   {
     variants: {
       variant: {
-        default:
-          'border-b bg-gray-1 outline-none placeholder:text-gray-3',
+        default: 'border-b bg-gray-1 outline-none placeholder:text-gray-3',
         secondary: 'border bg-gray-1',
       },
     },

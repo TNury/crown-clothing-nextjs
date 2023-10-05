@@ -27,14 +27,14 @@ const DeliveryPage = async () => {
   return (
     <main className='flex w-full flex-col items-center justify-center px-4 py-16'>
       <div className='w-full max-w-screen-md'>
-        <div className='flex w-full gap-8'>
-          <div className='w-2/3'>
+        <div className='flex w-full flex-col gap-8 md:flex-row'>
+          <div className='md:w-2/3'>
             <CheckoutDeliveryForm
               checkoutSession={checkoutSession}
               userSession={userSession}
             />
           </div>
-          <div className='flex w-1/3 flex-col gap-12'>
+          <div className='hidden flex-col gap-12 md:flex md:w-1/3'>
             <OrderSummary
               itemsQuantity={returnItemsQuantity()}
               itemsTotal={checkoutSession.lineItemsSubtotalPrice.amount}
