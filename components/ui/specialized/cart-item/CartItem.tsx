@@ -29,7 +29,7 @@ export const CartItem: React.FC<CartItemProps> = ({ cartId, itemData }) => {
       <div className='relative flex flex-1 flex-col gap-4 p-4'>
         <div className='flex justify-between'>
           <div className='flex flex-col'>
-            <p className='text-ellipsis-2 max-w-[85%] text-base'>
+            <p className='text-ellipsis-2 max-w-[85%] text-base md:max-w-none'>
               {itemData.merchandise.product.title}
             </p>
             {/* <p className='text-base'>Black / White</p> */}
