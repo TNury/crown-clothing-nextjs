@@ -18,7 +18,11 @@ const ShopPage = async () => {
           </Link>
           <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-4'>
             {entry.products.nodes.map((productData, index) => (
-              <ProductBox key={index} productData={productData} />
+              <Link
+                href={`/shop/${entry.handle}/${productData.handle}`}
+                key={index}>
+                <ProductBox key={index} productData={productData} />
+              </Link>
             ))}
           </div>
         </section>
